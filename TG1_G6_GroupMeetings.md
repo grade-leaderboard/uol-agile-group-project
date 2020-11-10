@@ -28,7 +28,7 @@
 -   Set up project Git repository @BlairCurrey
 -   Ask tutors if Word format is required or we can use text for versioning purposes @hayacon
 
-## 2020-11-06 - Weekly Working Session
+## 2020-11-09 - Weekly Working Session
 
 ### Agenda
 
