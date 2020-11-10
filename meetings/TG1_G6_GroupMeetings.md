@@ -24,7 +24,7 @@
 -   Doodle for Meeting Times (one each for weekly meeting and large group meeting) @amilos by 2020-11-07
 -   Set up and prepare virtual whiteboard @arjunmuralidharan
 -   Send e-mail IDs & GitHub names in the Slack for invites to GitHub and Miro @all
--   Collect ideas for project
+-   Collect ideas for project @all
 -   Set up project Git repository @BlairCurrey
 -   Ask tutors if Word format is required or we can use text for versioning purposes @hayacon
 
@@ -51,7 +51,7 @@
 
 ### Actions
 
--   Answer the following question for your assigned idea:
+-   Answer the following question for your assigned idea @everyone:
     -   What are other methods of accomplishing this task?
     -   Who is the customer?
     -   What are the main pain points today?
