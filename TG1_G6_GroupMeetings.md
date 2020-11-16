@@ -56,3 +56,25 @@
     -   Who is the customer?
     -   What are the main pain points today?
     -   What is a potential set of features that would address these pain points?
+
+## 2020-11-12 - Weekly Check-In Session
+
+### Agenda
+
+-   Present research for assigned idea
+-   Define method for choosing final idea
+-   Define homework
+
+### Outcomes
+
+-   Each team member presented their answers to the 4 questions from the 11/09 meeting for their assigned idea
+-   After presenting, team members gave feedback
+-   We agreed to vote on ideas next meeting
+    - each person get 2 votes and you can use at most 1 vote for your idea
+-   Agree to standardize documentation of our research by following Alex's diagram on Miro
+
+### Actions
+
+-   Document research questions/answers in Miro diagram
+-   Get current with coursework in coursera (through week 6)
+-   Be ready to vote
