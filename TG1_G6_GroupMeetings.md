@@ -78,3 +78,32 @@
 -   Document research questions/answers in Miro diagram
 -   Get current with coursework in coursera (through week 6)
 -   Be ready to vote
+
+## 2020-11-19 - Weekly Check-In Session
+
+### Agenda
+
+-   Present research questions
+-   Discuss midterm
+-	Define homework
+
+### Outcomes
+
+-   Presented research questions, methods, and useful resources
+-   After presenting, team members gave feedback
+	- brad noted midterm asks for comparison of our idea against
+	existing software. Added https://gpacalculator.io/ linked to
+	diagram as an example
+-	Discussed understanding of "Teamwork acitvity and deliverable"
+	in coursera
+	-	Are we expected to submit them? Doesn't look like it for the
+		midterm, but possibly the final. Should do them.
+
+### Actions
+- Review midterm
+	- is there anything we have already done
+	that we need to alter to fit the requirements?
+	- will going though week-by-week generate everything
+	we need for the final report? Anything extra needed?
+- Do peer review Swot Analysis in week 6
+- Document research questions in Miro board
