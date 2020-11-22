@@ -13,10 +13,12 @@
 ### Outcomes
 
 -   Team agrees that we need to build an actual project
--   Round of introductions: - Hayato: From Japan, lives in the UK, exposure to CS in this course - Blair: From the US, tests software at work, exposure to CS in this course, has done some Python in free time
+-   Round of introductions: 
+    -   Hayato: From Japan, lives in the UK, exposure to CS in this course
+    -   Blair: From the US, tests software at work, exposure to CS in this course, has done some Python in free time
     -   Alex: From Serbia, More than 25 years of programming experience, started education in Information Systems
     -   Arjun: From Switzerland, product manager, no programming experience prior to this programme
-    -   Brad: Worked in service industry, moved into IT in the 90s, some Python skills, no major IT experience
+    -   Brad: Worked in service industry, moved into IT in the 90s, some Python skills, no major programming experience
 -   Deadline for draft set at December 17, holidays planned, we have colleagues on the Julian calendar
 
 ### Actions
@@ -28,7 +30,7 @@
 -   Set up project Git repository @BlairCurrey
 -   Ask tutors if Word format is required or we can use text for versioning purposes @hayacon
 
-## 2020-11-06 - Weekly Working Session
+## 2020-11-09 - Weekly Working Session
 
 ### Agenda
 
@@ -56,3 +58,54 @@
     -   Who is the customer?
     -   What are the main pain points today?
     -   What is a potential set of features that would address these pain points?
+
+## 2020-11-12 - Weekly Check-In Session
+
+### Agenda
+
+-   Present research for assigned idea
+-   Define method for choosing final idea
+-   Define homework
+
+### Outcomes
+
+-   Each team member presented their answers to the 4 questions from the 11/09 meeting for their assigned idea
+-   After presenting, team members gave feedback
+-   We agreed to vote on ideas next meeting
+    - each person get 2 votes and you can use at most 1 vote for your idea
+-   Agree to standardize documentation of our research by following Alex's diagram on Miro
+
+### Actions
+
+-   Document research questions/answers in Miro diagram
+-   Get current with coursework in Coursera (through week 6)
+-   Be ready to vote
+
+## 2020-11-19 - Weekly Check-In Session
+
+### Agenda
+
+-   Present research questions
+-   Discuss midterm
+-	Define homework
+
+### Outcomes
+
+-   Presented research questions, methods, and useful resources
+-   After presenting, team members gave feedback
+	- brad noted midterm asks for comparison of our idea against
+	existing software. Added https://gpacalculator.io/ linked to
+	diagram as an example
+-	Discussed understanding of "Teamwork activity and deliverable"
+	in Coursera
+	-	Are we expected to submit them? Doesn't look like it for the
+		midterm, but possibly the final. Should do them.
+
+### Actions
+- Review midterm
+	- is there anything we have already done
+	that we need to alter to fit the requirements?
+	- will going though week-by-week generate everything
+	we need for the final report? Anything extra needed?
+- Do peer review Swot Analysis in week 6
+- Document research questions in Miro board
