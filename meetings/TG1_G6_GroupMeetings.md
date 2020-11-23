@@ -109,3 +109,24 @@
 	we need for the final report? Anything extra needed?
 - Do peer review Swot Analysis in week 6
 - Document research questions in Miro board
+
+## 2020-11-23 - Weekly Working Session
+
+### Agenda
+- Review midterm
+- Prepare outline
+
+### Outcomes
+Questions related to the mid-term:
+- On point 1, are these software deliverables (prototypes etc.) or also other intermediate products (non-software mocks), or does it also include design deliverables such as diagrams?
+- On point 3, it seems excessively heavy to have a full formal specification as part of a project proposal
+- On point 9, it is unclear if the intention is to create actual prototypes as part of the midterm and what resolution is desired
+- In "Aims and Objectives", what is meant by "Goals and Operations"?
+We set up a draft midterm document:
+- [https://www.overleaf.com/6198856199qtwkjvsmdfhs]
+### Actions
+- Prepare workshops for Thursday (Point 6) and Monday (Point 5, Survery) @arjunmuralidharan
+- Clarify open points with Tutors @BradLazaruk
+- Expand and start writing market benchmark using wider net on similar software (Point 7) @BlairCurrey
+
+
