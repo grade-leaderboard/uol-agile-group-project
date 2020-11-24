@@ -124,8 +124,9 @@ Questions related to the mid-term:
 - In "Aims and Objectives", what is meant by "Goals and Operations"?
 We set up a draft midterm document:
 - [https://www.overleaf.com/6198856199qtwkjvsmdfhs]
+
 ### Actions
-- Prepare workshops for Thursday (Point 6) and Monday (Point 5, Survery) @arjunmuralidharan
+- Prepare workshops for Thursday (Point 6) and Monday (Point 5, Survey) @arjunmuralidharan
 - Clarify open points with Tutors @BradLazaruk
 - Expand and start writing market benchmark using wider net on similar software (Point 7) @BlairCurrey
 
