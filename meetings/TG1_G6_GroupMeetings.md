@@ -131,3 +131,21 @@ We set up a draft midterm document:
 - Expand and start writing market benchmark using wider net on similar software (Point 7) @BlairCurrey
 
 
+
+
+## 2020-11-26 - Weekly Working Session
+
+### Agenda
+- Review actions from last meeting
+- Conduct exercise for preparing research
+
+### Outcomes
+- We will attend Saturday's webinar to answer the questions from last time
+- Blair has drafted some initial market benchmarking
+- We ideated on content for research
+
+### Actions
+- Prepare workshop for developing research
+- Create a project plan 
+
+
