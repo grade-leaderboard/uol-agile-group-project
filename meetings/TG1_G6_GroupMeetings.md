@@ -133,7 +133,7 @@ We set up a draft midterm document:
 
 
 
-## 2020-11-26 - Weekly Working Session
+## 2020-11-26 - Weekly Check-In Session
 
 ### Agenda
 - Review actions from last meeting
@@ -149,3 +149,8 @@ We set up a draft midterm document:
 - Create a project plan 
 
 
+
+## 2020-11-30 - Weekly Working Session
+
+### Agenda
+- Overleaf: Student plan is CAD$9/month. Certainly reasonable and Brad is willing to take it on for the semester if there is value in it for the team.
