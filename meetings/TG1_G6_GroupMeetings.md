@@ -180,10 +180,12 @@ We set up a draft midterm document:
 ### Outcomes
 - We agreed to work on chapters 1, 3 and 6
 - We aim to have a first draft until next Thursday, so we can finalize the entire report by December 17
+- Agreed that we should plan some time in January for a group 'hackathon' to address the software deliverable
 
 ### Actions
 - Chapter 1: Alex
 - Chapter 3: Arjun
 - Chapter 6: Brainstorm together on Monday, Hayato writes it up
+- Project Gantt: Brad will produce a draft ahead of Monday
 
 
