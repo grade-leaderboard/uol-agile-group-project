@@ -171,3 +171,19 @@ We set up a draft midterm document:
   - Hayato: Green
   - Blair: Blue-green
   - Arjun: Orange
+
+
+## 2020-11-30 - Weekly Check-In Session
+### Agenda
+- Review remaining items for mid-term
+
+### Outcomes
+- We agreed to work on chapters 1, 3 and 6
+- We aim to have a first draft until next Thursday, so we can finalize the entire report by December 17
+
+### Actions
+- Chapter 1: Alex
+- Chapter 3: Arjun
+- Chapter 6: Brainstorm together on Monday, Hayato writes it up
+
+
