@@ -173,7 +173,7 @@ We set up a draft midterm document:
   - Arjun: Orange
 
 
-## 2020-11-30 - Weekly Check-In Session
+## 2020-12-03 - Weekly Check-In Session
 ### Agenda
 - Review remaining items for mid-term
 
