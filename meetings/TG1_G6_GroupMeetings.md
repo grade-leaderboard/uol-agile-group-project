@@ -154,3 +154,38 @@ We set up a draft midterm document:
 
 ### Agenda
 - Overleaf: Student plan is CAD$9/month. Certainly reasonable and Brad is willing to take it on for the semester if there is value in it for the team.
+- Discussed webinar about midterm requirements and emphasis placed on documentation and iteration over finished, functional product.
+
+### Outcomes
+- Categorized "Best possible product" in Miro board (from 11-26 weekly check-in) into "must have" (top left), "nice to have" (bottom right), and "more is better" (diagonal) categories
+- Brainstorm activity for "User Goals" on miro. Divided into "satisfies human needs" on left and "accomplishes task" on right 
+
+### Actions
+- For each goal (on sticky note):
+  - Re-state goal more completely
+  - formulate how it would surface in the software
+  - define acceptance criteria
+- Each team member is assigned the sticky notes associated with a color:
+  - Alex: Pink
+  - Brad: Blue
+  - Hayato: Green
+  - Blair: Blue-green
+  - Arjun: Orange
+
+
+## 2020-12-03 - Weekly Check-In Session
+### Agenda
+- Review remaining items for mid-term
+
+### Outcomes
+- We agreed to work on chapters 1, 3 and 6
+- We aim to have a first draft until next Thursday, so we can finalize the entire report by December 17
+- Agreed that we should plan some time in January for a group 'hackathon' to address the software deliverable
+
+### Actions
+- Chapter 1: Alex
+- Chapter 3: Arjun
+- Chapter 6: Brainstorm together on Monday, Hayato writes it up
+- Project Gantt: Brad will produce a draft ahead of Monday
+
+
