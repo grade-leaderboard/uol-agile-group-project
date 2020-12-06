@@ -25,7 +25,7 @@
 \subsection{Measuring Success}
 \textit{This section should set out the measuring criteria for your work and your presentation will be judged in relation to these aims and objectives.}
 
-\section{Market Analysis}
+\section{Market Research}
 Our project does not have a direct competitor. There are some utilities which partially solve the problem we are tackling - namely, tracking grades - but none of these enable the user to compare themselves to their peers, nor aggregates grade data. As such, we must cast a wide net to analyze our place in the market and consider the \textit{alternative solutions}. We have identified these utilities which overlap with our project as well as tools which solve analogous problems in different domains in order to get a more comprehensive picture of where our product stands in the market.
 \subsection{Overview of Alternative Solutions}
 Our solution offers two mains functions: tracking grades and sharing/comparing grades. For each feature, we have documented the alternative solutions and their specific functionality and notable design choices.
@@ -255,8 +255,54 @@ The following tables compare the different features available across alternative
 \end{figure}
 
 \subsection{Our Solution's Place in the Market}
-\textbf{SWOT Analysis}
-\subsubsection{Strengths}
+In order to understand our solution's place in the market we need to examine the external factors which might affect the growth and performance of our application.
+\subsubsection{STEEPLE Analysis}
+\textbf{Social}
+\begin{itemize}
+    \item People tend to be competitive (\url{https://www.theatlantic.com/magazine/archive/2015/10/why-we-compete/403201/})
+    \item People may be hesitant to share if their grades are low or they feel they are unfairly graded
+\end{itemize}
+\textbf{Technological}
+\begin{itemize}
+    \item Student's participation in the course ensures they will have the hardware necessary to access the website (computer or mobile and internet)
+\end{itemize}
+\textbf{Economic}
+\begin{itemize}
+    \item Global audience means any future efforts to monetizate users will be subject to currency risk and local purchasing power.
+    \item Enrollment in University of London program and size of other Universities
+\end{itemize}
+\textbf{Environmental}
+\begin{itemize}
+    \item Server has energy requirements that will grow with usage
+    \begin{itemize}
+        \item An increasing number of cloud providers offer solutions that use green energy
+\end{itemize}
+\end{itemize}
+\textbf{Political}
+\begin{itemize}
+    \item Regulation of data handing is increasing everywhere. This continued trend is exemplified by recent regulations enacted over the past two years:
+    \begin{itemize}
+        \item Califonia, USA's CCPA
+        \item EU's GDPR
+        \item Canada's PIPEDA
+        \item Japan's APPI 
+        \item Brazil LGPD
+    \end{itemize}
+    Given the global nature of this degree program our application is sensitive to all of these policies and future data protection measures implemented worldwide.
+\end{itemize}
+\textbf{Legal}
+\begin{itemize}
+    \item Must comply with local data protection regulations listed above.
+\end{itemize}
+\textbf{Ethical}
+\begin{itemize}
+    \item Must handle sensitive data responsibly and transparently
+    \item Obligated to maintain a healthy sense of competition and steer away from toxicity and envy
+\end{itemize}
+\bigskip
+
+\noindent \subsubsection{SWOT Analysis}
+\textbf{Strengths}
 \begin{itemize}
     \item Knowing you have a relatively high grade could be motivating / encouraging / validating
     \item Validation if your grade was low but many people report similar grades
@@ -265,7 +311,7 @@ The following tables compare the different features available across alternative
     \item Motivation to maintain ones standing at or above a certain percentile
     \item Leaderboard aspect "gameifies" grades and gives incentive to submit grades
 \end{itemize}
-\subsubsection{Weaknesses}
+\textbf{Weaknesses}
 \begin{itemize}
     \item Data reliability. We have no good way to validate data. We must disincentivize dishonesty and not assume 100\% accuracy.
     \item A small sample size of participants will limit usefulness of averages
@@ -275,7 +321,7 @@ The following tables compare the different features available across alternative
     \item If we report anonymously, do we also store anonymously? If so then do we provide for the ability to remove data on request?
     \item If the tool is not completely opt-in / crowd-sourced then someone needs to moderate the data insertions and deletions.
 \end{itemize}
-\subsubsection{Opportunities}
+\textbf{Opportunities}
 \begin{itemize}
     \item This project has few real competitors. There are some student created utilities but grade sharing/comparing is outside the scope of those utilities.
     \item The program size will continue to grow for a long time. We haven't reached the maximum number of cohorts and the recent cohorts have grown. The need exists, there just wasn't a reason to make it until now.
@@ -287,7 +333,7 @@ The following tables compare the different features available across alternative
     \item Provide an overall average per course, per semester, etc to help future students know what to expect and perhaps how much they need to prepare
     \item Provide for grade conversions using various methodologies to non-UK standards
 \end{itemize}
-\subsubsection{Threats}
+\textbf{Threats}
 \begin{itemize}
     \item Time. Other student utilities show recognition of value for this type of product. Probably only a matter of time until someone else extends the grade idea in a similar fashion.
     \item Leak or theft of personally identifiable grade and contact information
