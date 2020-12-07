@@ -189,3 +189,35 @@ We set up a draft midterm document:
 - Project Gantt: Brad will produce a draft ahead of Monday
 
 
+## 2020-12-07 - Weekly Check-In Session
+### Agenda
+- Discuss Project Plan
+- Discuss Chapter 6 Success Criteria / KPI
+
+### Outcomes
+- Initial plan is fine, refinements on cycles discussed and will be made by Brad for team to review and provide input
+- Success criteria documented below
+
+
+### Actions
+- Refine project plan
+- Continue write-up of draft report until Thursday 
+
+#### Success Criteria
+
+Strategic Goals:
+- __Reach__: The tool is used by 5% of all students enrolled in the programme defined as distinct users who have submitted grades
+- __Coverage__: At least five grades submitted for each module
+- __Repeat__: 30% of students capture at least two grades across two distinct terms
+- __Adoption__: The tool is adopted by at least 5 other institutions
+- __App Store Ratings__: Long-term, we would want users to rate our product with at least 4 stars
+
+P0 Goals:
+- 2%
+- 2 grades for each module
+- 10% repeat
+- Adoption: 1 (uol)
+- no app store ratings as no mobile app
+
+
+
