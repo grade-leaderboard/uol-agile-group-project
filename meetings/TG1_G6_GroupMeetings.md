@@ -220,4 +220,49 @@ P0 Goals:
 - no app store ratings as no mobile app
 
 
+## 2020-12-10 - Weekly Check-In Session
+### Agenda
+- Discuss Status
+- Discuss aims and goals
+- Review success criteria and KPIs
+
+### Status
+- Alex and Arjun appologized for not having "review ready" content for todays meeting
+
+### Outcomes
+- Discussed aims and usability goals below 
+- Revised success criteria and KPIs below
+
+### Actions
+- Continue write-up of draft report until Monday, try to have your parts ready for review on Sunday (Arjun, Alex, Hayato)
+- Try to schedule another check-in on Sunday usind Doodle (Bret)
+
+### Aims
+- Possible commercial goals were discussed and dismissed as not congruent with original mission of solving the problem need for as many students as possible
+- Having free and open-source project, allows students to contribute and improve the tool they use 
+- Donations (sponsorship) and non-intrusive adds were discussed as a way to support project running cost. GitHub Sponsor mechanism would be used for donations from students, alumni and organizations, while adds would be used as last resort.  
+
+### Possible usability goals
+- Time required for first grade entered - Signup-to-entry
+- Time to review of main dashboard with grade comparison - Signin-to-dashboard
+
+### Revised Success Criteria
+
+Here is the suggested revision of the medium term and MVP goals:
+
+Medium term goals:
+- __Reach__: The tool is used by 5% of all students enrolled in the programme defined as distinct users who have submitted grades. Total population of students enrolled in the programme is derived from the number of students registered in main channel of the collaboration app provided by the university.
+> We may need to revise the way we count the total population of students in a programme as we go since accounts of students that leav the university may linger in the tool.
+- __Coverage__: 100% of modules have enough submitted grades for meaningfull comparison. Minimum number of grades for meaningfull comparison is 5.
+> It was not clear if the coverage relates to grades or modules. Revised definition makes it about the modules.
+- __Repeat__: 30% of returning students. Returning students are those that capture at least two grades across two distinct terms.
+- __Adoption__: The tool is adopted by at least 5 different programmes
+- __App Ratings__: Long-term, we would want users to rate our app with at least 4 stars
+
+P0 (MVP) Goals:
+- __Reach__: The tool is used by **2%** of all students enrolled in the programme.
+- __Coverage__: **66%** of modules have enough submitted grades for meaningfull comparison
+- __Repeat__: **10%** returning students
+- __Adoption__: **1** programme (BSc CS @ UoL)
+- __App Ratings__: No app store ratings as we launch MVP with progressiwe web app
 
