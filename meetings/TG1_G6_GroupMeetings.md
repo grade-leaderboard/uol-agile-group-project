@@ -238,7 +238,7 @@ P0 Goals:
 - Try to schedule another check-in on Sunday usind Doodle (Bret)
 
 ### Aims
-- Possible commercial goals were discussed and dismissed as not congruent with original mission of solving the problem need for as many students as possible
+- Possible commercial goals were discussed and dismissed due to etical and data privacy concerns. We want to remain accessible for all students and guarantee strong privacy and their full control over grade data.
 - Having free and open-source project, allows students to contribute and improve the tool they use 
 - Donations (sponsorship) and non-intrusive adds were discussed as a way to support project running cost. GitHub Sponsor mechanism would be used for donations from students, alumni and organizations, while adds would be used as last resort.  
 
