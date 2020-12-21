@@ -266,3 +266,19 @@ P0 (MVP) Goals:
 - __Adoption__: **1** programme (BSc CS @ UoL)
 - __App Ratings__: No app store ratings as we launch MVP with progressiwe web app
 
+
+
+
+
+## 2020-12-21 - Weekly Check-In Session
+### Agenda
+- 
+
+### Outcomes
+- Discussed the wireframe and storyboard submissions.
+- Team agreed to some additional wireframes for a login page, some additional common elements like an app logo. Brad realized that the initial wireframes have missed a leaderboard wireframe and the team developed that interactively through screen share.
+- Reviewed the storyboards and discussed specifically the character choices. Team decided that no further changes needed to be made to the storyboards.
+
+
+### Actions
+-  Wireframes (Brad): Leaderboard to be cleaned up and email login page to be cleaned up. App icon to be updated on all the wireframes.
