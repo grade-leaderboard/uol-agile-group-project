@@ -266,19 +266,23 @@ P0 (MVP) Goals:
 - __Adoption__: **1** programme (BSc CS @ UoL)
 - __App Ratings__: No app store ratings as we launch MVP with progressiwe web app
 
-
-
-
-
-## 2020-12-21 - Weekly Check-In Session
+## 2020-12-21 - Weekly Working Session
 ### Agenda
-- 
+- Discuss Sections 1 and 6
+- Go over survey results
+- Find opportunities to iterate
 
 ### Outcomes
 - Discussed the wireframe and storyboard submissions.
 - Team agreed to some additional wireframes for a login page, some additional common elements like an app logo. Brad realized that the initial wireframes have missed a leaderboard wireframe and the team developed that interactively through screen share.
 - Reviewed the storyboards and discussed specifically the character choices. Team decided that no further changes needed to be made to the storyboards.
-
+- Decided usability goals do belong in section 1. We can define them here and then add them as another category to P0 and strategic goals where maybe P0 is meeting 75% of usability goals and Strategic goal is to meet 100% of usability goals
+- Survey results:
+  - anonymity is key
 
 ### Actions
 -  Wireframes (Brad): Leaderboard to be cleaned up and email login page to be cleaned up. App icon to be updated on all the wireframes.
+- Blair will add survey results and analysis to report (after section 3.3.1 - Key research questions)
+- Alex will work on section 1 and 6
+  - Add usability goals/success criteria
+- Reaffirmed ability to meet as planned during holidays for the next few weeks but prepared to communicate asyncrhonously on slack since things will likely come up
