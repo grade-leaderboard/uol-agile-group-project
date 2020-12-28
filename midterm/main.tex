@@ -1,6 +1,6 @@
 \input{preamble} %Adjust this based on where your Summary is stored
 \title{CM2020: Agile Software Projects \\ Midterm Report, Group 6 (Tutor Group 1)}
-\author{B. Currey, B. Lazaruk, A. Muralidharan, A. Milosevic \& H.C. Yoshida}
+\author{B. Currey, B. Lazaruk, A. Muralidharan, A. Milosevic \& H.C.\ Yoshida}
 \graphicspath{{./images/}}
 \begin{document}
 
@@ -26,7 +26,6 @@ In order for the app to fulfill the aim and make a meaningful impact in the worl
 \subsection{Usability Goals}
 
 \subsection{Measuring Success}
-\textit{This section should set out the measuring criteria for your work and your presentation will be judged in relation to these aims and objectives.}
 
 \section{Market Research}
 Initial desk research indicates that the selected project, a grades leaderboard, does not have a direct competitor. There are some utilities which partially solve the problem we are tackling - namely, tracking grades - but none of these enable the user to compare themselves to their peers, nor aggregates grade data. As such, we must cast a wide net to analyze our place in the market and consider \emph{alternative solutions}. We have identified utilities which overlap with our project in terms of possible user needs as well as tools which solve analogous problems in different domains in order to get a more comprehensive picture of where our product stands in the market.
@@ -49,7 +48,7 @@ A peer student within the BSc Computer Science program at University of London d
 The tool allows tracking course-level and cumulative grades and converts to ECTS (Europe) and US scales. It also support conversion from US to UK GPA scores and determines which classification your grades fall into. Further, it allows tracking how many credits out of 360 were completed.
 
 \subparagraph{Notable Design Choices}
-The design is lightweigth as it can be installed locally and run from a command line. The input is provided via a JSON file, which also allows easily storing, versioning and sharing a set of grades.
+The design is lightweight as it can be installed locally and run from a command line. The input is provided via a JSON file, which also allows easily storing, versioning and sharing a set of grades.
 
 \paragraph{Peer's Google Sheets Degree Planner}
 Another student (and co-author of this paper) have published a spreadsheet-based tool to track and calculate grades \cite{muralidharan_2020}. Users records their grades in a Google sheet to track their credits and grades, as shown in \autoref{fig:deg-planner}.
@@ -61,7 +60,7 @@ Another student (and co-author of this paper) have published a spreadsheet-based
 \end{figure}
 
 \subparagraph{Notable Features}
-The tool allows tracking course-level and cumulative grades, allows tracking how many credits out of 360 were completed and also highlights which modules are optional. It allows planning modules across semesters in order to distribute the courseload.
+The tool allows tracking course-level and cumulative grades, allows tracking how many credits out of 360 were completed and also highlights which modules are optional. It allows planning modules across semesters in order to distribute the course load.
 
 \subparagraph{Notable Design Choices}
 This tool is implemented with Google Sheets, which makes it easier to use for many people, and allows easy sharing of the tool as anyone has free access to the software without any local installation.
@@ -344,6 +343,117 @@ As of this report, the team has designed the high-level questions that should be
 
 Data gathering will be conducted via an online survey among university students, and interviews will be conducted via online video calls with selected university students.
 
+\subsubsection{Online Survey - Design Choices}
+We used the online survey to gather quantitative data. Not all of our key research questions can easily be answered quantitatively so we will seek to answer these in the student interviews.
+
+We created the survey by directly converting key research question to a survey question designed to elicit the required answers where able. 
+
+Furthermore, we did not require any questions to submit the survey because we felt it was important to ensure reliable answers and wanted to ensure the highest possible response rate. We provided context of our project before asking the following questions.
+
+\subsubsection{Online Survey - Questions and Results}
+Here are the questions we asked to start collecting data on our key research questions.
+
+\textbf{Key Research Question:} How do students currently keep track of grades?
+\smallskip
+
+\textbf{Survey Question:} What tools do you use to keep track of grades?
+\smallskip
+
+\textbf{Results:}
+\begin{itemize}
+    \item 68.4\% of students use the University of London Portal
+    \item 47.3\% use an outside tool such as the Python grades calculator or an excel or google sheet
+    \item 15.8\% Do not use any tools to keep track of grades
+\end{itemize}
+
+
+\textbf{Key Research Question:} How comfortable are students with sharing their grades?
+\smallskip
+
+\textbf{Survey Question:} Have you ever shared your overall course or individual assessment grades in slack?
+\smallskip
+
+\textbf{Results:} 47.4\% have never shared grades in slack and 52.6\% have
+
+This question helps us establish a behavioral baseline for student comfort in sharing grades. We ask about past behavior to get the most objective answers possible. Slack is not anonymous and there is no explicit place to share so students who do share can be considered highly motivated to share their grades. We also surveyed students for their sentiment on this key research question.
+\medskip
+
+\textbf{Survey Question:} How comfortable are you with sharing grades with other students?
+\smallskip
+
+\textbf{Results:} 79.9\% reported being at lease somewhat comfortable sharing grades, whereas 21.1\% reported not being comfortable.
+
+\textbf{Survey Question:} What would make you more comfortable sharing grades?
+\smallskip
+
+\textbf{Results:}
+\begin{itemize}
+    \item 73.7\% Anonymity
+    \item 52.6\% Evidence of Privacy Protections
+    \item 47.4\% Seeing other students using tool
+    \item 36.8\% Knowing people can only see the data if they submitted grades
+    \item 31.6\% Tool is open source with transparent developers
+    \item 21.1\% University endorsement
+\end{itemize}
+
+\textbf{Key Research Question:} How honest will people be with reporting their grades, anonymously or not?
+\smallskip
+
+\textbf{Survey Question:} How would you feel about submitting a low grade anonymously?
+\smallskip
+
+\textbf{Results:} 73.7\% reported indifferent and 26.3\% reported good
+\smallskip
+
+\textbf{Survey Question:} How would you feel about submitting a low grade publicly?
+\smallskip
+
+\textbf{Results:} 78.9\% reported bad and 21.1\% reported indifferent
+
+\textbf{Key Research Question:} Why would students want to compare their grades with other students?
+\smallskip
+
+\textbf{Survey Question:} Please rate to what degree each of the following are important reasons for contributing grades? 1 is not important, 5 is very important
+\begin{itemize}
+    \item See where I rank compared to other students
+    \item Keep University Grading Curve Transparent
+    \item Help Upcoming Cohorts
+    \item Recognize High Achievers
+    \item Track Grades
+\end{itemize}
+
+\textbf{Results:} To determine the most important reasons, we consider a 4 or 5 an "endorsement." The endorsements ranked from high to low:
+\begin{enumerate}
+    \item \textit{See where I rank compared to other students}: 13
+    \item \textit{Track Grades}: 10
+    \item \textit{Keep University Grading Curve Transparent}: 9
+    \item \textit{Help Upcoming Cohorts}: 6
+    \item \textit{Recognize High Achievers}: 5
+\end{enumerate}
+\smallskip
+
+\textbf{Key Research Question:} Why would students want to see retrospective tips left by other students?
+\smallskip
+
+\textbf{Survey Question:} Please rate to what degree each of the following are important reasons for leaving retrospective tips for courses? 1 is not important, 5 is very important
+\begin{itemize}
+    \item Learn from wisdom of others
+    \item Give back to community
+    \item Assessing effort course
+    \item Assessing course expectations
+    \item Choosing Courses to take
+\end{itemize}
+
+\textbf{Results:} Like the previous question, we considered a 4 or 5 an "endorsement." The endorsements ranked from high to low:
+\begin{enumerate}
+    \item \textit{Learn from wisdom of others}: 15
+    \item \textit{Assessing course expectations}: 15
+    \item \textit{Assessing effort course}: 13
+    \item \textit{Give back to community}: 12
+    \item \textit{Choosing courses to take}: 12
+\end{enumerate}
+\smallskip
+
 \subsection{Implementation Approach}
 
 We chose an iterative implementation approach that fits multiple cycles of design, development and user testing from the start of the year until submission of the project by mid-March. This approach envisions that based on completed initial requirements analysis by the end of the year, we can start with short, 2-week cycles of developing the solution. This phase will be closer to a Google Design Sprint in which the team spends focused, full days in developing solutions, implementing prototypes and iterating on the product.
@@ -443,34 +553,36 @@ Based on this very early wireframe, the team identified important questions to c
 These questions will be further explored during execution of the project.
 
 \section{Evaluation Techniques}
+In order to evaluate our progress and success, we decided to select specific success factors that would indicate if the product is successful following a real-world market launch. We therefore set ourselves targets for each of these factors for both a "P0" launch, which is what we intend to build as part of this course module, and "Strategic Goals", which are longer-term goals if this product were launched in real-world conditions.
+
 \subsection{Critical Success Factors}
-    \noindent When it comes down to success of this project,  following critical factors will be measured. There are five factors and are as follow: reach, coverage, repeat, adoption and rating.  
-    Reach is measured by how many students are defined as distinct users who have submitted grades. We define the number of students who registered in the main channel of the collaboration app provided by the university as a total population of students. This critical factor will be set as a percentage of the total student population. ( way of counting total student population may need to be revised) 
-    Coverage is measure by how many modules had enough grade submission for meaningful comparison. We consider 5 submission is enough for meaningful comparison. Repeat is measure by how many students have submitted at least two grades over two distinct terms. This program may be used by several institutions and we measure the number of the institution as the adoption. Rating is particularly on users’ feedback on the app include experience with UI. This critical factor is more concerned in long term but not in the initial launch. 
+Through a further brainstorming exercise, combined with some research, we identified the following success factors.
 
+\begin{itemize}
+    \item \textbf{Reach:} The number of distinct students from the overall student population that has submitted grades. The population is defined as the number of students we can observe in the \texttt{\#general} channel of the student Slack. 
+    \item \textbf{Coverage:} The number of modules that have a sufficient number of grades submitted for meaningful comparison. We define "meaningful" as a minimum of 5 grade submissions for a single module.
+    \item \textbf{Repeat:} The number of students who submitted at least two grades in two distinct terms.
+    \item \textbf{Adoption:} The number of academic institutions and their respective student bodies that have adopted this product.
+   \item \textbf{Rating:} The average of all user-ratings in app stores where the product is available.
+\end{itemize}
+ 
 \subsection{Measurement of Success \& Failure}
-\noindent We set following measurement to determine if we success or not. There are P0 goals  and strategic goals. P0 goal essentially means what team would like to archive initially to launch of this software and strategic goal is set to be long term goals. \\* \\*
+As noted, we set ourselves targets for the initial launch as well as longer-term goals.
 
-\begin{table}[]
-    \begin{tabular}{lll}
-                     & P0 Goals                                                                                                   & Strategic Goals                                                                                             \\
-    Reach            & 2\% of all student                                                                                         & 5\% of all student                                                                                          \\
-    Coverage         & \begin{tabular}[c]{@{}l@{}}66\% of module has enough \\ submission for meaningful comparison.\end{tabular} & \begin{tabular}[c]{@{}l@{}}100\% of module has enough \\ submission for meaningful comparison.\end{tabular} \\
-    Repeat           & 10\% of returning student                                                                                  & 30\% of returning student                                                                                   \\
-    Adoption         & 1 Program (UoL)                                                                                            & 5 different program                                                                                         \\
-    App Store Rating & not apply                                                                                                  & in long-term, 4 stars                                                                                      
-    \end{tabular}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+                  & \multicolumn{1}{l}{\textbf{P0 Goals}} & \multicolumn{1}{l}{\textbf{Strategic Goals}} \\ \midrule
+\textbf{Reach}    & 2\%                                   & 10\%                                         \\
+\textbf{Coverage} & 20\%                                  & 100\%                                        \\
+\textbf{Repeat}   & n/a                                   & 20\%                                         \\
+\textbf{Adoption} & 1                                     & 20                                           \\
+\textbf{Rating}   & n/a                                   & 4.5                                          \\ \bottomrule
+\end{tabular}
 \end{table}
-
-\subsection{Results}
-\textit{ What works well about the system and where are the fundamental flaws?}
-
-Other points that will likely need to be included as they are included in the course lectures
-Version Control - make sure we talk about Github and why we chose it etc
-The requirements specifications are included above and coming along
-Writing needs to make frequent reference to User Centered Design, as frequent as possible testing and iterations, talk about our heuristics and evaluation methods
-Prototyping - are we doing evolutionary or throwaway and why
-Sketching or storyboarding?
 
 \bibliography{bib} 
 \bibliographystyle{IEEEtran}
