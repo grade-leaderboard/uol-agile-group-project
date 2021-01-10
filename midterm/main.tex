@@ -7,21 +7,27 @@
 
 \section{Aims and Objectives}
 \subsection{Background and Problem}
-Motivation to study is a scarce resource for university students and one that can easily get depleted. Any technique or tool that increases motivation might provide value to students and to the educational institutions that they partake in. In addition, students with a competitive mindset might draw additional motivation from the ability to compare themselves to peers and identify opportunities to improve their own skills.
+Motivation to study is a scarce resource for university students and one that can easily get depleted. Today’s connected and highly technological environment provides the opportunity to use gamification to increase motivation and provide to students and to the educational institutions that they partake in \cite{garciacabot_measuring_2020} \cite{lister_gamification:_2015}. 
+
+In addition, students with a competitive mindset might draw additional motivation from the ability to compare themselves to peers and identify opportunities to improve their own skills.
 
 Every module in a degree program is different and may require a tailored strategy for studying. Reflecting on a completed module provides “hindsight 20/20” notes on what worked well and what can be improved. In a collaborative environment however, students are not limited to their own experiences - they can benefit from the wisdom and experience of fellow students.
+
 
 The \textbf{problem} that we aim to solve is that students normally have no way to easily compare their own grades to those of their peers, and cannot assess if their grade is within an expected range for any given module. For prospective students of a module, it is hard to judge if a certain module usually provides high grades or not, and what effort might be associated with achieving such a grade. For students who have received grades, there is little opportunity to find out whether a received grade is reasonable given the self-perceived effort and completed coursework.
 
 \subsection{Opportunity}
+
 We aim to motivate the students to be their best selves and adopt the life-long growth mindset.
 
-To realise this long-term aim, we propose development of a \textbf{grades leaderboard} that allows students to share and compare grades, while managing their own grades for a given university program.
+Our review of academic literature found evidence for positive effect of use of leaderboards on student motivation \cite{chiu_effects_2017} \cite{jia_designing_2017}.
+
+To realise this long-term aim, we propose development of a \textbf{grades leaderboard} that allows students to share and compare grades, while managing their own grades for a given university program. 
 
 This report outlines how we decided to pursue this opportunity, what we aim to achieve, how we aim to achieve it and how we will measure outcomes.
 
 \subsection{Goals}
-With this project, we are pursuing the following goals. More detailed success criteria and KPI are defined in a later section.
+With this project, we are pursuing the following goals. Details of critical success factors that measure achievement of these goals are provided in section 6.
 
 \paragraph{Business Goals}
 \begin{itemize}
@@ -37,8 +43,8 @@ With this project, we are pursuing the following goals. More detailed success cr
 
 \paragraph{Technical Goals}
 \begin{itemize}
-    \item Make the application easily accessible as web application
     \item Ensure the security of the platform to ensure integrity of the data provided
+    \item Make the application easily accessible as web application
 \end{itemize}
 
 
@@ -247,6 +253,7 @@ The STEEPLE analysis will allow us to analyse our problem space based on environ
 \begin{itemize}
     \item Must handle sensitive data responsibly and transparently
     \item Obligated to maintain a healthy sense of competition and steer away from toxicity and envy
+    \item Honest reporting of grades and integrity of reported data is critical
 \end{itemize}
 \bigskip
 
@@ -607,7 +614,7 @@ In order to actually identify users that match these personas, we are including 
 \subsubsection{Evaluation Type}
 The team decided that the most appropriate evaluation type is in a \textbf{controlled settings directly involving users}. This means having users peruse the product under observation, describing their experience and providing live feedback. This will be the most efficient approach from a planning perspective.
 
-A further reason this is more appropriate as opposed to \textit{natural settings} is that grades are not something students submit and engage with on a daily basis, hence the opportunities to observe students in this process are rare. This will result in certain downsides of the controlled setting taking precedence, specifically not being able to identify behaviours of users that may occur when unsupervised, which may be central to the grades process. A future iteration may employ screen recording (such as Hotjar) or A/B testing to identify more hidden behaviours. A further method for evaluating usability will be employed based on \cite{lewis}.
+A further reason this is more appropriate as opposed to \textit{natural settings} is that grades are not something students submit and engage with on a daily basis, hence the opportunities to observe students in this process are rare. This will result in certain downsides of the controlled setting taking precedence, specifically not being able to identify behaviours of users that may occur when unsupervised, which may be central to the grades process. A future iteration may employ screen recording (such as Hotjar) or A/B testing to identify more hidden behaviours. An UMUX-Lite method for evaluating usability will be employed based on \cite{lewis}.
 
 \subsubsection{Evaluation Approach}
 
@@ -710,6 +717,8 @@ Through a further brainstorming exercise, combined with some research, we identi
     \item \textbf{Repeat:} The number of students who submitted at least two grades in two distinct terms.
     \item \textbf{Adoption:} The number of academic institutions and their respective student bodies that have adopted this product.
    \item \textbf{Rating:} The average of all user-ratings in app stores where the product is available.
+   \item \textbf{Usability:} Usability score measured with UMUX-Lite method
+   \item \textbf{Usefulness:} Usefulness score measured with UMUX-Lite method
 \end{itemize}
 
 \subsection{Measurement of Success \& Failure}
@@ -721,12 +730,15 @@ As noted, we set ourselves targets for the initial launch as well as longer-term
 \centering
 \begin{tabular}{@{}lcc@{}}
 \toprule
-                  & \multicolumn{1}{l}{\textbf{P0 Goals}} & \multicolumn{1}{l}{\textbf{Strategic Goals}} \\ \midrule
+                  & \multicolumn{1}{l}{\textbf{P0 Target}} & \multicolumn{1}{l}{\textbf{Long Term Target}} \\ \midrule
 \textbf{Reach}    & 2\%                                   & 10\%                                         \\
 \textbf{Coverage} & 20\%                                  & 100\%                                        \\
 \textbf{Repeat}   & n/a                                   & 20\%                                         \\
 \textbf{Adoption} & 1                                     & 20                                           \\
-\textbf{Rating}   & n/a                                   & 4.5                                          \\ \bottomrule
+\textbf{Rating}   & n/a                                   & 4.5                                          \\ 
+\textbf{Usability}   & 40\%                                   & 60\%                                          \\ 
+\textbf{Usefulness}   & 40\%                                 & 60\%                                          \\ \bottomrule
+
 \end{tabular}
 \end{table}
 
