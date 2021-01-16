@@ -51,11 +51,15 @@ When they access their personal grades page
 Then they are shown a message "No grades submitted" with a CTA to submit a grade
 
 Scenario: User is trying to submit grade for the same module again
+Given that the user has already submitted a grade for a module
+When they try to submit another grade for the same module
+Then they cannot do so because the module does not appear on the list to begin with
 
-
-Scenario: User edits an already submitted grade 
-
-
+Scenario: User edits an already submitted grade
+Given that the user has already submitted a grade for a module
+When they attempt to edit their grade on the personal grades page
+(And the grade is not frozen)
+Then the grade is updated
 
 Scenario: Show user avatars in leaderboard 
 Given that there are grades submitted
