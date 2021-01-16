@@ -15,3 +15,32 @@
         $ nodemon
 
 6. Navigate to `localhost:<port>` in your browser, where `<port>` is the port defined in `.env`
+
+
+# Git Flow
+
+1. Create a new branch
+
+        git -b checkout "my new fancy branch"
+
+2. Make sure you are on the new branch 
+
+3. Make your changes
+
+4. Stage your changes
+
+		git add .
+
+5. Check your status
+
+		git status
+
+6. Commit your changes
+
+		git commit -m "GL-XX Ticket Description"
+
+7. Push your changes
+
+		git push
+
+It might be that you need to set your upstream. Git will tell you the right command to use if this is the case. Just copy-paste that command and proceed.
