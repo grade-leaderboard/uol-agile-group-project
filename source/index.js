@@ -1,27 +1,48 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
+const db = require("mysql-promise")();
 const path = require("path");
-const app = express();
-const port = process.env.PORT || 8080;
-app.use(express.static(path.join(__dirname, "/public")));
 
-const db = mysql.createConnection({
+db.configure({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_DATABASE,
 });
 
-// connect to database
-db.connect((err) => {
-	if (err) {
-		throw err;
-	}
+global.db = db;
 
-	console.log("Connected to database");
-});
+const app = express();
+const port = process.env.PORT || 8080;
+app.use(express.static(path.join(__dirname, "/public")));
+
+// configure database connection
+// mysql.configure({
+//     host: "localhost",
+//     user: "root",
+//     password: "root",
+//     database: "calorieTracking"
+// });
+// make database connection available as global variable
+// app.listen(port, async () => {
+//     try {
+//         await db.query("SELECT 1 from foods limit 1");
+//         console.log("Connected to database")
+//         console.log(`CalorieBuddy app listening on port ${port}`);
+//     } catch (err) {
+//         console.log(err)
+//     }
+// });
+
+// // connect to database
+// db.connect((err) => {
+// 	if (err) {
+// 		throw err;
+// 	}
+
+// 	console.log("Connected to database");
+// });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

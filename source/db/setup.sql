@@ -10,6 +10,14 @@ CREATE TABLE `courses` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE VIEW modules_with_grades AS
+SELECT
+	c.id,
+	c.title,
+	FLOOR(RAND() * 100) as grade
+FROM
+	courses c;
+
 INSERT INTO
 	courses(id, title)
 VALUES
@@ -30,13 +38,19 @@ VALUES
 	('CM2035', 'Algorithms and Data Structures II'),
 	('CM2040', 'Databases, Networks and the Web'),
 	('CM3005', 'Data Science'),
-	('CM3010','Databases and Advanced Data Techniques'),
-	('CM3015','Machine Learning and Neural Networks'),
+	(
+		'CM3010',
+		'Databases and Advanced Data Techniques'
+	),
+	('CM3015', 'Machine Learning and Neural Networks'),
 	('CM3020', 'Artificial Intelligence'),
 	('CM3025', 'Virtual Reality'),
 	('CM3030', 'Games Development'),
 	('CM3035', 'Advanced Web Development'),
-	('CM3040', 'Physical Computing and Internet of Things'),
+	(
+		'CM3040',
+		'Physical Computing and Internet of Things'
+	),
 	('CM3045', '3D Graphics and Animation'),
 	('CM3050', 'Mobile Development'),
 	('CM3055', 'Interaction Design'),

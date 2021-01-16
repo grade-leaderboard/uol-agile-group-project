@@ -31,22 +31,19 @@
 					</tr>
 				</thead>
 				<tbody>
+					<% res.forEach(function (module) { %>
 					<tr>
-						<td>CM1015</td>
-						<td>Computational Mathematics</td>
-						<td>65%</td>
+						<td><%= module.id %></td>
+						<td><%= module.title %></td>
+						<td><%= module.grade %></td>
 					</tr>
-					<tr>
-						<td>CM1005</td>
-						<td>Introduction to Programming</td>
-						<td>85%</td>
-					</tr>
+					<% }); %>
 				</tbody>
 			</table>
 		</div>
 		<%- include('partials/footer.ejs') %>
 	</body>
-		<!-- Optional JavaScript -->
-		<!-- Bootstrap Requirements -->
-		<%- include('partials/bootstrap_reqs.ejs') %>
+	<!-- Optional JavaScript -->
+	<!-- Bootstrap Requirements -->
+	<%- include('partials/bootstrap_reqs.ejs') %>
 </html>
