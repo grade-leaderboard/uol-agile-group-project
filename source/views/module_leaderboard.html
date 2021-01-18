@@ -18,24 +18,22 @@
 	</head>
 	<body>
 		<div class="container">
-			<!-- Navigation -->
+			<!-- Express snippet to include the header and navigation from a partial -->
 			<%- include('partials/nav.ejs') %>
 			<!-- Page content begins below this -->
-			<h1>Courses</h1>
+			<h1><%= course_id %> Leaderboard</h1>
 			<table data-toggle="table" data-search="true">
 				<thead>
 					<tr>
 						<th scope="col" data-sortable="true">ID</th>
-						<th scope="col" data-sortable="true">Course</th>
-						<th scope="col" data-sortable="true">Average Grade</th>
+						<th scope="col" data-sortable="true">Grade</th>
 					</tr>
 				</thead>
 				<tbody>
-					<% res.forEach(function (module) { %>
+					<% res.forEach(function (grade) { %>
 					<tr>
-						<td><%= module.id %></td>
-						<td><a href="/module_leaderboard?module_id=<%= module.id %>"><%= module.title %></a></td>
-						<td><%= module.grade %></td>
+						<td><%= grade.id %></td>
+						<td><%= grade.grade %></td>
 					</tr>
 					<% }); %>
 				</tbody>

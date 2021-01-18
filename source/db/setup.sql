@@ -1,15 +1,27 @@
+-- Create and use database
 CREATE DATABASE IF NOT EXISTS grades_leaderboard;
-
 USE grades_leaderboard;
 
+-- Drop tables and views
+DROP TABLE IF EXISTS grades;
 DROP TABLE IF EXISTS courses;
+DROP VIEW IF EXISTS modules_with_grades;
 
+-- Create Tables
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
 	`title` VARCHAR(100),
 	PRIMARY KEY (`id`)
 );
+CREATE TABLE `grades` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`course_id` VARCHAR(6),
+	`grade` SMALLINT,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (course_id) REFERENCES courses(id)
+);
 
+-- Create Views
 CREATE VIEW modules_with_grades AS
 SELECT
 	c.id,
@@ -18,6 +30,7 @@ SELECT
 FROM
 	courses c;
 
+-- Insert into Tables
 INSERT INTO
 	courses(id, title)
 VALUES
@@ -56,3 +69,22 @@ VALUES
 	('CM3055', 'Interaction Design'),
 	('CM3060', 'Natural Language Processing'),
 	('CM3070', 'Final Project');
+
+INSERT INTO
+	grades(course_id, grade)
+VALUES
+	('CM1005', 100),
+	('CM1005', 90),
+	('CM1005', 92),
+	('CM1005', 80),
+	('CM1005', 63),
+	('CM1010', 88),
+	('CM1010', 99),
+	('CM1010', 92),
+	('CM1010', 40),
+	('CM1010', 65),
+	('CM1015', 84),
+	('CM1015', 91),
+	('CM1015', 96),
+	('CM1015', 70),
+	('CM1015', 62);
