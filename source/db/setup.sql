@@ -4,6 +4,8 @@ USE grades_leaderboard;
 
 -- Drop tables and views
 DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
 DROP VIEW IF EXISTS modules_with_grades;
 
@@ -13,11 +15,27 @@ CREATE TABLE `courses` (
 	`title` VARCHAR(100),
 	PRIMARY KEY (`id`)
 );
+CREATE TABLE `users` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(80) NOT NULL,
+    `email` VARCHAR(80),
+    `slackuid` VARCHAR(25) NOT NULL UNIQUE,
+    PRIMARY KEY (`id`)
+);
+CREATE TABLE `sessions` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`session` VARCHAR(50),
+	PRIMARY KEY (`id`)
+);
 CREATE TABLE `grades` (
 	`id` int NOT NULL AUTO_INCREMENT,
+	`user_id` int,
+	`session_id` int,
 	`course_id` VARCHAR(6),
 	`grade` SMALLINT,
 	PRIMARY KEY (`id`),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    	FOREIGN KEY (session_id) REFERENCES sessions(id),
 	FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
@@ -71,20 +89,41 @@ VALUES
 	('CM3070', 'Final Project');
 
 INSERT INTO
-	grades(course_id, grade)
+	sessions(session)
 VALUES
-	('CM1005', 100),
-	('CM1005', 90),
-	('CM1005', 92),
-	('CM1005', 80),
-	('CM1005', 63),
-	('CM1010', 88),
-	('CM1010', 99),
-	('CM1010', 92),
-	('CM1010', 40),
-	('CM1010', 65),
-	('CM1015', 84),
-	('CM1015', 91),
-	('CM1015', 96),
-	('CM1015', 70),
-	('CM1015', 62);
+	('April 2019'),
+	('October 2019'),
+	('April 2020'),
+	('October 2020'),
+	('April 2021'),
+	('October 2021'),
+	('April 2022'),
+	('October 2022');
+
+INSERT INTO
+	users(username, email, slackuid)
+VALUES
+	('Alex', 'alex@something.com', '1'),
+	('Arjun', 'arjun@something.com', '2'),
+	('Blair', 'blair@something.com', '3'),
+	('Hayato', 'hayato@something.com', '4');
+
+INSERT INTO
+	grades(user_id, session_id, course_id, grade)
+VALUES
+	(1, 1, 'CM1005', 100),
+	(2, 1, 'CM1005', 90),
+	(3, 1, 'CM1005', 92),
+	(4, 1, 'CM1005', 80),
+	(2, 1, 'CM1010', 88),
+	(3, 1, 'CM1010', 99),
+	(4, 1, 'CM1010', 92),
+	(1, 1, 'CM1010', 40),
+	(3, 1, 'CM1015', 84),
+	(4, 2, 'CM1015', 91),
+	(1, 3, 'CM1015', 96),
+	(2, 4, 'CM1015', 70),
+	(4, 4, 'CM1020', 99),
+	(1, 3, 'CM1020', 80),
+	(2, 2, 'CM1020', 49),
+	(3, 1, 'CM1020', 40);
