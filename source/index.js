@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("mysql-promise")();
 const path = require("path");
+var fakeAuth = require("./middlewares/fakeAuth");
 
 db.configure({
 	host: process.env.DB_HOST,
@@ -16,7 +17,7 @@ global.db = db;
 const app = express();
 const port = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, "/public")));
-
+app.use(fakeAuth);
 // configure database connection
 // mysql.configure({
 //     host: "localhost",
@@ -44,7 +45,9 @@ app.use(express.static(path.join(__dirname, "/public")));
 // 	console.log("Connected to database");
 // });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 require("./routes/main")(app);
 
