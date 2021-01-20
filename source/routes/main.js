@@ -7,7 +7,7 @@ module.exports = function (app) {
 			let sql = "SELECT * FROM modules_with_grades ORDER BY id ASC";
 			var [results, _] = await db.query(sql);
 			res.render("index.html", {
-				res: results
+				res: results,
 			});
 		} catch (error) {
 			console.log(error);
@@ -25,4 +25,21 @@ module.exports = function (app) {
 		}
 	});
 
+	app.get("/module_leaderboard", async (req, res) => {
+		try {
+			id = [req.query.module_id];
+			// let sql = "SELECT * FROM grades WHERE course_id = ? ORDER BY grade DESC";
+			let sql =
+				"SELECT grades.grade, users.id \
+						FROM grades \
+						JOIN users  \
+						ON grades.user_id = users.id \
+						WHERE course_id = ? \
+						ORDER BY grade DESC";
+			var [results, _] = await db.query(sql, id);
+			res.render("module_leaderboard.html", { res: results, course_id: id });
+		} catch (error) {
+			console.log(error);
+		}
+	});
 };
