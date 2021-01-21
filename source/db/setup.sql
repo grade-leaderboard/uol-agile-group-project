@@ -48,6 +48,7 @@ SELECT
 FROM
 	courses c;
 
+
 -- Insert into Tables
 INSERT INTO
 	courses(id, title)
@@ -105,8 +106,8 @@ INSERT INTO
 VALUES
 	('Alex', 'alex@something.com', '1'),
 	('Arjun', 'arjun@something.com', '2'),
-	('Blair', 'blair@something.com', '3'),
-	('Hayato', 'hayato@something.com', '4');
+	('Blair Currey', 'curreyb88@gmail.com', '3'),
+	('Hayato Ishida', 'hayato@something.com', '4');
 
 INSERT INTO
 	grades(user_id, session_id, course_id, grade)

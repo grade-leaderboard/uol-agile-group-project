@@ -42,4 +42,29 @@ module.exports = function (app) {
 			console.log(error);
 		}
 	});
+
+	app.get("/personal_grade", checkAuth, async (req, res) => {
+		try{
+			let username = [req.user.name]
+			// console.log(req.user.name);
+			let sql = 
+			"SELECT sessions.session, grades.course_id, courses.title, grades.grade\
+					FROM grades \
+					JOIN users \
+					ON grades.user_id = users.id \
+					JOIN sessions \
+					ON sessions.id = grades.session_id \
+					JOIN courses \
+					ON courses.id = grades.course_id \
+					WHERE users.username = ? ";
+			var [results, _] = await db.query(sql, username);
+			console.log(username);
+			console.log(results);
+			res.render("personal_grade.html", {user: username, res: results});
+
+		} catch(error){
+			console.log(error);
+		}
+
+	});
 };
