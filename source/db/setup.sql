@@ -1,45 +1,15 @@
--- Create and use database
 CREATE DATABASE IF NOT EXISTS grades_leaderboard;
+
 USE grades_leaderboard;
 
--- Drop tables and views
-DROP TABLE IF EXISTS grades;
-DROP TABLE IF EXISTS sessions;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
-DROP VIEW IF EXISTS modules_with_grades;
 
--- Create Tables
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
 	`title` VARCHAR(100),
 	PRIMARY KEY (`id`)
 );
-CREATE TABLE `users` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(80) NOT NULL,
-    `email` VARCHAR(80),
-    `slackuid` VARCHAR(25) NOT NULL UNIQUE,
-    PRIMARY KEY (`id`)
-);
-CREATE TABLE `sessions` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`session` VARCHAR(50),
-	PRIMARY KEY (`id`)
-);
-CREATE TABLE `grades` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`user_id` int,
-	`session_id` int,
-	`course_id` VARCHAR(6),
-	`grade` SMALLINT,
-	PRIMARY KEY (`id`),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    	FOREIGN KEY (session_id) REFERENCES sessions(id),
-	FOREIGN KEY (course_id) REFERENCES courses(id)
-);
 
--- Create Views
 CREATE VIEW modules_with_grades AS
 SELECT
 	c.id,
@@ -48,7 +18,6 @@ SELECT
 FROM
 	courses c;
 
--- Insert into Tables
 INSERT INTO
 	courses(id, title)
 VALUES
@@ -88,42 +57,54 @@ VALUES
 	('CM3060', 'Natural Language Processing'),
 	('CM3070', 'Final Project');
 
-INSERT INTO
-	sessions(session)
-VALUES
-	('April 2019'),
-	('October 2019'),
-	('April 2020'),
-	('October 2020'),
-	('April 2021'),
-	('October 2021'),
-	('April 2022'),
-	('October 2022');
+
+CREATE TABLE `users` (
+	`id` VARCHAR(9),
+	`name` VARCHAR(50),
+	`email` VARCHAR(100),		
+	`avatar_url` VARCHAR(250),	
+	PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `study_sessions` (
+	`id` VARCHAR(5) NOT NULL,
+	`title` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+);
 
 INSERT INTO
-	users(username, email, slackuid)
+	study_sessions(id, title)
 VALUES
-	('Alex', 'alex@something.com', '1'),
-	('Arjun', 'arjun@something.com', '2'),
-	('Blair', 'blair@something.com', '3'),
-	('Hayato', 'hayato@something.com', '4');
+	('19|04', 'April 2019'),
+	('19|10', 'October 2019'),
+	('20|04', 'April 2020'),
+	('20|10', 'October 2020'),
+	('21|04', 'April 2021'),
+	('21|10', 'October 2021');
+
+CREATE TABLE `grades` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`course_id` VARCHAR(6) NOT NULL,
+	`study_session_id` VARCHAR(5) NOT NULL,
+	`user_id` VARCHAR(9) NOT NULL,
+	`grade` SMALLINT NOT NULL,
+	`anonymous` BOOLEAN NOT NULL,
+	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (course_id) REFERENCES courses(id), -- only known courses
+	FOREIGN KEY (study_session_id) REFERENCES study_sessions(id), -- only known study sessions
+  	UNIQUE KEY `course_user` (`course_id`,`user_id`) -- one grade is allowed per course for any user
+);
 
 INSERT INTO
-	grades(user_id, session_id, course_id, grade)
+	grades(course_id, study_session_id, user_id, grade, anonymous)
 VALUES
-	(1, 1, 'CM1005', 100),
-	(2, 1, 'CM1005', 90),
-	(3, 1, 'CM1005', 92),
-	(4, 1, 'CM1005', 80),
-	(2, 1, 'CM1010', 88),
-	(3, 1, 'CM1010', 99),
-	(4, 1, 'CM1010', 92),
-	(1, 1, 'CM1010', 40),
-	(3, 1, 'CM1015', 84),
-	(4, 2, 'CM1015', 91),
-	(1, 3, 'CM1015', 96),
-	(2, 4, 'CM1015', 70),
-	(4, 4, 'CM1020', 99),
-	(1, 3, 'CM1020', 80),
-	(2, 2, 'CM1020', 49),
-	(3, 1, 'CM1020', 40);
+	('CM1015', '19|04', 'U00000000', 65, 1),
+	('CM1015', '19|04', 'U00000001', 95, 0),
+	('CM1015', '19|04', 'U00000002', 72, 1),
+	('CM1015', '20|04', 'U00000003', 98, 0),
+	('CM1015', '20|04', 'U00000004', 92, 0),
+	('CM1015', '20|04', 'U00000005', 62, 1),
+	('CM1015', '20|04', 'U00000006', 71, 1);
