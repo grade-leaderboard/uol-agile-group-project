@@ -2,7 +2,11 @@ CREATE DATABASE IF NOT EXISTS grades_leaderboard;
 
 USE grades_leaderboard;
 
+DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS study_sessions;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
+DROP VIEW IF EXISTS modules_with_grades;
 
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
