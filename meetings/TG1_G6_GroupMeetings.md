@@ -286,3 +286,19 @@ P0 (MVP) Goals:
 - Alex will work on section 1 and 6
   - Add usability goals/success criteria
 - Reaffirmed ability to meet as planned during holidays for the next few weeks but prepared to communicate asyncrhonously on slack since things will likely come up
+
+# 2020-1-21 - Weekly Working Session
+### Agenda
+- Stand-up to report work accomplished
+- Discuss ways we can improve development process
+
+### Outcomes
+- Brad is compiling feedback and iterating on wireframes
+- Alex added fake authentication and permission middleware, and projects his submit grade story will be done by tomorrow
+- Hayato finished personal grades page but will revise to avoid conflict with Alex's database scheme
+- Blair is partially done with edit grades story
+- Weighed pros/cons of trunk development. Alex suggested trunk development might work better.
+
+### Actions
+- Alex will push database changes before finishing entire story so Blair and Hayato can revise their work on module_leaderboard view and personal_grades view.
+- Will get feedback from Brad and Arjun on sprint length
