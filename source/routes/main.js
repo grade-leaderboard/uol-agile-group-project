@@ -38,7 +38,7 @@ module.exports = function (app) {
 						ORDER BY grade DESC";
 			var [results, _] = await db.query(sql, id);
 			results.forEach((row) => {
-				if (!row.anonymous) {
+				if (row.anonymous) {
 					row.name = "Anonymous";
 				}
 			});
