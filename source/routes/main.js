@@ -58,8 +58,6 @@ module.exports = function (app) {
 					ON courses.id = grades.course_id \
 					WHERE users.username = ? ";
 			var [results, _] = await db.query(sql, username);
-			console.log(username);
-			console.log(results);
 			res.render("personal_grade.html", {user: username, res: results});
 
 		} catch(error){
