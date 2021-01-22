@@ -25,18 +25,23 @@ module.exports = function (app) {
 		}
 	});
 
-	app.get("/module_leaderboard", async (req, res) => {
+	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
 			// let sql = "SELECT * FROM grades WHERE course_id = ? ORDER BY grade DESC";
 			let sql =
-				"SELECT grades.grade, users.id \
+				"SELECT grades.grade, users.name, grades.anonymous \
 						FROM grades \
 						JOIN users  \
 						ON grades.user_id = users.id \
 						WHERE course_id = ? \
 						ORDER BY grade DESC";
 			var [results, _] = await db.query(sql, id);
+			results.forEach((row) => {
+				if (row.anonymous) {
+					row.name = "Anonymous";
+				}
+			});
 			res.render("module_leaderboard.html", { res: results, course_id: id });
 		} catch (error) {
 			console.log(error);
