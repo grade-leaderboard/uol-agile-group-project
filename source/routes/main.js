@@ -47,4 +47,27 @@ module.exports = function (app) {
 			console.log(error);
 		}
 	});
+
+	app.get("/personal_grade", checkAuth, async (req, res) => {
+		try{
+			let username = [req.user.name]
+			// console.log(req.user.name);
+			let sql = 
+			"SELECT study_sessions.title AS session, grades.course_id, courses.title, grades.grade\
+					FROM grades \
+					JOIN users \
+					ON grades.user_id = users.id \
+					JOIN study_sessions \
+					ON study_sessions.id = grades.study_session_id \
+					JOIN courses \
+					ON courses.id = grades.course_id \
+					WHERE users.name = ? ";
+			var [results, _] = await db.query(sql, username);
+			res.render("personal_grade.html", {user: username, res: results});
+
+		} catch(error){
+			console.log(error);
+		}
+
+	});
 };
