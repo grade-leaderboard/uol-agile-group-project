@@ -4,7 +4,7 @@ module.exports = function (app) {
 	app.get("/", async (req, res) => {
 		try {
 			console.log(req.user.name);
-			let sql = "SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submition' \
+			let sql = "SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
 								FROM modules_with_grades m \
 								LEFT JOIN grades g \
 								ON g.course_id = m.id\
