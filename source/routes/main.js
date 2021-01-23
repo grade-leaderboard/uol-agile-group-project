@@ -6,7 +6,13 @@ module.exports = function (app) {
 	app.get("/", async (req, res) => {
 		try {
 			console.log(req.user.name);
-			let sql = "SELECT * FROM modules_with_grades ORDER BY id ASC";
+			let sql = "SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
+								FROM modules_with_grades m \
+								LEFT JOIN grades g \
+								ON g.course_id = m.id\
+								GROUP BY m.id\
+								ORDER BY id ASC" ; 
+								
 			var [results, _] = await db.query(sql);
 			res.render("index.html", {
 				res: results,
