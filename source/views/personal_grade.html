@@ -22,13 +22,14 @@
 			<%- include('partials/nav.ejs') %>
 			<!-- Page content begins below this -->
 			<h1><%= user %></h1>
+			<a class="btn btn-outline-primary" role="button" href="/edit_grades">Edit Grades</a>
             <table data-toggle="table" data-search="true">
 				<thead>
 					<tr class="d-flex">
                         <th scope="col" data-sortable="true"  class="col-2">Session</th>
                         <th scope="col" data-sortable="true"  class="col-2">ID</th>
 						<th scope="col" data-sortable="true"  class="col-5">Module</th>
-						<th scope="col" data-sortable="true"  class="col-2">Grade</th>
+						<th scope="col" data-sortable="true"  class="col-3">Grade</th>
 					</tr>
 				</thead>
 				<tbody>
