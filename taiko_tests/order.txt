@@ -1,0 +1,8 @@
+1. Refresh your database
+2. Run open_ scripts to simply open each of the pages. Screenshots are generated in the screenshots folder for verification.
+3. Run add_ scripts and Catch_ scripts to test adding valid grades and catching the error of submitting the grade twice.
+
+Repeat with
+    --emulate-network 'Good2G'
+    --emulate-network 'WiFi'
+    --emulate-network 'Offline'
