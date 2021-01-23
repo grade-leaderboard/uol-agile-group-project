@@ -28,6 +28,7 @@
 						<th scope="col" data-sortable="true">ID</th>
 						<th scope="col" data-sortable="true">Course</th>
 						<th scope="col" data-sortable="true">Average Grade</th>
+						<th scope="col" data-sortable="true">Number of submition</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,6 +37,7 @@
 						<td><%= module.id %></td>
 						<td><a href="/module_leaderboard?module_id=<%= module.id %>"><%= module.title %></a></td>
 						<td><%= module.grade %></td>
+						<td><%= module.submition %></td>
 					</tr>
 					<% }); %>
 				</tbody>
