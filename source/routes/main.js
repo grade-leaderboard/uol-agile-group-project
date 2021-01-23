@@ -1,4 +1,6 @@
 const checkAuth = require("../middlewares/checkAuth");
+const checkPermission = require("../middlewares/checkPermission");
+const { check, validationResult } = require('express-validator');
 
 module.exports = function (app) {
 	app.get("/", async (req, res) => {
@@ -14,14 +16,39 @@ module.exports = function (app) {
 		}
 	});
 
-	app.post("/grades", checkAuth, async (req, res) => {
+	app.get("/addgrade", async (req, res) => {
 		try {
-			console.log(req.user.name);
-			// let sql = "SELECT * FROM modules_with_grades ORDER BY id ASC";
-			// var [results, _] = await db.query(sql);
-			// res.render("index.html", { res: results });
+			let sql = "SELECT * FROM courses ORDER BY id ASC";
+			var [courses, _] = await db.query(sql);
+			sql = "SELECT * FROM study_sessions ORDER BY id ASC";
+			var [semesters, _] = await db.query(sql);			
+			res.render("addgrade.html", {
+				title: 'Leaderboard - Add grade',
+				heading: "Add grade",
+				courseList: courses, 
+				semesterList: semesters,
+				addResult: req.query.addResult,
+			});
 		} catch (error) {
 			console.log(error);
+		}
+	});
+
+	app.post("/addgrade", checkAuth, checkPermission, async (req, res) => {
+		try {
+			let params = [req.body.course_id, req.body.semester, req.user.id, 
+				req.body.grade, !!req.body.anonymous]
+			let sql = `
+			INSERT INTO grades(course_id, study_session_id, user_id, grade, anonymous)
+			VALUES (?, ?, ?, ?, ?)`;
+			var [results, _] = await db.query(sql, params);
+			res.redirect(req.baseUrl + "?addResult=success");
+		} catch (error) {
+			console.log(error);
+            if (error.code == "ER_DUP_ENTRY") {
+				res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`
+				)
+			}	
 		}
 	});
 
@@ -50,7 +77,7 @@ module.exports = function (app) {
 
 	app.get("/personal_grade", checkAuth, async (req, res) => {
 		try{
-			let username = [req.user.name]
+			let user = [req.user.id]
 			// console.log(req.user.name);
 			let sql = 
 			"SELECT study_sessions.title AS session, grades.course_id, courses.title, grades.grade\
@@ -61,9 +88,9 @@ module.exports = function (app) {
 					ON study_sessions.id = grades.study_session_id \
 					JOIN courses \
 					ON courses.id = grades.course_id \
-					WHERE users.name = ? ";
-			var [results, _] = await db.query(sql, username);
-			res.render("personal_grade.html", {user: username, res: results});
+					WHERE users.id = ? ";
+			var [results, _] = await db.query(sql, user);
+			res.render("personal_grade.html", {user: req.user.name, res: results});
 
 		} catch(error){
 			console.log(error);

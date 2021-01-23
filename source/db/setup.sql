@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS grades_leaderboard;
+DROP DATABASE IF EXISTS grades_leaderboard;
+CREATE DATABASE IF NOT EXISTS grades_leaderboard CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE grades_leaderboard;
 
@@ -123,3 +124,4 @@ VALUES
 	('U00000004', 'Hayato Ishida', 'hayato@something.com'),
 	('U00000005', 'Bob', 'bob@something.com'),
 	('U00000006', 'Alice', 'alice@something.com');
+

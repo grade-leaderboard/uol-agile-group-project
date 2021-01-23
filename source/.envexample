@@ -4,3 +4,7 @@ DB_HOST=localhost
 DB_USER=user
 DB_PASSWORD=pw
 DB_DATABASE=db_name
+
+USER_NAME=Name Surname
+USER_ID=U00000000
+USER_EMAIL=someone@example.com
