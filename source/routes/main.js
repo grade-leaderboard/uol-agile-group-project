@@ -15,7 +15,6 @@ module.exports = function (app) {
 			res.render("index.html", {
 				res: results,
 			});
-			console.log(results)
 		} catch (error) {
 			console.log(error);
 		}
