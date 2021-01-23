@@ -17,7 +17,7 @@
 6. Navigate to `localhost:<port>` in your browser, where `<port>` is the port defined in `.env`
 
 
-# Git Flow
+## Git Flow
 
 1. Create a new branch
 
@@ -44,3 +44,13 @@
 		git push
 
 It might be that you need to set your upstream. Git will tell you the right command to use if this is the case. Just copy-paste that command and proceed.
+
+## PR Review
+We will review each pull request to ensure it works and meets the requirements before merging. You can review changes in github using the "Files changed" tab in the pull request.
+
+To review a pull request locally you can use [github desktop, github command line, or fetch the branch to your local repository with git](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/checking-out-pull-requests-locally). To fetch with git you need the ID of the PR and branchname. For example, [this PR](https://github.com/BlairCurrey/uol-agile-group-project/pull/2)'s ID is `2` and the branchname is `modules_with_grades`.
+		
+		git fetch origin pull/ID/head:BRANCHNAME
+		git checkout BRANCHNAME
+		
+If the code works and meets the requirements you can merge the request. Otherwise ask for the necessary clarification or changes and the PR owner will address them.
