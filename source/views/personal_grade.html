@@ -23,26 +23,35 @@
 			<!-- Page content begins below this -->
 			<h1><%= user %></h1>
 			<a class="btn btn-outline-primary" role="button" href="/edit_grades">Edit Grades</a>
-            <table data-toggle="table" data-search="true">
-				<thead>
-					<tr class="d-flex">
-                        <th scope="col" data-sortable="true"  class="col-2">Session</th>
-                        <th scope="col" data-sortable="true"  class="col-2">ID</th>
-						<th scope="col" data-sortable="true"  class="col-5">Module</th>
-						<th scope="col" data-sortable="true"  class="col-3">Grade</th>
-					</tr>
-				</thead>
-				<tbody>
-                    <% res.forEach(function (grade) { %>
-                        <tr scope="row" class="d-flex">
-                            <td><%= grade.session %></td>
-                            <td><%= grade.course_id %></td>
-                            <td><%= grade.title %> </td>
-                            <td><%= grade.grade %></td>
-                        </tr>
-                        <% }); %>
-				</tbody>
-			</table>
+
+			<% if (res.length > 0) {%>
+
+				<table data-toggle="table" data-search="true">
+					<thead>
+						<tr class="d-flex">
+							<th scope="col" data-sortable="true"  class="col-2">Session</th>
+							<th scope="col" data-sortable="true"  class="col-2">ID</th>
+							<th scope="col" data-sortable="true"  class="col-5">Module</th>
+							<th scope="col" data-sortable="true"  class="col-2">Grade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% res.forEach(function (grade) { %>
+							<tr scope="row" class="d-flex">
+								<td><%= grade.session %></td>
+								<td><%= grade.course_id %></td>
+								<td><%= grade.title %> </td>
+								<td><%= grade.grade %></td>
+							</tr>
+							<% }); %>
+					</tbody>
+				</table>
+
+			<% } else {%>
+
+				You have no grades entered into the leaderboard. Visit the <a href="addgrade">add grades</a> page to add one now.
+			
+			<% } %>
             
 		<%- include('partials/footer.ejs') %>
 	</body>
