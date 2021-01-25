@@ -27,7 +27,7 @@ const headless = process.env.headless_chrome.toLowerCase() === 'true';
 beforeSuite(async () => {
     await openBrowser({
         // headless: headless
-        headless: false
+        headless: true
     })
 });
 
@@ -35,11 +35,13 @@ afterSuite(async () => {
     await closeBrowser();
 });
 
-step("Change device to iPhone X", async () => {
+step("Change device to iPhone X portrait", async () => {
     await emulateDevice('iPhone X')
 });
 
-
+step("Change device to iPhone X landscape", async () => {
+    await emulateDevice('iPhone X landscape')
+});
 
 step("Open default app webpage", async () => {
     await goto("127.0.0.1:8080");
@@ -53,42 +55,29 @@ step("Open addgrade page", async () => {
     await goto("127.0.0.1:8080/addgrade");
 });
 
-step("Select second module", async () => {
-    await click("Choose a module...");
-    await press(['ArrowDown', 'ArrowDown', 'Enter']);
+step("Click submit", async () => {
+    await click('Submit')
 });
 
-step("Select fourth module", async () => {
-    await click("Choose a module...");
-    await press(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'Enter']);
+step("Click Choose a module", async () => {
+    await click('Choose a module')
 });
 
-step("Select first session", async () => {
-    await click("Choose a session...");
-    await press(['ArrowDown', 'Enter']);
+step("Click Choose a session", async () => {
+    await click('Choose a session')
 });
 
-step("Select third session", async () => {
-    await click("Choose a session...");
-    await press(['ArrowDown', 'ArrowDown', 'ArrowDown', 'Enter']);
+step("Press arrowdown", async () => {
+    await press(['ArrowDown']);
 });
 
-step("Add a valid grade", async () => {
+step("Press enter", async () => {
+    await press(['Enter']);
+});
+
+step("Add a grade of <grade>", async function(grade) {
     await clear(textBox({id:'grade'}))
-    await write('72',into(textBox({id:'grade'})))
-    await click('Submit');
-});
-
-step("Add a invalid negative grade", async () => {
-    await clear(textBox({id:'grade'}))
-    await write('-7',into(textBox({id:'grade'})))
-    await click('Submit');
-});
-
-step("Add a invalid grade above 100", async () => {
-    await clear(textBox({id:'grade'}))
-    await write('107',into(textBox({id:'grade'})))
-    await click('Submit');
+    await write(grade,into(textBox({id:'grade'})))
 });
 
 step("Check for grade entered success message", async () => {
@@ -105,4 +94,18 @@ step("Click submit anonymously button", async () => {
 
 step("Take a screenshot", async () => {
     await screenshot({path: 'reports\\screenshots\\validate_grade_already_exists.png'})
+});
+
+step("Click session <session>", async function(session) {
+    await click(session)
+});
+
+step("Click module <module>", async function(module) {
+    await click(module)
+});
+
+step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(grade, module, session, courseid) {
+    await assert.ok(await text(grade, {toRightOf: module}).exists());
+    await assert.ok(await text(module, {toRightOf: courseid}).exists());
+    await assert.ok(await text(courseid, {toRightOf: session}).exists());
 });
