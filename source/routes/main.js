@@ -2,10 +2,10 @@ const checkAuth = require("../middlewares/checkAuth");
 const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
 	app.get("/", async (req, res) => {
 		try {
-			console.log(req.user.name);
+			console.log(req.user);
 			let sql =
 				"SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
 								FROM modules_with_grades m \
@@ -23,7 +23,7 @@ module.exports = function (app) {
 		}
 	});
 
-	app.get("/addgrade", async (req, res) => {
+	app.get("/addgrade", checkAuth, async (req, res) => {
 		try {
 			let sql = "SELECT * FROM courses ORDER BY id ASC";
 			var [courses, _] = await db.query(sql);
@@ -60,7 +60,6 @@ module.exports = function (app) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
-			// let sql = "SELECT * FROM grades WHERE course_id = ? ORDER BY grade DESC";
 			let sql =
 				"SELECT grades.grade, users.name, grades.anonymous \
 						FROM grades \
@@ -83,7 +82,6 @@ module.exports = function (app) {
 	app.get("/personal_grade", checkAuth, async (req, res) => {
 		try {
 			let user = [req.user.id];
-			// console.log(req.user.name);
 			let sql =
 				"SELECT study_sessions.title AS session, grades.course_id, courses.title, grades.grade\
 					FROM grades \
@@ -95,7 +93,7 @@ module.exports = function (app) {
 					ON courses.id = grades.course_id \
 					WHERE users.id = ? ";
 			var [results, _] = await db.query(sql, user);
-			res.render("personal_grade.html", { user: req.user.name, res: results });
+			res.render("personal_grade.html", { res: results });
 		} catch (error) {
 			console.log(error);
 		}
@@ -144,5 +142,32 @@ module.exports = function (app) {
 			console.log(error);
 			res.redirect(req.baseUrl + "?editResult=Grade was not edited. Something went wrong.");
 		}
+	});
+
+	// Intiate slack authentication process
+	app.get("/auth/slack", passport.authorize("slack"));
+
+	// OAuth callback url used by Slack
+	app.get(
+		"/auth/slack/callback",
+		passport.authenticate("slack", {
+			failureRedirect: "/",
+			failureFlash: "Slack login failed",
+		}),
+		(req, res) => {
+			try {
+				console.log("slack auth callback");
+				// Set cookie age to 7 days
+				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
+				res.redirect("/");
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	);
+	// app.get("/logout", (req) => req.logout());
+	app.get("/logout", (req, res) => {
+		req.logout();
+		res.redirect("/");
 	});
 };
