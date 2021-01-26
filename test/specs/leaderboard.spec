@@ -46,7 +46,7 @@ Remember to reset the database prior to the tests
 * Click Choose a session
 * Click session "October 2021"
 * Add a grade of "72"
-* Click Submit
+* Click submit
 * Open personal grades page
 * Validate personal grade in "CM3005" "Data Science" in "October 2021" with grade "72"
 * Open addgrade page
@@ -55,7 +55,7 @@ Remember to reset the database prior to the tests
 * Click Choose a session
 * Click session "October 2021"
 * Add a grade of "72"
-* Click Submit
+* Click submit
 * Check for you already have a grade message
 
  Add a valid grade anonymously
