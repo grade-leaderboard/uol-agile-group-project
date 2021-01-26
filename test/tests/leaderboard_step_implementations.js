@@ -27,7 +27,7 @@ const headless = process.env.headless_chrome.toLowerCase() === 'true';
 beforeSuite(async () => {
     await openBrowser({
         // headless: headless
-        headless: true
+        headless: false
     })
 });
 
@@ -104,8 +104,18 @@ step("Click module <module>", async function(module) {
     await click(module)
 });
 
-step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(grade, module, session, courseid) {
-    await assert.ok(await text(grade, {toRightOf: module}).exists());
-    await assert.ok(await text(module, {toRightOf: courseid}).exists());
-    await assert.ok(await text(courseid, {toRightOf: session}).exists());
+step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(courseid, module, session, grade) {
+    await assert.ok
+        (await text(grade, {toRightOf: module, exactMatch: true}).exists()) &&
+        (await text(module, {toRightOf: courseid, exactMatch: true}).exists()) &&
+        (await text(courseid, {toRightOf: session, exactMatch: true}).exists())
+    ;
+});
+
+step("Ensure personal grade in <courseid> <module> in <session> with grade <grade> does not exist", async function(courseid, module, session, grade) {
+    await assert.ok
+        (!await text(grade, {toRightOf: module, exactMatch: true}).exists(50000, 100)) &&
+        (!await text(module, {toRightOf: courseid, exactMatch: true}).exists(50000, 100), true) &&
+        (!await text(courseid, {toRightOf: session, exactMatch: true}).exists(50000, 100), true)
+    ;
 });
