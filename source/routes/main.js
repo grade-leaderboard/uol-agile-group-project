@@ -67,7 +67,19 @@ module.exports = function (app) {
 						JOIN users  \
 						ON grades.user_id = users.id \
 						WHERE course_id = ? \
-						ORDER BY grade DESC";
+						ORDER BY grade DESC, created_at ASC \
+						LIMIT 50";
+
+						// SELECT username, grade, graderank, created_at
+						// FROM (
+						// 	SELECT users.name AS username, grades.grade AS grade, RANK() OVER w AS graderank, grades.created_at AS created_at
+						// 	FROM grades
+						// 	JOIN users 
+						// 	ON grades.user_id = users.id
+						// 	WINDOW w AS (ORDER BY grades.grade DESC)
+						// ) a
+						// ORDER BY created_at
+						// ;
 			var [results, _] = await db.query(sql, id);
 			results.forEach((row) => {
 				if (row.anonymous) {
