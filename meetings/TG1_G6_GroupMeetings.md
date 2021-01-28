@@ -302,3 +302,18 @@ P0 (MVP) Goals:
 ### Actions
 - Alex will push database changes before finishing entire story so Blair and Hayato can revise their work on module_leaderboard view and personal_grades view.
 - Will get feedback from Brad and Arjun on sprint length
+
+# 2020-1-21 - Weekly Working Session
+### Agenda
+- Stand-up to report work accomplished
+- Discuss alternative meeting times
+
+### Outcomes
+- Brad is working on his story and reported user feedback he collected
+- Hayato provided feedback on Slack sign-in and reported no issues on his stories
+- Alex clarified requirements fro continuous integration
+- Blair demod slack sign in feature and tests
+
+### Actions
+- Brad will send out Doodle for alternative meeting times
+- Continue working on stories and make sure to distribute survey and app for user feedback
