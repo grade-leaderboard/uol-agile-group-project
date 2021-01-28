@@ -39,15 +39,15 @@
 
 		</div>
 		<!-- Slack Sign-in-->
-		<!-- <div class="navbar-nav flex-row justify-content-between ml-auto">
+		<div class="navbar-nav flex-row justify-content-between ml-auto">
 			<% if (typeof user !== 'undefined' && user) { %>
-			<a href="#" class="nav-link disabled">Hi, <%= user.username %></a>
-			<a href="/user/profile" class="nav-link">Profile</a>
-			<a href="/user/logout" class="nav-link">Logout</a>
+			<a href="#" class="nav-link disabled">Hi, <%= user.name %></a>
+			<!-- <a href="/user/profile" class="nav-link">Profile</a> -->
+			<a href="/logout" class="nav-link">Logout</a>
 			<% } else { %>
-			<a href="/user/auth/slack"
+			<a href="/auth/slack"
 				><img
-					class=""
+					id="slack-sign-in"
 					alt="verify in with Slack"
 					height="40"
 					width="172"
@@ -58,6 +58,6 @@
 					"
 			/></a>
 			<% } %>
-		</div> -->
+		</div>
 	</div>
 </nav>

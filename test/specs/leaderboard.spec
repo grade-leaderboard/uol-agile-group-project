@@ -1,8 +1,16 @@
-# Test Public Pages
+# Test Grade Leaderboard
 Remember to reset the database prior to the tests
 
 ## View default page 
 * Open default app webpage
+
+## Sign in with Slack
+* Open default app webpage
+* Click Slack sign in
+* Enter workspace and continue
+* Enter Slack email and password and continue
+* Click "Allow"
+* Validate user is logged in
 
 ## View personal grades page
 * Open personal grades page
