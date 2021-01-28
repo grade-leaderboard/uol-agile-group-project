@@ -110,7 +110,7 @@ VALUES
 	('CM1015', '19|04', 'U00000001', 95, 0),
 	('CM1015', '19|04', 'U00000002', 72, 1),
 	('CM1015', '20|04', 'U00000003', 95, 0),
-	('CM1015', '20|04', 'U00000004', 92, 0),
+	('CM1015', '20|04', 'U00000004', 95, 0),
 	('CM1015', '20|04', 'U00000005', 62, 1),
 	('CM1015', '20|04', 'U00000006', 71, 1);
 
@@ -118,7 +118,29 @@ SET SQL_SAFE_UPDATES = 0;
 UPDATE grades
 	SET created_at = '2020-12-01 15:15:23'
     WHERE user_id = 'U00000001';
+UPDATE grades
+	SET created_at = '2019-12-01 15:15:23'
+    WHERE user_id = 'U00000004';
 SET SQL_SAFE_UPDATES = 1;
+
+CREATE VIEW rml AS
+SELECT username, grade, anonymous, course_id, graderank, created_at
+FROM (
+	SELECT users.name AS username, grades.grade AS grade, grades.anonymous AS anonymous, grades.course_id AS course_id, RANK() OVER w AS graderank, grades.created_at AS created_at
+	FROM grades
+	JOIN users
+	ON grades.user_id = users.id
+	WINDOW w AS (ORDER BY grades.grade DESC)
+) ranked
+ORDER BY created_at;
+
+CREATE VIEW rml2 AS
+SELECT users.name AS username, grade, anonymous, course_id, created_at
+FROM
+	grades
+	JOIN users
+	ON grades.user_id = users.id
+ORDER BY created_at;
 
 INSERT INTO
 	users(id, name, email)

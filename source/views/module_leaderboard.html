@@ -35,11 +35,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% res.forEach(function (grade, i) { %>
+					<% res.forEach(function (ranked) { %>
 					<tr scope="row" class="d-flex">
-						<th><%=i + 1%></th>
-						<td><%= grade.name %></td>
-						<td><%= grade.grade %></td>
+						<td><%= ranked.graderank %></td>
+						<td><%= ranked.username %></td>
+						<td><%= ranked.grade %></td>
 					</tr>
 					<% }); %>
 				</tbody>
