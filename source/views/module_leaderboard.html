@@ -38,7 +38,11 @@
 					<% res.forEach(function (grade, i) { %>
 					<tr scope="row" class="d-flex">
 						<th><%=i + 1%></th>
-						<td><%= grade.name %></td>
+						<% if(grade.avatar_url != null){ %>
+							<td><%= grade.name %> <img src=<%= grade.avatar_url%> alt="user avatar" style="border-radius: 30%"> </td>
+						<% } else { %>
+							<td><%= grade.name %> </td> 
+				        <% } %>
 						<td><%= grade.grade %></td>
 					</tr>
 					<% }); %>

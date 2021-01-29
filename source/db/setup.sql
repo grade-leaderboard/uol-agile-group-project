@@ -109,7 +109,6 @@ VALUES
 	('CM1015', '19|04', 'U00000000', 65, 1),
 	('CM1015', '19|04', 'U00000001', 95, 0),
 	('CM1015', '20|04', 'U00000003', 98, 0),
-	('CM1015', '20|04', 'U00000004', 92, 0),
 	('CM1015', '20|04', 'U00000005', 62, 1),
 	('CM1015', '20|04', 'U00000006', 71, 1);
 
@@ -119,7 +118,6 @@ VALUES
 	('U00000000', 'Alex', 'alex@something.com'),
 	('U00000001', 'Arjun', 'arjun@something.com'),
 	('U00000003', 'Brad', 'brad@something.com'),
-	('U00000004', 'Hayato Ishida', 'hayato@something.com'),
 	('U00000005', 'Bob', 'bob@something.com'),
 	('U00000006', 'Alice', 'alice@something.com');
 
