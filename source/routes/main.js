@@ -61,16 +61,18 @@ module.exports = function (app, passport) {
 		try {
 			id = [req.query.module_id];
 			let sql =
-				"SELECT grades.grade, users.name, grades.anonymous \
+				"SELECT grades.grade, users.name, grades.anonymous, users.avatar_url\
 						FROM grades \
 						JOIN users  \
 						ON grades.user_id = users.id \
 						WHERE course_id = ? \
 						ORDER BY grade DESC";
 			var [results, _] = await db.query(sql, id);
+			console.log(results)
 			results.forEach((row) => {
 				if (row.anonymous) {
 					row.name = "Anonymous";
+					row.avatar_url = null;
 				}
 			});
 			res.render("module_leaderboard.html", { res: results, course_id: id });

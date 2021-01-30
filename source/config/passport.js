@@ -47,7 +47,7 @@ module.exports = (passport) => {
 					if (result.length == 0) {
 						let sql = "INSERT INTO users (id, name, email, avatar_url) \
 									values (?,?,?,?)";
-						let values = [profile.id, profile.user.name, profile.user.email, profile.user.image_24];
+						let values = [profile.id, profile.user.name, profile.user.email, profile.user.image_32];
 						var [result, _] = await db.query(sql, values);
 					}
 					done(null, profile.user);
