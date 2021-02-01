@@ -9,6 +9,7 @@ const {
     press,
     screenshot,
     above,
+    below,
     click,
     checkBox,
     listItem,
@@ -22,13 +23,14 @@ const {
     clear,
     button,
     waitFor,
-    image
+    image,
+    highlight
 } = require('taiko');
 const assert = require("assert");
 
 beforeSuite(async () => {
     await openBrowser(
-        {headless: false}
+        {headless: true}
     )
 });
 
@@ -58,6 +60,10 @@ step("Open addgrade page", async () => {
 
 step("Click <text>", async (text) => {
     await click(text)
+});
+
+step("Open rankings page for <module>", async function(module) {
+    await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
 });
 
 step("Click submit", async () => {
@@ -102,7 +108,7 @@ step("Click submit anonymously button", async () => {
 });
 
 step("Take a screenshot", async () => {
-    await screenshot({path: 'reports\\screenshots\\validate_grade_already_exists.png'})
+    await screenshot({path: `screenshot-${process.hrtime.bigint()}.png`});
 });
 
 step("Click session <session>", async function(session) {
@@ -115,9 +121,9 @@ step("Click module <module>", async function(module) {
 
 step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(courseid, module, session, grade) {
     await assert.ok
-        (await text(grade, {toRightOf: module, exactMatch: true}).exists()) &&
-        (await text(module, {toRightOf: courseid, exactMatch: true}).exists()) &&
-        (await text(courseid, {toRightOf: session, exactMatch: true}).exists())
+        (await text(grade, {toRightOf: module, exactMatch: true}).exists(50000, 100)) &&
+        (await text(module, {toRightOf: courseid, exactMatch: true}).exists(50000, 100)) &&
+        (await text(courseid, {toRightOf: session, exactMatch: true}).exists(50000, 100))
     ;
 });
 
@@ -154,3 +160,6 @@ step("Validate user is logged in", async () => {
 step("Verify that module <moduleId> is not available anymore", async(moduleId) => {
     await assert.ok(text(moduleId).exists);
 })
+step("<textFirst> is above <textSecond>", async (textFirst, textSecond) => {
+    await assert.ok(text(textFirst), above(text(textSecond)));
+});
