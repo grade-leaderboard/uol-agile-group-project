@@ -122,12 +122,12 @@ VALUES
 	('CM1025', '20|04', 'U00000005', 62, 1),
 	('CM1025', '20|04', 'U00000006', 71, 1);
 
-CREATE VIEW grade_rank_by_module AS
-SELECT name as username, grade, course_id, anonymous, created_at, RANK() OVER (ORDER BY course_id ASC, grade DESC) AS "graderank"
-FROM grades
-JOIN users
-ON grades.user_id = users.id
-ORDER BY course_id ASC, graderank ASC, created_at ASC;
+# CREATE VIEW grade_rank_by_module AS
+# SELECT name as username, grade, course_id, anonymous, created_at, RANK() OVER (ORDER BY course_id ASC, grade DESC) AS "graderank"
+# FROM grades
+# JOIN users
+# ON grades.user_id = users.id
+# ORDER BY course_id ASC, graderank ASC, created_at ASC;
 
 # This is strictly for testing the module rankings
 SET SQL_SAFE_UPDATES = 0;

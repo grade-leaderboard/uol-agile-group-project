@@ -61,7 +61,20 @@ module.exports = function (app) {
 		try {
 			id = [req.query.module_id];
 			let sql =
-				"SELECT * FROM grade_rank_by_module WHERE course_id = ?";
+				"SELECT username, grade, graderank, created_at, anonymous \
+				FROM ( \
+					SELECT users.name AS username, grades.grade AS grade, RANK() OVER w AS graderank, grades.created_at AS created_at, grades.course_id, grades.anonymous \
+					FROM grades \
+					JOIN users \
+					ON grades.user_id = users.id \
+					WHERE grades.course_id = ? \
+					WINDOW w AS (ORDER BY grades.grade DESC) \
+				) a \
+				ORDER BY created_at \
+				;"
+
+				// "SELECT * FROM grade_rank_by_module WHERE course_id = ?";
+
 			var [results, _] = await db.query(sql, id);
 			results.forEach((row) => {
 				if (row.anonymous) {
