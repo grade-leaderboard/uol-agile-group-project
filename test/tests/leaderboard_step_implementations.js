@@ -19,7 +19,8 @@ const {
     textBox,
     evaluate,
     emulateDevice,
-    clear
+    clear,
+    highlight
 } = require('taiko');
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
@@ -53,6 +54,10 @@ step("Open personal grades page", async () => {
 
 step("Open addgrade page", async () => {
     await goto("127.0.0.1:8080/addgrade");
+});
+
+step("Open rankings page for <module>", async function(module) {
+    await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
 });
 
 step("Click submit", async () => {
@@ -93,7 +98,7 @@ step("Click submit anonymously button", async () => {
 });
 
 step("Take a screenshot", async () => {
-    await screenshot({path: 'reports\\screenshots\\validate_grade_already_exists.png'})
+    await screenshot({path: `screenshot-${process.hrtime.bigint()}.png`});
 });
 
 step("Click session <session>", async function(session) {
@@ -104,11 +109,15 @@ step("Click module <module>", async function(module) {
     await click(module)
 });
 
+step("Click <text>", async function(text) {
+    await click(text)
+});
+
 step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(courseid, module, session, grade) {
     await assert.ok
-        (await text(grade, {toRightOf: module, exactMatch: true}).exists()) &&
-        (await text(module, {toRightOf: courseid, exactMatch: true}).exists()) &&
-        (await text(courseid, {toRightOf: session, exactMatch: true}).exists())
+        (await text(grade, {toRightOf: module, exactMatch: true}).exists(50000, 100)) &&
+        (await text(module, {toRightOf: courseid, exactMatch: true}).exists(50000, 100)) &&
+        (await text(courseid, {toRightOf: session, exactMatch: true}).exists(50000, 100))
     ;
 });
 
@@ -117,5 +126,23 @@ step("Ensure personal grade in <courseid> <module> in <session> with grade <grad
         (!await text(grade, {toRightOf: module, exactMatch: true}).exists(50000, 100)) &&
         (!await text(module, {toRightOf: courseid, exactMatch: true}).exists(50000, 100), true) &&
         (!await text(courseid, {toRightOf: session, exactMatch: true}).exists(50000, 100), true)
+    ;
+});
+
+step("Check that a new grade of <newgrade> with rank <newrank> appears between <expectedtopuser> ranked <expectedtoprank> with <expectedtopgrade> and <expectedbottomuser> ranked <expectedbottomrank> with <expectedbottomgrade>", async function(newgrade, newrank, expectedtopuser, expectedtoprank, expectedtopgrade, expectedbottomuser, expectedbottomrank, expectedbottomgrade) {
+    await highlight(expectedbottomgrade)
+    await highlight(expectedbottomrank)
+    await highlight(expectedbottomuser)
+    await highlight(expectedtopgrade)
+    await highlight(expectedtoprank)
+    await highlight(expectedtopuser)
+    await highlight(newrank)
+    await highlight(newgrade)
+
+    await assert.ok
+    (await text(expectedbottomgrade, {toLeftOf: expectedbottomuser, exactMatch: true}).exists(50000, 100)) &&
+    (await text(expectedbottomuser, {toRightOf: expectedbottomrank, exactMatch: true}).exists(50000, 100)) &&
+    (await text(expectedtopgrade, {toRightOf: expectedtopuser, exactMatch: true}).exists(50000, 100)) &&
+    (await text(expectedtopuser, {toRightOf: expectedtoprank, exactMatch: true}).exists(50000, 100))
     ;
 });

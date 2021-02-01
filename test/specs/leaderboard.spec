@@ -58,6 +58,27 @@ Remember to reset the database prior to the tests
 * Click submit
 * Check for you already have a grade message
 
+## Check that grades are sorted by timestamp when tied
+These tests are done on CM3070.
+This relies on the database being manually reset so that Bob's grade is entered at 70% when the DB is refreshed.
+Alice's grade of 71 is manually reset so it was entered in December 2019.
+A new grade of 71 should be ranked as a tie with Alice and appear between Alice and Bob on the list.
+ Open addgrade page
+ Click Choose a module
+ Click module "CM3070"
+ Click Choose a session
+ Click session "October 2021"
+ Add a grade of "71"
+ Click submit
+ Check for grade entered success message
+ Open rankings page for "CM3070"
+ Click "Name"
+ Click "Grade"
+ Click "Grade"
+This will ensure the rows are sorted by grade in descending order.
+ Check that a new grade of "71" with rank "1" appears between "Alice" ranked "1" with "71" and "Bob" ranked "3" with "70"
+ Take a screenshot
+
  Add a valid grade anonymously
  Open addgrade page
  Select fourth module

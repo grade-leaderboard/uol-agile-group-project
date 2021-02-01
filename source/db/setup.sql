@@ -120,7 +120,9 @@ VALUES
 	('CM1025', '20|04', 'U00000003', 95, 0),
 	('CM1025', '20|04', 'U00000004', 95, 0),
 	('CM1025', '20|04', 'U00000005', 62, 1),
-	('CM1025', '20|04', 'U00000006', 71, 1);
+	('CM1025', '20|04', 'U00000006', 71, 1),
+    ('CM3070', '19|04', 'U00000005', 70, 0),
+    ('CM3070', '20|04', 'U00000006', 71, 0);
 
 # CREATE VIEW grade_rank_by_module AS
 # SELECT name as username, grade, course_id, anonymous, created_at, RANK() OVER (ORDER BY course_id ASC, grade DESC) AS "graderank"
@@ -137,6 +139,9 @@ UPDATE grades
 UPDATE grades
 	SET created_at = '2019-12-01 15:15:23'
     WHERE user_id = 'U00000004';
+UPDATE grades
+	SET created_at = '2019-12-01 15:15:23'
+    WHERE user_id = 'U00000006';
 SET SQL_SAFE_UPDATES = 1;
 # This is strictly for testing the module rankings
 
