@@ -25,8 +25,10 @@ module.exports = function (app, passport) {
 
 	app.get("/addgrade", checkAuth, async (req, res) => {
 		try {
-			let sql = "SELECT * FROM courses ORDER BY id ASC";
-			var [courses, _] = await db.query(sql);
+			let sql = `SELECT c.* FROM courses c WHERE c.id NOT IN 
+			(SELECT g.course_id FROM grades g WHERE g.user_id = ?)
+			ORDER BY c.id ASC`;
+			var [courses, _] = await db.query(sql, [req.user.id]);
 			sql = "SELECT * FROM study_sessions ORDER BY id ASC";
 			var [semesters, _] = await db.query(sql);
 			res.render("addgrade.html", {

@@ -150,3 +150,7 @@ step("Enter Slack email and password and continue", async () => {
 step("Validate user is logged in", async () => {
     await link("Logout").exists();
 });
+
+step("Verify that module <moduleId> is not available anymore", async(moduleId) => {
+    await assert.ok(text(moduleId).exists);
+})
