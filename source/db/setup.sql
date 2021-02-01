@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS study_sessions;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
 DROP VIEW IF EXISTS modules_with_grades;
+DROP VIEW IF EXISTS ranked_grades;
 
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
@@ -103,14 +104,32 @@ CREATE TABLE `grades` (
   	UNIQUE KEY `course_user` (`course_id`,`user_id`) -- one grade is allowed per course for any user
 );
 
+CREATE VIEW ranked_grades AS
+SELECT name, grade, course_id, anonymous, created_at, avatar_url,
+RANK() OVER (PARTITION BY course_id ORDER BY course_id ASC, grade DESC) AS "ranking"
+FROM grades
+JOIN users
+ON grades.user_id = users.id
+ORDER BY course_id ASC, ranking ASC, created_at ASC;
+
+
 INSERT INTO
 	grades(course_id, study_session_id, user_id, grade, anonymous)
 VALUES
+	('CM1025', '19|04', 'U00000000', 65, 1),
+	('CM1025', '19|04', 'U00000001', 95, 0),
+	('CM1025', '19|04', 'U00000002', 72, 1),
 	('CM1015', '19|04', 'U00000000', 65, 1),
 	('CM1015', '19|04', 'U00000001', 95, 0),
-	('CM1015', '20|04', 'U00000003', 98, 0),
+	('CM1015', '19|04', 'U00000002', 72, 1),
+	('CM1015', '20|04', 'U00000003', 95, 0),
+	('CM1015', '20|04', 'U00000004', 95, 0),
 	('CM1015', '20|04', 'U00000005', 62, 1),
-	('CM1015', '20|04', 'U00000006', 71, 1);
+	('CM1015', '20|04', 'U00000006', 71, 1),
+	('CM1025', '20|04', 'U00000003', 95, 0),
+	('CM1025', '20|04', 'U00000004', 95, 0),
+	('CM1025', '20|04', 'U00000005', 62, 1),
+	('CM1025', '20|04', 'U00000006', 71, 1);
 
 SET SQL_SAFE_UPDATES = 0;
 UPDATE grades
@@ -121,31 +140,13 @@ UPDATE grades
     WHERE user_id = 'U00000004';
 SET SQL_SAFE_UPDATES = 1;
 
-CREATE VIEW rml AS
-SELECT username, grade, anonymous, course_id, graderank, created_at
-FROM (
-	SELECT users.name AS username, grades.grade AS grade, grades.anonymous AS anonymous, grades.course_id AS course_id, RANK() OVER w AS graderank, grades.created_at AS created_at
-	FROM grades
-	JOIN users
-	ON grades.user_id = users.id
-	WINDOW w AS (ORDER BY grades.grade DESC)
-) ranked
-ORDER BY created_at;
-
-CREATE VIEW rml2 AS
-SELECT users.name AS username, grade, anonymous, course_id, created_at
-FROM
-	grades
-	JOIN users
-	ON grades.user_id = users.id
-ORDER BY created_at;
-
 INSERT INTO
 	users(id, name, email)
 VALUES
 	('U00000000', 'Alex', 'alex@something.com'),
 	('U00000001', 'Arjun', 'arjun@something.com'),
+	('U00000002', 'Bob', 'bob@something.com'),
 	('U00000003', 'Brad', 'brad@something.com'),
-	('U00000005', 'Bob', 'bob@something.com'),
-	('U00000006', 'Alice', 'alice@something.com');
-
+	('U00000004', 'Alice', 'alice@something.com'),
+	('U00000005', 'Jack', 'jack@something.com'),
+	('U00000006', 'Jill', 'jill@something.com');
