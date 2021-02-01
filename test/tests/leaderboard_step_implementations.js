@@ -19,16 +19,17 @@ const {
     textBox,
     evaluate,
     emulateDevice,
-    clear
+    clear,
+    button,
+    waitFor,
+    image
 } = require('taiko');
 const assert = require("assert");
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
 
 beforeSuite(async () => {
-    await openBrowser({
-        // headless: headless
-        headless: false
-    })
+    await openBrowser(
+        {headless: false}
+    )
 });
 
 afterSuite(async () => {
@@ -48,11 +49,15 @@ step("Open default app webpage", async () => {
 });
 
 step("Open personal grades page", async () => {
-    await goto("127.0.0.1:8080/personal_grade");
+    await click("My grade")
 });
 
 step("Open addgrade page", async () => {
-    await goto("127.0.0.1:8080/addgrade");
+    await click("Add grade")
+});
+
+step("Click <text>", async (text) => {
+    await click(text)
 });
 
 step("Click submit", async () => {
@@ -73,6 +78,10 @@ step("Press arrowdown", async () => {
 
 step("Press enter", async () => {
     await press(['Enter']);
+});
+
+step("Write <text>", async function(text) {
+    await write(text);
 });
 
 step("Add a grade of <grade>", async function(grade) {
@@ -119,3 +128,29 @@ step("Ensure personal grade in <courseid> <module> in <session> with grade <grad
         (!await text(courseid, {toRightOf: session, exactMatch: true}).exists(50000, 100), true)
     ;
 });
+
+step("Click Slack sign in", async () => {
+    // await click(button({id: "navbar-toggler"})) // modal
+    await click(image({id:'slack-sign-in'}));
+});
+
+step("Enter workspace and continue", async () => {
+    await write("londoncs");
+    press(['Enter']);
+});
+
+step("Enter Slack email and password and continue", async () => {
+    require("dotenv").config();
+    await write(process.env.SLACK_EMAIL);
+    await press(['Tab']);
+    await write(process.env.SLACK_PASSWORD);
+    await click('Sign in');
+});
+
+step("Validate user is logged in", async () => {
+    await link("Logout").exists();
+});
+
+step("Verify that module <moduleId> is not available anymore", async(moduleId) => {
+    await assert.ok(text(moduleId).exists);
+})

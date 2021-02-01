@@ -1,11 +1,32 @@
-# Test Public Pages
+# Test Grade Leaderboard
 Remember to reset the database prior to the tests
 
 ## View default page 
 * Open default app webpage
 
+## Sign in with Slack
+* Open default app webpage
+* Click Slack sign in
+* Enter workspace and continue
+* Enter Slack email and password and continue
+* Click "Allow"
+* Validate user is logged in
+
 ## View personal grades page
 * Open personal grades page
+
+## Try to add grade that was already entered and verify that module is not available in list
+* Open addgrade page
+* Click Choose a module
+* Click module "CM2030"
+* Click Choose a session
+* Click session "October 2021"
+* Add a grade of "90"
+* Click submit
+* Check for grade entered success message
+* Click Choose a module
+* Verify that module "CM2030" is not available anymore
+* Click Choose a module
 
 ## Add a valid grade of 72 to Agile Software Projects in April 2019
 * Open addgrade page
@@ -39,30 +60,13 @@ Remember to reset the database prior to the tests
 * Open personal grades page
 * Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "107" does not exist
 
- ## Add a valid grade where one was already entered and verify the error message was displayed
-* Open addgrade page
-* Click Choose a module
-* Click module "CM3005"
-* Click Choose a session
-* Click session "October 2021"
-* Add a grade of "72"
-* Click submit
-* Open personal grades page
-* Validate personal grade in "CM3005" "Data Science" in "October 2021" with grade "72"
-* Open addgrade page
-* Click Choose a module
-* Click module "CM3005"
-* Click Choose a session
-* Click session "October 2021"
-* Add a grade of "72"
-* Click submit
-* Check for you already have a grade message
 
- Add a valid grade anonymously
- Open addgrade page
- Select fourth module
- Select third session
- Click submit anonymously button
- Add a valid grade
- Check for grade entered success message
+<!-- 
+ ## Add a valid grade anonymously
+ * Open addgrade page
+ * Select fourth module
+ * Select third session
+ * Click submit anonymously button
+ * Add a valid grade
+ * Check for grade entered success message -->
 

@@ -2,10 +2,10 @@ const checkAuth = require("../middlewares/checkAuth");
 const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
 	app.get("/", async (req, res) => {
 		try {
-			console.log(req.user.name);
+			console.log(req.user);
 			let sql =
 				"SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
 								FROM modules_with_grades m \
@@ -23,10 +23,12 @@ module.exports = function (app) {
 		}
 	});
 
-	app.get("/addgrade", async (req, res) => {
+	app.get("/addgrade", checkAuth, async (req, res) => {
 		try {
-			let sql = "SELECT * FROM courses ORDER BY id ASC";
-			var [courses, _] = await db.query(sql);
+			let sql = `SELECT c.* FROM courses c WHERE c.id NOT IN 
+			(SELECT g.course_id FROM grades g WHERE g.user_id = ?)
+			ORDER BY c.id ASC`;
+			var [courses, _] = await db.query(sql, [req.user.id]);
 			sql = "SELECT * FROM study_sessions ORDER BY id ASC";
 			var [semesters, _] = await db.query(sql);
 			res.render("addgrade.html", {
@@ -60,52 +62,20 @@ module.exports = function (app) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
-			// console.log(id)
-			// let sql = "SELECT * FROM grades WHERE course_id = ? ORDER BY grade DESC";
 			let sql =
-
-
-				// "SELECT graderank, username, grade, anonymous \
-				// 	FROM grades_leaderboard.rml \
-				// 	WHERE course_id = ?";
-
-				// "SELECT username, grade, graderank, \
-				// 	FROM ( \
-				// 		SELECT username, grade, anonymous, course_id, created_at, RANK() OVER w AS graderank, grades.created_at AS created_at \
-				// 		FROM rml2 \
-				// 		WHERE course_id = 'CM1015' \
-				// 		WINDOW w AS (ORDER_BY grades.created_at) \
-				// 	) a \
-				// 	;"
-
-				// "SELECT grades.grade, users.name, grades.anonymous \
-				// 		FROM grades \
-				// 		JOIN users  \
-				// 		ON grades.user_id = users.id \
-				// 		WHERE course_id = ? \
-				// 		ORDER BY grade DESC, created_at ASC \
-				// 		LIMIT 50";
-
-				"SELECT username, grade, graderank, created_at, anonymous \
-				FROM ( \
-					SELECT users.name AS username, grades.grade AS grade, RANK() OVER w AS graderank, grades.created_at AS created_at, grades.course_id, grades.anonymous \
-					FROM grades \
-					JOIN users \
-					ON grades.user_id = users.id \
-					WHERE grades.course_id = ? \
-					WINDOW w AS (ORDER BY grades.grade DESC) \
-				) a \
-				ORDER BY created_at \
-				;"
-
-			// console.log('SQL done')
+				"SELECT grades.grade, users.name, grades.anonymous, users.avatar_url\
+						FROM grades \
+						JOIN users  \
+						ON grades.user_id = users.id \
+						WHERE course_id = ? \
+						ORDER BY grade DESC";
 			var [results, _] = await db.query(sql, id);
-			// var [results, _] = await db.query(sql);
-			// console.log('Check anonymous')
+			console.log(results);
 			results.forEach((row) => {
 				// console.log(row)
 				if (row.anonymous) {
-					row.username = "Anonymous";
+					row.name = "Anonymous";
+					row.avatar_url = null;
 				}
 			});
 			res.render("module_leaderboard.html", { res: results, course_id: id });
@@ -119,7 +89,6 @@ module.exports = function (app) {
 	app.get("/personal_grade", checkAuth, async (req, res) => {
 		try {
 			let user = [req.user.id];
-			// console.log(req.user.name);
 			let sql =
 				"SELECT study_sessions.title AS session, grades.course_id, courses.title, grades.grade\
 					FROM grades \
@@ -131,7 +100,7 @@ module.exports = function (app) {
 					ON courses.id = grades.course_id \
 					WHERE users.id = ? ";
 			var [results, _] = await db.query(sql, user);
-			res.render("personal_grade.html", { user: req.user.name, res: results });
+			res.render("personal_grade.html", { res: results });
 		} catch (error) {
 			console.log(error);
 		}
@@ -180,5 +149,32 @@ module.exports = function (app) {
 			console.log(error);
 			res.redirect(req.baseUrl + "?editResult=Grade was not edited. Something went wrong.");
 		}
+	});
+
+	// Intiate slack authentication process
+	app.get("/auth/slack", passport.authorize("slack"));
+
+	// OAuth callback url used by Slack
+	app.get(
+		"/auth/slack/callback",
+		passport.authenticate("slack", {
+			failureRedirect: "/",
+			failureFlash: "Slack login failed",
+		}),
+		(req, res) => {
+			try {
+				console.log("slack auth callback");
+				// Set cookie age to 7 days
+				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
+				res.redirect("/");
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	);
+	// app.get("/logout", (req) => req.logout());
+	app.get("/logout", (req, res) => {
+		req.logout();
+		res.redirect("/");
 	});
 };
