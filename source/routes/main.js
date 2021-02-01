@@ -60,57 +60,15 @@ module.exports = function (app) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
-			// console.log(id)
-			// let sql = "SELECT * FROM grades WHERE course_id = ? ORDER BY grade DESC";
 			let sql =
-
-
-				// "SELECT graderank, username, grade, anonymous \
-				// 	FROM grades_leaderboard.rml \
-				// 	WHERE course_id = ?";
-
-				// "SELECT username, grade, graderank, \
-				// 	FROM ( \
-				// 		SELECT username, grade, anonymous, course_id, created_at, RANK() OVER w AS graderank, grades.created_at AS created_at \
-				// 		FROM rml2 \
-				// 		WHERE course_id = 'CM1015' \
-				// 		WINDOW w AS (ORDER_BY grades.created_at) \
-				// 	) a \
-				// 	;"
-
-				// "SELECT grades.grade, users.name, grades.anonymous \
-				// 		FROM grades \
-				// 		JOIN users  \
-				// 		ON grades.user_id = users.id \
-				// 		WHERE course_id = ? \
-				// 		ORDER BY grade DESC, created_at ASC \
-				// 		LIMIT 50";
-
-				"SELECT username, grade, graderank, created_at, anonymous \
-				FROM ( \
-					SELECT users.name AS username, grades.grade AS grade, RANK() OVER w AS graderank, grades.created_at AS created_at, grades.course_id, grades.anonymous \
-					FROM grades \
-					JOIN users \
-					ON grades.user_id = users.id \
-					WHERE grades.course_id = ? \
-					WINDOW w AS (ORDER BY grades.grade DESC) \
-				) a \
-				ORDER BY created_at \
-				;"
-
-			// console.log('SQL done')
+				"SELECT * FROM grade_rank_by_module WHERE course_id = ?";
 			var [results, _] = await db.query(sql, id);
-			// var [results, _] = await db.query(sql);
-			// console.log('Check anonymous')
 			results.forEach((row) => {
-				// console.log(row)
 				if (row.anonymous) {
 					row.username = "Anonymous";
 				}
 			});
 			res.render("module_leaderboard.html", { res: results, course_id: id });
-			// console.log(results)
-			// console.log(id)
 		} catch (error) {
 			console.log(error);
 		}
