@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS study_sessions;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS courses;
 DROP VIEW IF EXISTS modules_with_grades;
+DROP VIEW IF EXISTS ranked_grades;
 
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
@@ -103,6 +104,15 @@ CREATE TABLE `grades` (
   	UNIQUE KEY `course_user` (`course_id`,`user_id`) -- one grade is allowed per course for any user
 );
 
+CREATE VIEW ranked_grades AS
+SELECT name, grade, course_id, anonymous, created_at, avatar_url,
+RANK() OVER (PARTITION BY course_id ORDER BY course_id ASC, grade DESC) AS "ranking"
+FROM grades
+JOIN users
+ON grades.user_id = users.id
+ORDER BY course_id ASC, ranking ASC, created_at ASC;
+
+
 INSERT INTO
 	grades(course_id, study_session_id, user_id, grade, anonymous)
 VALUES
@@ -140,12 +150,20 @@ VALUES
 	('CM2035', '20|04', 'UHQTXAXDW', 91, 0),
 	('CM2040', '20|04', 'UHQTXAXDW', 92, 0);
 
+-- for test to check tie order is correct
+INSERT INTO
+	grades(course_id, study_session_id, user_id, grade, anonymous, created_at)
+VALUES
+	('CM3070', '21|04', 'U00000004', 95, 0, '2021-08-05 15:15:23'),
+	('CM3070', '20|04', 'U00000002', 95, 0, '2020-08-01 12:10:23');
+
 INSERT INTO
 	users(id, name, email)
 VALUES
 	('U00000000', 'Alex', 'alex@something.com'),
 	('U00000001', 'Arjun', 'arjun@something.com'),
+	('U00000002', 'Bob', 'bob@something.com'),
 	('U00000003', 'Brad', 'brad@something.com'),
-	('U00000005', 'Bob', 'bob@something.com'),
-	('U00000006', 'Alice', 'alice@something.com');
-
+	('U00000004', 'Alice', 'alice@something.com'),
+	('U00000005', 'Jack', 'jack@something.com'),
+	('U00000006', 'Jill', 'jill@something.com');

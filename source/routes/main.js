@@ -5,7 +5,6 @@ const { check, validationResult } = require("express-validator");
 module.exports = function (app, passport) {
 	app.get("/", async (req, res) => {
 		try {
-			console.log(req.user);
 			let sql =
 				"SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
 								FROM modules_with_grades m \
@@ -62,15 +61,8 @@ module.exports = function (app, passport) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
-			let sql =
-				"SELECT grades.grade, users.name, grades.anonymous, users.avatar_url\
-						FROM grades \
-						JOIN users  \
-						ON grades.user_id = users.id \
-						WHERE course_id = ? \
-						ORDER BY grade DESC";
+			let sql = "SELECT * FROM ranked_grades WHERE course_id = ?";
 			var [results, _] = await db.query(sql, id);
-			console.log(results)
 			results.forEach((row) => {
 				if (row.anonymous) {
 					row.name = "Anonymous";
@@ -160,7 +152,6 @@ module.exports = function (app, passport) {
 		}),
 		(req, res) => {
 			try {
-				console.log("slack auth callback");
 				// Set cookie age to 7 days
 				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
 				res.redirect("/");

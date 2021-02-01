@@ -60,13 +60,16 @@ Remember to reset the database prior to the tests
 * Open personal grades page
 * Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "107" does not exist
 
+## Tied grades are sorted by timestamp
+This relies on the database having two users with the same grade and different timestamps.
+Must refer to db to know which user should come before the other.
+ * Open rankings page for "CM3070"
+ * "Bob" is above "Alice"
 
-<!-- 
- ## Add a valid grade anonymously
- * Open addgrade page
- * Select fourth module
- * Select third session
- * Click submit anonymously button
- * Add a valid grade
- * Check for grade entered success message -->
-
+// ## Add a valid grade anonymously
+// * Open addgrade page
+// * Select fourth module
+// * Select third session
+// * Click submit anonymously button
+// * Add a valid grade
+// * Check for grade entered success message
