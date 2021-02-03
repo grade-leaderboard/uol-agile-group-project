@@ -10,6 +10,7 @@ const {
     screenshot,
     above,
     below,
+    toRightOf,
     click,
     checkBox,
     listItem,
@@ -24,7 +25,8 @@ const {
     button,
     waitFor,
     image,
-    highlight
+    highlight,
+    dropDown
 } = require('taiko');
 const assert = require("assert");
 
@@ -66,18 +68,6 @@ step("Open rankings page for <module>", async function(module) {
     await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
 });
 
-step("Click submit", async () => {
-    await click('Submit')
-});
-
-step("Click Choose a module", async () => {
-    await click('Choose a module')
-});
-
-step("Click Choose a session", async () => {
-    await click('Choose a session')
-});
-
 step("Press arrowdown", async () => {
     await press(['ArrowDown']);
 });
@@ -90,13 +80,13 @@ step("Write <text>", async function(text) {
     await write(text);
 });
 
-step("Add a grade of <grade>", async function(grade) {
-    await clear(textBox({id:'grade'}))
-    await write(grade,into(textBox({id:'grade'})))
+step("Enter a grade of <grade>", async function(grade) {
+    await clear(textBox({name:'grade'}))
+    await write(grade,into(textBox({name:'grade'})))
 });
 
-step("Check for grade entered success message", async () => {
-    await assert.ok(await text('Your grade was successfully added', {exactMatch: false}).exists());
+step("Check for success message", async () => {
+    await assert.ok(await text('successful', {exactMatch: false}).exists());
 });
 
 step("Check for you already have a grade message", async () => {
@@ -160,6 +150,15 @@ step("Validate user is logged in", async () => {
 step("Verify that module <moduleId> is not available anymore", async(moduleId) => {
     await assert.ok(text(moduleId).exists);
 })
+
 step("<textFirst> is above <textSecond>", async (textFirst, textSecond) => {
     await assert.ok(text(textFirst), above(text(textSecond)));
 });
+
+step("Click edit for <moduleName>", async (moduleName) => {
+    await click("edit", toRightOf(moduleName))
+})
+
+step("Select <dropDownName> <selection>", async (dropDownName, selection) => {
+    await dropDown(below(dropDownName)).select(selection)
+})

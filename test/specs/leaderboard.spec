@@ -17,46 +17,46 @@ Remember to reset the database prior to the tests
 
 ## Try to add grade that was already entered and verify that module is not available in list
 * Open addgrade page
-* Click Choose a module
-* Click module "CM2030"
-* Click Choose a session
-* Click session "October 2021"
-* Add a grade of "90"
-* Click submit
-* Check for grade entered success message
-* Click Choose a module
+* Select "Module" "CM2030"
+* Select "Session" "October 2021"
+* Enter a grade of "90"
+* Click "Submit"
+* Check for success message
+* Click "Choose a module"
 * Verify that module "CM2030" is not available anymore
-* Click Choose a module
 
 ## Add a valid grade of 72 to Agile Software Projects in April 2019
 * Open addgrade page
-* Click Choose a module
-* Click module "CM2020"
-* Click Choose a session
-* Click session "April 2019"
-* Add a grade of "72"
-* Click submit
-* Check for grade entered success message
+* Select "Module" "CM2020"
+* Select "Session" "April 2019"
+* Enter a grade of "72"
+* Click "Submit"
+* Check for success message
 * Open personal grades page
 * Validate personal grade in "CM2020" "Agile Software Projects" in "April 2019" with grade "72"
 
+## Edit Agile Software Projects grade
+* Open personal grades page
+* Click edit for "Agile Software Projects"
+* Select "Session" "April 2020"
+* Enter a grade of "75"
+* Click "Submit"
+* Check for success message
+* Validate personal grade in "CM2020" "Agile Software Projects" in "April 2020" with grade "75"
+
 ## Try to add invalid grades to Discrete Mathematics in October 2021 and verify they were not accepted
 * Open addgrade page
-* Click Choose a module
-* Click module "CM1020"
-* Click Choose a session
-* Click session "October 2021"
-* Add a grade of "-7"
-* Click submit
+* Select "Module" "CM1020"
+* Select "Session" "October 2021"
+* Enter a grade of "-7"
+* Click "Submit"
 * Open personal grades page
 * Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "-7" does not exist
 * Open addgrade page
-* Click Choose a module
-* Click module "CM1020"
-* Click Choose a session
-* Click session "October 2021"
-* Add a grade of "107"
-* Click submit
+* Select "Module" "CM1020"
+* Select "Session" "October 2021"
+* Enter a grade of "107"
+* Click "Submit"
 * Open personal grades page
 * Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "107" does not exist
 
