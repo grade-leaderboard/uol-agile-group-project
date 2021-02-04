@@ -16,14 +16,6 @@ CREATE TABLE `courses` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE VIEW modules_with_grades AS
-SELECT
-	c.id,
-	c.title,
-	FLOOR(RAND() * 100) as grade
-FROM
-	courses c;
-
 INSERT INTO
 	courses(id, title)
 VALUES
@@ -104,6 +96,12 @@ CREATE TABLE `grades` (
   	UNIQUE KEY `course_user` (`course_id`,`user_id`) -- one grade is allowed per course for any user
 );
 
+CREATE VIEW modules_with_grades AS
+SELECT course_id id, courses.title title, ROUND(AVG(grade), 0) grade
+  FROM grades
+  JOIN courses ON course_id = courses.id
+GROUP BY course_id;
+
 CREATE VIEW ranked_grades AS
 SELECT name, grade, course_id, anonymous, created_at, avatar_url,
 RANK() OVER (PARTITION BY course_id ORDER BY course_id ASC, grade DESC) AS "ranking"
@@ -158,12 +156,11 @@ VALUES
 	('CM3070', '20|04', 'U00000002', 95, 0, '2020-08-01 12:10:23');
 
 INSERT INTO
-	users(id, name, email)
+	users(id, name, email, avatar_url)
 VALUES
-	('U00000000', 'Alex', 'alex@something.com'),
-	('U00000001', 'Arjun', 'arjun@something.com'),
-	('U00000002', 'Bob', 'bob@something.com'),
-	('U00000003', 'Brad', 'brad@something.com'),
-	('U00000004', 'Alice', 'alice@something.com'),
-	('U00000005', 'Jack', 'jack@something.com'),
-	('U00000006', 'Jill', 'jill@something.com');
+	('U00000000', 'Alex', 'alex@something.com', null),
+	('U00000001', 'Arjun', 'arjun@something.com', null),
+	('UHQTXAXDW', 'Blair Currey', 'curreyb88@gmail.com', 'https://avatars.slack-edge.com/2019-05-21/644070021751_4814ee9d9da3d9d49653_192.jpg'),
+	('U00000003', 'Brad', 'brad@something.com', null),
+	('U00000005', 'Bob', 'bob@something.com', null),
+	('U00000006', 'Alice', 'alice@something.com', null);
