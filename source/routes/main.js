@@ -78,8 +78,9 @@ module.exports = function (app, passport) {
 	app.get("/personal_grade", checkAuth, async (req, res) => {
 		try {
 			let user = [req.user.id];
-			let sql =
-				"SELECT study_sessions.title AS session, grades.course_id, courses.title, grades.grade\
+			let grades_sql =
+				"SELECT study_sessions.title AS session, grades.course_id,  \
+					courses.title, grades.id, grades.grade, grades.anonymous\
 					FROM grades \
 					JOIN users \
 					ON grades.user_id = users.id \
@@ -88,32 +89,11 @@ module.exports = function (app, passport) {
 					JOIN courses \
 					ON courses.id = grades.course_id \
 					WHERE users.id = ? ";
-			var [results, _] = await db.query(sql, user);
-			res.render("personal_grade.html", { res: results });
-		} catch (error) {
-			console.log(error);
-		}
-	});
-
-	app.get("/edit_grades", checkAuth, async (req, res) => {
-		try {
-			let grades_sql =
-				"SELECT courses.id AS course_id, \
-					courses.title AS course_title, \
-					grades.id AS grade_id \
-					FROM grades \
-					JOIN users \
-					ON grades.user_id = users.id \
-					JOIN courses \
-					ON courses.id = grades.course_id \
-					WHERE users.name = ?";
 			let sessions_sql = "SELECT id, title FROM study_sessions";
-			var [grades_results, _] = await db.query(grades_sql, [req.user.name]);
+			var [grades_results, _] = await db.query(grades_sql, user);
 			var [sessions_results, _] = await db.query(sessions_sql);
-
-			res.render("edit_grades.html", {
-				title: "Leaderboard - Edit grades",
-				heading: "Edit grades",
+			res.render("personal_grade.html", {
+				title: "Leaderboard - My grades",
 				grades_res: grades_results,
 				sessions_res: sessions_results,
 				editResult: req.query.editResult,
@@ -130,13 +110,13 @@ module.exports = function (app, passport) {
 					grade = ?, \
 					anonymous = ? \
 					WHERE id = ?";
-			var anonymous = req.body.anonymous == "on" ? 1 : 0;
+			var anonymous = req.body.anonymous == "true" ? 1 : 0;
 			var fields = [req.body.session, req.body.grade, anonymous, req.body.grade_id];
 			var [results, _] = await db.query(sql, fields);
-			res.redirect(req.baseUrl + "?editResult=success");
+			res.redirect("/personal_grade" + "?editResult=success");
 		} catch (error) {
 			console.log(error);
-			res.redirect(req.baseUrl + "?editResult=Grade was not edited. Something went wrong.");
+			res.redirect("/personal_grade" + "?editResult=Grade was not edited. Something went wrong.");
 		}
 	});
 
@@ -160,7 +140,7 @@ module.exports = function (app, passport) {
 			}
 		}
 	);
-	// app.get("/logout", (req) => req.logout());
+
 	app.get("/logout", (req, res) => {
 		req.logout();
 		res.redirect("/");
