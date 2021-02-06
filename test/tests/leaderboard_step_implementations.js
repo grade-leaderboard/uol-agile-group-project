@@ -32,7 +32,7 @@ const assert = require("assert");
 
 beforeSuite(async () => {
     await openBrowser(
-        {headless: true}
+        {headless: false}
     )
 });
 
@@ -50,6 +50,10 @@ step("Change device to iPhone X landscape", async () => {
 
 step("Open default app webpage", async () => {
     await goto("127.0.0.1:8080");
+});
+
+step("Go to homepage", async () => {
+    await click("Grades Leaderboard")
 });
 
 step("Open personal grades page", async () => {
@@ -161,4 +165,13 @@ step("Click edit for <moduleName>", async (moduleName) => {
 
 step("Select <dropDownName> <selection>", async (dropDownName, selection) => {
     await dropDown(below(dropDownName)).select(selection)
+})
+
+step("Check for user avatar on navbar", async () => {
+    await image('user avatar').exists()
+})
+
+step("Check for user avatar in leaderboard", async () => {
+    await highlight(image('user avatar', below('Name')))
+    await image('user avatar', below('Name')).exists()
 })
