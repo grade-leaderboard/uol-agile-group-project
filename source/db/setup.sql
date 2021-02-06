@@ -168,6 +168,6 @@ VALUES
 	('U00000000', 'Alex', 'alex@something.com', null),
 	('U00000001', 'Arjun', 'arjun@something.com', null),
 	('UHQTXAXDW', 'Blair Currey', 'curreyb88@gmail.com', 'https://avatars.slack-edge.com/2019-05-21/644070021751_4814ee9d9da3d9d49653_192.jpg'),
-	('UGYHF87V3', 'Brad', 'brad@lazaruk.com', null),
+	('UGYHF87V3', 'Brad', 'brad@lazaruk.com', 'https://secure.gravatar.com/avatar/1f9963bd124c27493e14749e56db5d9f.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-192.png'),
 	('U00000005', 'Bob', 'bob@something.com', null),
 	('U00000006', 'Alice', 'alice@something.com', null);
