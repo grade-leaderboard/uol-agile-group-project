@@ -168,6 +168,6 @@ VALUES
 	('U00000000', 'Alex', 'alex@something.com', null),
 	('U00000001', 'Arjun', 'arjun@something.com', null),
 	('UHQTXAXDW', 'Blair Currey', 'curreyb88@gmail.com', 'https://avatars.slack-edge.com/2019-05-21/644070021751_4814ee9d9da3d9d49653_192.jpg'),
-	('U00000003', 'Brad', 'brad@something.com', null),
+	('UGYHF87V3', 'Brad', 'brad@lazaruk.com', null),
 	('U00000005', 'Bob', 'bob@something.com', null),
 	('U00000006', 'Alice', 'alice@something.com', null);
