@@ -32,7 +32,7 @@ const assert = require("assert");
 
 beforeSuite(async () => {
     await openBrowser(
-        {headless: false}
+        {headless: true}
     )
 });
 
