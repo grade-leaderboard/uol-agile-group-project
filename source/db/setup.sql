@@ -167,8 +167,8 @@ VALUES
 INSERT INTO
 	grades(course_id, study_session_id, user_id, grade, anonymous, created_at)
 VALUES
-	('CM3070', '21|04', 'U00000004', 95, 0, '2021-08-05 15:15:23'),
-	('CM3070', '20|04', 'U00000002', 95, 0, '2020-08-01 12:10:23');
+	('CM3070', '21|04', 'U00000005', 95, 0, '2021-08-05 15:15:23'),
+	('CM3070', '20|04', 'U00000006', 95, 0, '2020-08-01 12:10:23');
 
 INSERT INTO
 	users(id, name, email, avatar_url)
