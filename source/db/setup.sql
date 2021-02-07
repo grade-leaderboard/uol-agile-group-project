@@ -153,7 +153,15 @@ VALUES
 	('CM1040', '19|10', 'UHQTXAXDW', 74, 0),
 	('CM2005', '20|04', 'UHQTXAXDW', 97, 0),
 	('CM2035', '20|04', 'UHQTXAXDW', 91, 0),
-	('CM2040', '20|04', 'UHQTXAXDW', 92, 0);
+	('CM2040', '20|04', 'UHQTXAXDW', 92, 0),
+	('CM1005', '19|04', 'UGZRDUR1C', 80, 0),
+	('CM1015', '19|04', 'UGZRDUR1C', 85, 0),
+	('CM1030', '19|04', 'UGZRDUR1C', 57, 0),
+	('CM1040', '19|04', 'UGZRDUR1C', 83, 1),
+	('CM1010', '19|10', 'UGZRDUR1C', 50, 0),
+	('CM1020', '19|10', 'UGZRDUR1C', 50, 0),
+	('CM1025', '19|10', 'UGZRDUR1C', 90, 0),
+	('CM1035', '19|10', 'UGZRDUR1C', 58, 0);
 
 -- for test to check tie order is correct
 INSERT INTO
@@ -165,9 +173,10 @@ VALUES
 INSERT INTO
 	users(id, name, email, avatar_url)
 VALUES
-	('U00000000', 'Alex', 'alex@something.com', null),
-	('U00000001', 'Arjun', 'arjun@something.com', null),
+	('UGYTW920K', 'Alex', 'alex@something.com', 'https://ca.slack-edge.com/TDT1N1BUG-UGYTW920K-g219487da2db-512'),
+	('UGZRDUR1C', 'Arjun', 'arjun@muralidharan.org ', 'https://ca.slack-edge.com/TDT1N1BUG-UGZRDUR1C-6318825681ef-512'),
 	('UHQTXAXDW', 'Blair Currey', 'curreyb88@gmail.com', 'https://avatars.slack-edge.com/2019-05-21/644070021751_4814ee9d9da3d9d49653_192.jpg'),
 	('UGYHF87V3', 'Brad', 'brad@lazaruk.com', 'https://secure.gravatar.com/avatar/1f9963bd124c27493e14749e56db5d9f.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-192.png'),
-	('U00000005', 'Bob', 'bob@something.com', null),
-	('U00000006', 'Alice', 'alice@something.com', null);
+	('UH047P2KA', 'Hayato', 'mhci1@student.london.ac.uk', 'https://ca.slack-edge.com/TDT1N1BUG-UH047P2KA-59cb020788e1-512'),
+	('U00000005', 'Bob', 'bob@something.com', 'https://st4.depositphotos.com/5575514/23597/v/600/depositphotos_235978748-stock-illustration-neutral-profile-picture.jpg'),
+	('U00000006', 'Alice', 'alice@something.com', 'https://st4.depositphotos.com/5575514/23597/v/600/depositphotos_235978748-stock-illustration-neutral-profile-picture.jpg');
