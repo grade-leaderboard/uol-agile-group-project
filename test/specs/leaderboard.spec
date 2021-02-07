@@ -15,6 +15,22 @@ Remember to reset the database prior to the tests
 ## View personal grades page
 * Open personal grades page
 
+## Try to add invalid grades to Final Project in October 2021 and verify they were not accepted
+* Open addgrade page
+* Select "Module" "CM2030"
+* Select "Session" "October 2021"
+* Enter a grade of "-7"
+* Click "Submit"
+* Open personal grades page
+* Ensure personal grade in "CM2030" "Final Project" in "October 2021" with grade "-7" does not exist
+* Open addgrade page
+* Select "Module" "CM2030"
+* Select "Session" "October 2021"
+* Enter a grade of "107"
+* Click "Submit"
+* Open personal grades page
+* Ensure personal grade in "CM2030" "Final Project" in "October 2021" with grade "107" does not exist
+
 ## Try to add grade that was already entered and verify that module is not available in list
 * Open addgrade page
 * Select "Module" "CM2030"
@@ -43,22 +59,6 @@ Remember to reset the database prior to the tests
 * Click "Submit"
 * Check for success message
 * Validate personal grade in "CM2020" "Agile Software Projects" in "April 2020" with grade "75"
-
-## Try to add invalid grades to Discrete Mathematics in October 2021 and verify they were not accepted
-* Open addgrade page
-* Select "Module" "CM1020"
-* Select "Session" "October 2021"
-* Enter a grade of "-7"
-* Click "Submit"
-* Open personal grades page
-* Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "-7" does not exist
-* Open addgrade page
-* Select "Module" "CM1020"
-* Select "Session" "October 2021"
-* Enter a grade of "107"
-* Click "Submit"
-* Open personal grades page
-* Ensure personal grade in "CM1020" "Discrete Mathematics" in "October 2021" with grade "107" does not exist
 
 ## Tied grades are sorted by timestamp
 This relies on the database having two users with the same grade and different timestamps.

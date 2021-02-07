@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" />
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-			crossorigin="anonymous"
-		/>
-
-		<title>Grades Leaderboard</title>
-	</head>
+<!-- EJS head partial -->
+<%- include('partials/head.ejs'), {title: title}%>
 	<body>
 		<div class="container">
 			<!-- Express snippet to include the header and navigation from a partial -->
@@ -39,7 +25,11 @@
 					<tr scope="row" class="d-flex">
 						<th><%=r.ranking %></th>
 						<% if(r.avatar_url != null){ %>
-							<td><img src=<%= r.avatar_url %> alt="user avatar" style="border-radius: 30%"><%= r.name %> </td>
+							<td><img 
+									class="leaderboard-avatar"
+									src=<%= r.avatar_url %> 
+									alt="user avatar"
+									><%= r.name %> </td>
 						<% } else { %>
 							<td><%= r.name %> </td> 
 				        <% } %>

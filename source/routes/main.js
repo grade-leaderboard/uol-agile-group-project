@@ -69,7 +69,11 @@ module.exports = function (app, passport) {
 					row.avatar_url = null;
 				}
 			});
-			res.render("module_leaderboard.html", { res: results, course_id: id });
+			res.render("module_leaderboard.html", {
+				res: results,
+				course_id: id,
+				title: `Grades Leaderboard - ${id}`,
+			});
 		} catch (error) {
 			console.log(error);
 		}
