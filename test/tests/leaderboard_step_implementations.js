@@ -175,3 +175,7 @@ step("Check for user avatar in leaderboard", async () => {
     await highlight(image('user avatar', below('Name')))
     await image('user avatar', below('Name')).exists()
 })
+
+step("Check for <checkText>", async (checkText) => {
+    await assert.ok(await text(checkText).exists());
+})
