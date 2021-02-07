@@ -84,7 +84,7 @@ module.exports = function (app, passport) {
 			let user = [req.user.id];
 			let grades_sql =
 				"SELECT study_sessions.title AS session, grades.course_id,  \
-					courses.title, grades.id, grades.grade, grades.anonymous\
+					courses.title, courses.level, grades.id, grades.grade, grades.anonymous\
 					FROM grades \
 					JOIN users \
 					ON grades.user_id = users.id \
@@ -96,11 +96,15 @@ module.exports = function (app, passport) {
 			let sessions_sql = "SELECT id, title FROM study_sessions";
 			var [grades_results, _] = await db.query(grades_sql, user);
 			var [sessions_results, _] = await db.query(sessions_sql);
+			let cumulativeGrade = calculateCumulativeGrade(grades_results);
+			let completionRate = calculateCompletionRate(grades_results);
 			res.render("personal_grade.html", {
 				title: "Leaderboard - My grades",
 				grades_res: grades_results,
 				sessions_res: sessions_results,
 				editResult: req.query.editResult,
+				cumulativeGrade: cumulativeGrade,
+				completionRate: completionRate,
 			});
 		} catch (error) {
 			console.log(error);
@@ -149,4 +153,42 @@ module.exports = function (app, passport) {
 		req.logout();
 		res.redirect("/");
 	});
+
+	function calculateCumulativeGrade(grades) {
+		let sumOfWeights = 0;
+		let sumOfWeightedGrades = 0;
+		for (let i = 0; i < grades.length; i++) {
+			if (grades[i].level == 4) {
+				grades[i].weight = 1;
+			}
+			if (grades[i].level == 5) {
+				grades[i].weight = 3;
+			}
+			if (grades[i].level == 6) {
+				grades[i].weight = 5;
+			}
+
+			// Increase the weight for the final project. It is worth double of a L6 module as it provides 30 credits, hence the weighting here is doubled
+			if (grades[i].level == 6 && grades[i].course_id == "CM3070") {
+				grades[i].weight = 10;
+			}
+		}
+
+		for (let i = 0; i < grades.length; i++) {
+			sumOfWeights += grades[i].weight;
+			sumOfWeightedGrades += grades[i].grade * grades[i].weight;
+		}
+
+		return Math.round(sumOfWeightedGrades / sumOfWeights);
+	}
+
+	function calculateCompletionRate(grades) {
+		let totalCredits = grades.length * 15;
+		for (let i = 0; i < grades.length; i++) {
+			if (grades[i].course_id == "CM3070") {
+				totalCredits += 15;
+			}
+		}
+		return Math.round((totalCredits / 360) * 100);
+	}
 };
