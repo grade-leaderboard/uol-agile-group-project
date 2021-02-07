@@ -63,8 +63,16 @@ Remember to reset the database prior to the tests
 ## Tied grades are sorted by timestamp
 This relies on the database having two users with the same grade and different timestamps.
 Must refer to db to know which user should come before the other.
- * Open rankings page for "CM3070"
- * "Bob" is above "Alice"
+* Open rankings page for "CM3070"
+* "Bob" is above "Alice"
+
+## Verify user avatar exists in navbar
+* Go to homepage
+* Check for user avatar on navbar
+
+## Verify user avatar exists in leaderboard
+* Click "Introduction to Programming I"
+* Check for user avatar in leaderboard
 
 // ## Add a valid grade anonymously
 // * Open addgrade page
