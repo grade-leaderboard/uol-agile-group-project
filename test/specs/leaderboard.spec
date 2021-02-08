@@ -74,6 +74,12 @@ Must refer to db to know which user should come before the other.
 * Click "Introduction to Programming I"
 * Check for user avatar in leaderboard
 
+## Verify Cumulative Grade and Completion Rate are visible
+* Open personal grades page
+* Check for "Cumulative Grade"
+* Check for "Completion Rate"
+
+
 // ## Add a valid grade anonymously
 // * Open addgrade page
 // * Select fourth module
