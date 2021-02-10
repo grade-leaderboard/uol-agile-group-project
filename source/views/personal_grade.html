@@ -44,7 +44,11 @@
 									<% let lockThreshold = 15778676000 %>
 									<% let currentDate = new Date() %>
 									<% let timeDiff = Math.abs(currentDate - grade.created_at) %>
-									<% if (timeDiff > lockThreshold) {%> <div title="This grade is locked as it was submitted over six months ago">Locked</div> <%} else {%> <a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a> <%}%>
+									<% if (timeDiff > lockThreshold) {%> 
+										<div title="This grade is locked as it was submitted over six months ago">Locked</div> 
+									<%} else {%> 
+										<a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a> 
+									<%}%>
 								</td>
 							</tr>
 
@@ -60,7 +64,11 @@
 										</div>
 										<div class="modal-body">
 											<h5><%= grade.title %></h5>
-											<% if (timeDiff > lockThreshold) {%> <form action="/edit_grades" method="DIALOG" id="form-<%= grade.id %>" class="mb-4"> <%} else {%> <form action="/edit_grades" method="POST" id="form-<%= grade.id %>" class="mb-4"> <%}%>
+											<% if (timeDiff > lockThreshold) {%> 
+												<form action="/edit_grades" method="DIALOG" id="form-<%= grade.id %>" class="mb-4"> 
+											<%} else {%> 
+												<form action="/edit_grades" method="POST" id="form-<%= grade.id %>" class="mb-4"> 
+											<%}%>
 												<!-- Hidden Grade ID -->
 												<input type="hidden" name="grade_id" value="<%= grade.id %>">
 												<!-- Session -->
@@ -110,8 +118,11 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-													<% if (timeDiff > lockThreshold) {%> <div title="This grade is locked as it was submitted over six months ago">Locked</div>
-													<%} else {%> <button type="submit" class="btn btn-primary">Submit</button> <%}%>
+													<% if (timeDiff > lockThreshold) {%> 
+														<div title="This grade is locked as it was submitted over six months ago">Locked</div>
+													<%} else {%> 
+														<button type="submit" class="btn btn-primary">Submit</button> 
+													<%}%>
 												</div>
 											</form>
 										</div>
