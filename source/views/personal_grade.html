@@ -39,7 +39,13 @@
 									<%= grade.grade %>
 									<% if (grade.anonymous) {%> <em>(Anonymous)</em> <%}%>
 								</td>
-								<td><a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a></td>
+								<td>
+									<!-- 15,778,476,000 millseconds in 6 months -->
+									<% let currentDate = new Date() %>
+									<% let timeDiff = Math.abs(currentDate - grade.created_at) %>
+									<% if (timeDiff > 15778676000) {%> Locked <%} else {%> <a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a> <%}%>
+								</td>
+								<!-- <td><a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a></td> -->
 							</tr>
 
 							<!-- Modal -->
