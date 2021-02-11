@@ -22,39 +22,16 @@
 	<body>
 		<div class="container">
 			<!-- Navigation -->
-            <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light mb-3">
-                <a href="/" class="navbar-brand">Grades Leaderboard</a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="navbar-nav">
-                        <a class="btn btn-outline-primary" href="/personal_grade" role="button">My Grade</a>
-                        <a class="btn btn-outline-primary" href="/addgrade" role="button">Add grade</a>
-                        <!-- Links Here -->
-            
-                    </div>
-                </div>
-            </nav>
+            			<!-- Navigation -->
+			<%- include('partials/nav.ejs') %>
             <!-- Page content begins below this -->
                     <!-- Slack Sign-in-->
                     <div class="container">
-                        <p>You're not sing in......</p>
-                        <p>Please sign in with Slack</p>
+                        <p>To access this section, you will need to sign in to the University of London Slack Workspace.</p>
                         <a href="/auth/slack"
                             ><img
                                 id="slack-sign-in"
-                                alt="verify in with Slack"
-                                height="70"
-                                width="220"
+                                alt="Sign in with Slack"
                                 src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
                                 srcset="
                                     https://platform.slack-edge.com/img/sign_in_with_slack.png    1x,

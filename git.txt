@@ -1,0 +1,49 @@
+* [33m94e4e7f[m Updated midterm section 6
+* [33m48b7b4a[m updated wireframes
+* [33mfeeeaa5[m Update leaderboard_wireframes.bmpr
+* [33m8f28ebb[m added the rest of 12-21 notes
+* [33m0d09fae[m added my meeting notes
+* [33m354fc35[m new revision from group session
+* [33m0cf3b52[m updated overleaf as images were not visible or outdated
+* [33m62ca2e7[m new wireframes, renamed source file
+* [33m5995e79[m Added framing to SWOT/STEEPLE and added author names.
+* [33m1a29062[m Reviewed and restructured midterm LaTeX file. Edited sections 2-5 and created tables. Incorporated storyboard graphics.
+* [33mf4465f9[m Create casual_checker_1.png
+* [33mde57acb[m Create competitive_topper_1.png
+* [33mb32c653[m export of gantt used in proposal
+* [33m41852f6[m Some rough ideas for reports to the user
+* [33mb7dea47[m Modified wireframe
+* [33m9f86020[m Added account log in and sign in pages
+* [33m54bf1e4[m initial attempt at wireframe prototype
+* [33m1f79184[m Amended minutes
+* [33m39db9d6[m Minutes from 2020-12-10 session
+* [33m04fa4e1[m Notes 2020-12-07
+* [33m1dc2d5b[m added updated midterm report pdf
+*   [33m5f165af[m Merge branch 'main' of https://github.com/BlairCurrey/uol-agile-group-project into main
+[32m|[m[33m\[m  
+[32m|[m * [33mf35e4a3[m Added a couple of comments on the meeting
+[32m|[m * [33md70fb30[m Fix date
+[32m|[m *   [33mc2d0c6a[m Merge branch 'main' of https://github.com/BlairCurrey/uol-agile-group-project into main
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33m273900f[m Updated notes 3-Dec-2020
+[32m|[m [34m|[m * [33m0f60790[m Uploaded summary of the book
+[32m|[m * [35m|[m [33m03b91ca[m Capture ideation board after the meeting
+[32m|[m [35m|[m[35m/[m  
+[32m|[m * [33mabaac74[m Update TG1_G6_GroupMeetings.md
+[32m|[m * [33ma2e19a4[m Updating exports of Miro
+* [35m|[m [33m51d1a3a[m Add STEEPLE & changed market analysis sectioning
+[35m|[m[35m/[m  
+* [33m6424a17[m added methodology for gathering competitors
+* [33m1022228[m images for market research
+* [33me358d8f[m added Market Research
+* [33m03e7384[m Setup agenda for next meeting
+* [33m0e21f30[m Updated notes 27-11-2020
+* [33meffc3bd[m Added Tex Template for Midterm
+* [33m23a65f7[m Updated meeting outcomes November 23
+* [33m29ab345[m Update TG1_G6_GroupMeetings.md
+* [33m347db17[m 2020-11-19 check-in
+* [33m4f45b8a[m added 2020-11-12 meeting
+* [33m7556267[m corrected date for second meeting
+* [33m859b63f[m Documentation for Weekly Working Session 2020-11-09
+* [33m9b7188d[m Added Meeting Notes 2020-11-05 and updated README
+* [33mf461ecf[m Initial commit
