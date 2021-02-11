@@ -84,7 +84,7 @@ module.exports = function (app, passport) {
 			let user = [req.user.id];
 			let grades_sql =
 				"SELECT study_sessions.title AS session, grades.course_id,  \
-					courses.title, courses.level, grades.id, grades.grade, grades.anonymous\
+					courses.title, courses.level, grades.id, grades.grade, grades.anonymous, grades.created_at\
 					FROM grades \
 					JOIN users \
 					ON grades.user_id = users.id \
