@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS courses;
 
+DROP TABLE IF EXISTS sessions;
+
 DROP VIEW IF EXISTS modules_with_grades;
 
 DROP VIEW IF EXISTS ranked_grades;
@@ -108,6 +110,13 @@ CREATE TABLE `grades` (
 	-- only known study sessions
 	UNIQUE KEY `course_user` (`course_id`, `user_id`) -- one grade is allowed per course for any user
 );
+
+CREATE TABLE `sessions` (
+	`session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+	`expires` int unsigned NOT NULL,
+	`data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE VIEW modules_with_grades AS
 SELECT
