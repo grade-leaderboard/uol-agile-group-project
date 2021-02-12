@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const sessionStore = new MySQLStore({}, db);
-global.sessionStore = sessionStore;
 app.use(
 	session({
 		key: "grades-leaderboard-session",
