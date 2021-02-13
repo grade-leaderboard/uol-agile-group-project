@@ -113,6 +113,7 @@ CREATE VIEW modules_with_grades AS
 SELECT
 	course_id id,
 	courses.title title,
+    courses.level level,
 	ROUND(AVG(grade), 0) grade
 FROM
 	grades

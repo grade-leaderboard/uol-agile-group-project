@@ -30,9 +30,9 @@
 							<!--begin::Right-->
 							<div class="d-flex align-items-center">
 								<!--begin::Search-->
-								<button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" data-bs-toggle="modal" data-bs-target="#kt_header_search_modal">
+								<!-- <button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" data-bs-toggle="modal" data-bs-target="#kt_header_search_modal"> -->
 									<!--begin::Svg Icon | path: '.svg/icons/General/Search.svg.'-->
-									<span class="svg-icon svg-icon-1 svg-icon-dark">
+									<!-- <span class="svg-icon svg-icon-1 svg-icon-dark">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24" />
@@ -40,14 +40,14 @@
 												<path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero" />
 											</g>
 										</svg>
-									</span>
+									</span> -->
 									<!--end::Svg Icon-->
-								</button>
+								<!-- </button> -->
 								<!--end::Search-->
 								<!--begin::Message-->
-								<button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" data-bs-toggle="modal" data-bs-target="#kt_inbox_compose">
+								<!-- <button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" data-bs-toggle="modal" data-bs-target="#kt_inbox_compose"> -->
 									<!--begin::Svg Icon | path: '.svg/icons/Communication/Chat6.svg.'-->
-									<span class="svg-icon svg-icon-1 svg-icon-dark">
+									<!-- <span class="svg-icon svg-icon-1 svg-icon-dark">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24" />
@@ -55,15 +55,17 @@
 												<path fill-rule="evenodd" clip-rule="evenodd" d="M6 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H6C5.44772 9 5 8.55228 5 8C5 7.44772 5.44772 7 6 7ZM6 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11Z" fill="black" />
 											</g>
 										</svg>
-									</span>
+									</span> -->
 									<!--end::Svg Icon-->
-								</button>
+								<!-- </button> -->
 								<!--end::Message-->
 								<!--begin::User-->
 								<div class="ms-1 ms-lg-6">
 									<!--begin::Toggle-->
 									<div class="btn btn-icon btn-sm btn-active-bg-accent" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+										<% if (!user) {%>
 										<!--begin::Svg Icon | path: '.svg/icons/General/User.svg.'-->
+										
 										<span class="svg-icon svg-icon-1 svg-icon-dark">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -74,6 +76,11 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<% } else { %>
+											<div class="symbol symbol-30px">
+												<img src="<%=user.avatar_url %>" alt=""/>
+											</div>										
+										<% } %>
 									</div>
 
 <!--layout-partial:partials/layout/_header_user_menu.html-->
@@ -81,19 +88,20 @@
 								</div>
 								<!--end::User-->
 								<!--begin::Notifications-->
-								<div class="ms-1 ms-lg-6">
+								<!-- <div class="ms-1 ms-lg-6"> -->
 									<!--begin::Dropdown-->
-									<button class="btn btn-icon btn-sm btn-light-danger fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+									<!-- <button class="btn btn-icon btn-sm btn-light-danger fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 										<span class="position-absolute fs-6">3</span>
 										<span class="pulse-ring"></span>
-									</button>
+									</button> -->
 
 <!--layout-partial:partials/layout/_header_notifications_menu.html-->
 
 									<!--end::Dropdown-->
-								</div>
+								<!-- </div> -->
 								<!--end::Notifications-->
 								<!--begin::Aside Toggler-->
+								
 								<!--end::Aside Toggler-->
 								<!--begin::Sidebar Toggler-->
 								<button class="btn btn-icon btn-sm btn-active-bg-accent d-lg-none ms-1 ms-lg-6" id="kt_sidebar_toggler">

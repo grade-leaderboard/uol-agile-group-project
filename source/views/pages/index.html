@@ -4,7 +4,9 @@
 									<div class="col-xl-4">
 
 <!--layout-partial:partials/widgets/engage/_widget-5.html-->
-
+<% if (!user) {%>
+<%- include('../partials/widgets/engage/_widget-5.html')%>
+<% } %>
 									</div>
 									<div class="col-xl-8">
 
@@ -37,16 +39,16 @@
 									<div class="col-xl-8">
 
 <!--layout-partial:partials/widgets/tables/_widget-2.html-->
-
+<%- include('../partials/widgets/tables/_widget-modules.html')%>
 									</div>
 								</div>
 								<!--end::Row-->
 								<!--begin::Modals-->
 
 <!--layout-partial:partials/modals/_create-app.html-->
-
+<%- include('../partials/modals/_create-app.html')%>
 
 <!--layout-partial:partials/modals/_select-location.html-->
-
+<%- include('../partials/modals/_select-location.html')%>
 								<!--end::Modals-->
 								

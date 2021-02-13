@@ -15,7 +15,26 @@ module.exports = function (app, passport) {
 
 			var [results, _] = await db.query(sql);
 			res.render("_index.html", {
-				res: results,
+				res: results, title: "Home"
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	});
+
+	app.get("/home", async (req, res) => {
+		try {
+			let sql =
+				"SELECT  m.id, m.title, m.grade, m.level, COUNT(g.course_id) AS 'submissions' \
+								FROM modules_with_grades m \
+								LEFT JOIN grades g \
+								ON g.course_id = m.id\
+								GROUP BY m.id\
+								ORDER BY id ASC";
+
+			var [results, _] = await db.query(sql);
+			res.render("pages/home.html", {
+				res: results, title: "Home", subtitle: "Welcome to Gradez"
 			});
 		} catch (error) {
 			console.log(error);
@@ -142,7 +161,7 @@ module.exports = function (app, passport) {
 			try {
 				// Set cookie age to 7 days
 				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
-				res.redirect("/");
+				res.redirect("/home");
 			} catch (error) {
 				console.log(error);
 			}
