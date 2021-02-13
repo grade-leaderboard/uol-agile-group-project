@@ -5,6 +5,7 @@ const db = require("mysql-promise")();
 const path = require("path");
 const passport = require("passport");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 const putUserInAllViews = require("./middlewares/putUserInAllViews");
 const flash = require("flash");
 
@@ -22,9 +23,13 @@ const port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const sessionStore = new MySQLStore({}, db);
 app.use(
 	session({
+		key: "grades-leaderboard-session",
 		secret: process.env.SESSION_SECRET,
+		store: sessionStore,
 		resave: false,
 		saveUninitialized: false,
 	})
