@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+			crossorigin="anonymous"
+		/>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css" />
+
+		<title>Login</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Navigation -->
+            			<!-- Navigation -->
+			<%- include('../partials/nav.ejs') %>
+            <!-- Page content begins below this -->
+                    <!-- Slack Sign-in-->
+                    <div class="container">
+                        <p>To access this section, you will need to sign in to the University of London Slack Workspace.</p>
+                        <a href="/auth/slack"
+                            ><img
+                                id="slack-sign-in"
+                                alt="Sign in with Slack"
+                                src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+                                srcset="
+                                    https://platform.slack-edge.com/img/sign_in_with_slack.png    1x,
+                                    https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x
+                                "
+                        /></a>
+                    </div>
+
+			<%- include('../partials/footer.ejs') %>
+	</body>
+	
+	<!-- Bootstrap Requirements -->
+	<%- include('../partials/bootstrap_reqs.ejs') %>
+</html>
