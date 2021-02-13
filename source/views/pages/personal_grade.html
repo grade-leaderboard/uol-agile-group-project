@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lanf="en">
 <!-- EJS head partial -->
-<%- include('partials/head.ejs'), {title: title}%>
+<%- include('../partials/head.ejs'), {title: title}%>
 	<body>
 		<div class="container">
 			<!-- Express snippet to include the header and navigation from a partial -->
-			<%- include('partials/nav.ejs') %>
+			<%- include('../partials/nav.ejs') %>
 			<!-- Page content begins below this -->
 			<h1><%= user.name %></h1>
 			<!-- Render a confirmation message if action was succesful -->
@@ -155,12 +155,12 @@
 				You have no grades entered into the leaderboard. Visit the <a href="addgrade">add grades</a> page to add one now.
 			<% } %>
 			<!-- prettier-ignore -->
-		<%- include("partials/footer.ejs") %>
+		<%- include("../partials/footer.ejs") %>
 
 	</body>
 
 	<!-- Bootstrap Requirements -->
-	<%- include("partials/bootstrap_reqs.ejs") %>
+	<%- include("../partials/bootstrap_reqs.ejs") %>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 	<!-- Optional JavaScript -->
 </html>

@@ -14,7 +14,7 @@ module.exports = function (app, passport) {
 								ORDER BY id ASC";
 
 			var [results, _] = await db.query(sql);
-			res.render("index.html", {
+			res.render("_index.html", {
 				res: results,
 			});
 		} catch (error) {
@@ -30,7 +30,7 @@ module.exports = function (app, passport) {
 			var [courses, _] = await db.query(sql, [req.user.id]);
 			sql = "SELECT * FROM study_sessions ORDER BY id ASC";
 			var [semesters, _] = await db.query(sql);
-			res.render("addgrade.html", {
+			res.render("pages/addgrade.html", {
 				title: "Leaderboard - Add grade",
 				heading: "Add grade",
 				courseList: courses,
@@ -69,7 +69,7 @@ module.exports = function (app, passport) {
 					row.avatar_url = null;
 				}
 			});
-			res.render("module_leaderboard.html", {
+			res.render("pages/module_leaderboard.html", {
 				res: results,
 				course_id: id,
 				title: `Grades Leaderboard - ${id}`,
@@ -98,7 +98,7 @@ module.exports = function (app, passport) {
 			var [sessions_results, _] = await db.query(sessions_sql);
 			let cumulativeGrade = calculateCumulativeGrade(grades_results);
 			let completionRate = calculateCompletionRate(grades_results);
-			res.render("personal_grade.html", {
+			res.render("pages/personal_grade.html", {
 				title: "Leaderboard - My grades",
 				grades_res: grades_results,
 				sessions_res: sessions_results,

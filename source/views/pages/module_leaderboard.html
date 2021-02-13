@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- EJS head partial -->
-<%- include('partials/head.ejs'), {title: title}%>
+<%- include('../partials/head.ejs'), {title: title}%>
 	<body>
 		<div class="container">
 			<!-- Express snippet to include the header and navigation from a partial -->
-			<%- include('partials/nav.ejs') %>
+			<%- include('../partials/nav.ejs') %>
 			<!-- Page content begins below this -->
 			<h1><%= course_id %> Leaderboard</h1>
 			<table data-toggle="table" data-search="true">
@@ -39,9 +39,9 @@
 				</tbody>
 			</table>
 		</div>
-		<%- include('partials/footer.ejs') %>
+		<%- include('../partials/footer.ejs') %>
 	</body>
 	<!-- Optional JavaScript -->
 	<!-- Bootstrap Requirements -->
-	<%- include('partials/bootstrap_reqs.ejs') %>
+	<%- include('../partials/bootstrap_reqs.ejs') %>
 </html>
