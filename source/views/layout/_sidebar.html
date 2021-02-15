@@ -4,8 +4,12 @@
 					<!--begin::Sidebar Content-->
 					<div class="d-flex flex-column sidebar-body">
 
-<!--layout-partial:partials/layout/_sidebar-general.html-->
-
+						<!--layout-partial:partials/layout/_sidebar-general.html-->
+						<% if (user) { %>
+							<%- include('../partials/layout/_sidebar-profile.html')%>
+						<% } else { %>
+							<%- include('../partials/layout/_sidebar-general.html')%>
+						<% } %>
 					</div>
 					<!--end::Sidebar Content-->
 				</div>
