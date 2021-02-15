@@ -45044,6 +45044,7 @@ body {
 @media (min-width: 992px) {
   .aside {
     transition: width 0.3s ease;
+    display: none;
   }
   .aside-fixed .aside {
     position: fixed;

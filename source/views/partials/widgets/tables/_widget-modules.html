@@ -15,9 +15,11 @@
 																									<!--end::Action-->	
 												<div class="card-toolbar">
 													<ul class="nav nav-pills nav-pills-sm nav-light">
+														<% if (user) {%>
 														<li class="nav-item">
 															<a href="#" class="btn btn-primary fw-bolder fs-6 px-7 py-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Add Grade</a>
 														</li>
+														<% } %>
 													</ul>
 												</div> 																									
 												<!-- <div class="card-toolbar">
@@ -47,9 +49,8 @@
 																	<tr>
 																		<th class="p-0 w-50px"></th>
 																		<th class="p-0 min-w-150px"></th>
-																		<th class="p-0 min-w-120px"></th>
 																		<th class="p-0 min-w-70px text-end">Average Grade</th>
-																		<th class="p-0 min-w-70px text-end">Submissions</th>
+																		<th class="p-0 min-w-70px text-end text-truncate">Students</th>
 																		<th class="p-0 min-w-50px"></th>
 																	</tr>
 																</thead>
@@ -75,7 +76,6 @@
 																			<a href="/module_leaderboard?module_id=<%= module.id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= module.id %></a>
 																			<span class="text-muted fw-bold d-block mt-1"><%= module.title %></span>
 																		</td>
-																		<td></td>
 																		<td class="text-end">
 																			<span class="text-primary fw-bolder d-block fs-6"><%= module.grade %></span>
 																			<!-- <span class="text-muted fw-bold d-block mt-1 fs-7">Average grade</span> -->
