@@ -1,9 +1,9 @@
-							
-							<!--begin::Container-->
-							<div class="container">
-
-<!--layout-partial:pages/index.html-->
-<%- include('../../pages/index.html')%>
-							</div>
-							<!--end::Container-->
-							
+<!--begin::Container-->
+<div class="container">
+	<!--layout-partial:pages/index.html-->
+	<!-- IMPORTANT: Make sure that you name your content pages according to 
+		            route names e.g. _leaderboard.html for /leaderboard route.
+     -->
+	<%- include('../../pages/'+req.path.replace('/','_') +'.html')%>
+</div>
+<!--end::Container-->
