@@ -83,18 +83,22 @@ module.exports = function (app, passport) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
-			let sql = "SELECT * FROM ranked_grades WHERE course_id = ?";
-			var [results, _] = await db.query(sql, id);
-			results.forEach((row) => {
+			let grades_sql = "SELECT * FROM ranked_grades WHERE course_id = ?";
+			var [grades_results, _] = await db.query(grades_sql, id);
+			let course_sql = "SELECT title FROM courses WHERE id = ?";
+			var [course_results, _] = await db.query(course_sql, id);
+			let title = course_results[0].title;
+			grades_results.forEach((row) => {
 				if (row.anonymous) {
 					row.name = "Anonymous";
 					row.avatar_url = null;
 				}
 			});
 			res.render("pages/module_leaderboard.html", {
-				res: results,
-				course_id: id,
-				title: `Grades Leaderboard - ${id}`,
+				res: grades_results,
+				course: { id: id, title: title },
+				title: `Leaderboard`,
+				subtitle: `${id} - ${title}`,
 			});
 		} catch (error) {
 			console.log(error);
