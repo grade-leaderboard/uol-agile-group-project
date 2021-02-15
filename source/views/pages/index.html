@@ -1,14 +1,15 @@
 								
 								<!--begin::Row-->
 								<div class="row g-0 g-xl-5 g-xxl-8">
-									<div class="col-xl-12">
-
+									
+									<% if (!user) {%>									
+									<div class="col-xl-4">
 <!--layout-partial:partials/widgets/engage/_widget-5.html-->
-<% if (!user) {%>
 <%- include('../partials/widgets/engage/_widget-5.html')%>
-<% } %>
-									</div>
-									<!-- <div class="col-xl-8"> -->
+								</div>
+									<% } %>		
+
+									<div class="col-xl-12">
 
 <!--layout-partial:partials/widgets/tables/_widget-1.html-->
 
@@ -45,10 +46,5 @@
 								<!--end::Row-->
 								<!--begin::Modals-->
 
-<!--layout-partial:partials/modals/_create-app.html-->
-<%- include('../partials/modals/_create-app.html')%>
-
-<!--layout-partial:partials/modals/_select-location.html-->
-<%- include('../partials/modals/_select-location.html')%>
 								<!--end::Modals-->
 								

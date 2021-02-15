@@ -5639,7 +5639,7 @@ var KTLayoutSidebar = function() {
         }
 
         var options = {
-            series: [74],
+            series: [46],
             chart: {
                 fontFamily: 'inherit',
                 height: height,
@@ -5649,12 +5649,12 @@ var KTLayoutSidebar = function() {
                 radialBar: {
                     hollow: {
                         margin: 0,
-                        size: "78%"
+                        size: "55%"
                     },
                     dataLabels: {
                         showOn: "always",
                         name: {
-                            show: false,
+                            show: true,
                             fontWeight: '700'
                         },
                         value: {
@@ -5669,12 +5669,14 @@ var KTLayoutSidebar = function() {
                         }
                     },
                     track: {
-                        background: '#00A3FF',
+                        // background: '#00A3FF',
+                        background: '#4F0CA4',
                         strokeWidth: '100%'
                     }
                 }
             },
-            colors: ['#F1416C'],
+            // colors: ['#F1416C'],#20D489
+            colors: ['#20D489'],
             stroke: {
                 lineCap: "round",
             },
