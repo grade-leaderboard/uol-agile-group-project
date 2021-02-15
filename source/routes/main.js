@@ -15,7 +15,8 @@ module.exports = function (app, passport) {
 
 			var [results, _] = await db.query(sql);
 			res.render("_index.html", {
-				res: results, title: "Home"
+				res: results,
+				title: "Home",
 			});
 		} catch (error) {
 			console.log(error);
@@ -34,7 +35,9 @@ module.exports = function (app, passport) {
 
 			var [results, _] = await db.query(sql);
 			res.render("pages/home.html", {
-				res: results, title: "Home", subtitle: "Welcome to Gradez"
+				res: results,
+				title: "Home",
+				subtitle: "Welcome to Gradez",
 			});
 		} catch (error) {
 			console.log(error);
