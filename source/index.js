@@ -6,7 +6,7 @@ const path = require("path");
 const passport = require("passport");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const putUserInAllViews = require("./middlewares/putUserInAllViews");
+const putObjectsInAllViews = require("./middlewares/putObjectsInAllViews");
 const flash = require("flash");
 
 db.configure({
@@ -36,7 +36,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(putUserInAllViews); //must go after passport.initialize()/.session()
+app.use(putObjectsInAllViews); //must go after passport.initialize()/.session()
 app.use(flash());
 require("./routes/main")(app, passport);
 require("./config/passport")(passport);
