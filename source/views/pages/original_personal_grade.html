@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lanf="en">
+<!-- EJS head partial -->
+<%- include('../partials/head.ejs'), {title: title}%>
+	<body>
+		<div class="container">
+			<!-- Express snippet to include the header and navigation from a partial -->
+			<%- include('../partials/nav.ejs') %>
+			<!-- Page content begins below this -->
+			<h1><%= user.name %></h1>
+			<!-- Render a confirmation message if action was succesful -->
+			<% if (editResult && editResult== "success") { %>
+			<div class="alert alert-success" role="alert">Your grade was successfully edited.</div>
+			<% } %>
+			<!-- Rendering validation errors if any -->
+			<% if(editResult && editResult != "success") { %>
+				<div class="alert alert-danger" role="alert"><%= editResult %></div>
+			<% } %>
+			<% if (grades_res.length > 0) {%>
+				<table data-toggle="table" data-search="true">
+					<thead>
+						<tr>
+							<th scope="col" data-sortable="true">Session</th>
+							<th scope="col" data-sortable="true">ID</th>
+							<th scope="col" data-sortable="true">Level</th>
+							<th scope="col" data-sortable="true">Module</th>
+							<th scope="col" data-sortable="true">Grade</th>
+							<th scope="col" data-sortable="false"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% grades_res.forEach(function (grade) { %>
+							<tr>
+								<td><%= grade.session %></td>
+								<td><%= grade.course_id %></td>
+								<td><%= grade.level %></td>
+								<td><%= grade.title %> </td>
+								<td>
+									<%= grade.grade %>
+									<% if (grade.anonymous) {%> <em>(Anonymous)</em> <%}%>
+								</td>
+								<td>
+									<!-- 15,778,476,000 millseconds in 6 months -->
+									<% let lockThreshold = 15778676000 %>
+									<% let currentDate = new Date() %>
+									<% let timeDiff = Math.abs(currentDate - grade.created_at) %>
+									<% if (timeDiff > lockThreshold) {%> 
+										<div title="This grade is locked as it was submitted over six months ago">Locked</div> 
+									<%} else {%> 
+										<a class="link" data-toggle="modal" data-target="#modal-<%= grade.id %>">edit</a> 
+									<%}%>
+								</td>
+							</tr>
+
+							<!-- Modal -->
+							<div class="modal fade" id="modal-<%= grade.id %>" tabindex="-1" role="dialog" aria-labelledby="example-modal-label" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" id="example-modal-label">Edit grade</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<h5><%= grade.title %></h5>
+											<% if (timeDiff > lockThreshold) { %> 
+												<form action="/edit_grades" method="DIALOG" id="form-<%= grade.id %>" class="mb-4"> 
+											<%} else {%> 
+												<form action="/edit_grades" method="POST" id="form-<%= grade.id %>" class="mb-4"> 
+											<%}%>
+												<!-- Hidden Grade ID -->
+												<input type="hidden" name="grade_id" value="<%= grade.id %>">
+												<!-- Session -->
+												<div class="form-group">
+													<label for="session">Session</label>
+													<select class="form-control selectpicker"
+														data-live-search="true" 
+														form = "form-<%= grade.id %>" 
+														name="session" 
+														title="Choose a session..." 
+														required>
+														<% sessions_res.forEach(function (session) { %>
+<!-- prettier-ignore-start -->
+														<option value="<%= session.id %>"
+																<% if (grade.session == session.title){ %> 
+																selected 
+															<% } %>
+															>
+															<%= session.title %>
+														</option>
+														<% }); %>
+													</select>
+												</div>
+												<!-- Grade -->
+												<div class="form-group">
+													<label for="grade">Grade</label>
+													<input
+														class="form-control"
+														type="number"
+														name="grade"
+														min="40"
+														max="100"
+														value=<%= grade.grade%>
+														required
+													/>
+												</div>
+												<!-- Anonymous -->
+												<div class="form-check form-check-custom form-check-solid">
+													<input 
+														type="checkbox" 
+														class="form-check-input" 
+														name="anonymous"
+														value="true"
+														<% if (grade.anonymous) {%> checked <% } %>
+													/>
+													<label class="form-check-label" for="anonymous">Do not reveal my identity in leaderboard. Keep this grade anonymous.</label>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+													<% if (timeDiff > lockThreshold) {%> 
+														<div title="This grade is locked as it was submitted over six months ago">Locked</div>
+													<%} else {%> 
+														<button type="submit" class="btn btn-primary">Submit</button> 
+													<%}%>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% }); %>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="font-weight: bold;">Cumulative Grade</td>
+								<td style="font-weight: bold;"><%= cumulativeGrade %> </td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="font-weight: bold;">Completion Rate</td>
+								<td style="font-weight: bold;"><%= completionRate %>%</td>
+								<td></td>
+							</tr>
+					</tbody>
+
+				</table>
+			
+
+			<% } else {%>
+				You have no grades entered into the leaderboard. Visit the <a href="addgrade">add grades</a> page to add one now.
+			<% } %>
+			<!-- prettier-ignore -->
+		<%- include("../partials/footer.ejs") %>
+
+	</body>
+
+	<!-- Bootstrap Requirements -->
+	<%- include("../partials/bootstrap_reqs.ejs") %>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<!-- Optional JavaScript -->
+</html>
