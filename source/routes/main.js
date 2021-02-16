@@ -91,7 +91,7 @@ module.exports = function (app, passport) {
 			grades_results.forEach((row) => {
 				if (row.anonymous) {
 					row.name = "Anonymous";
-					row.avatar_url = null;
+					row.avatar_url = "/assets/media/avatars/blank.png";
 				}
 			});
 			res.render("pages/module_leaderboard.html", {
