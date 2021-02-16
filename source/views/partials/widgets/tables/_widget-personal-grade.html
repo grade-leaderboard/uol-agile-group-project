@@ -1,0 +1,102 @@
+<!--begin::Table Widget 2-->
+<div class="card card-custom card-stretch mb-5 mb-xxl-8">
+    <!--begin::Header-->
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder text-dark fs-3"><%= user.name %></span>
+            <span class="text-muted mt-2 fw-bold fs-6"">My Grade</span>
+        </h3>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body pt-3 pb-0 mt-n3">
+        <div class="tab-content mt-4" id="myTabTables2">
+            <!--begin::Tap pane-->
+            <div class="tab-pane fade show active" id="kt_tab_pane_2_1" role="tabpanel" aria-labelledby="kt_tab_pane_2_1">
+                <!--begin::Table-->
+                <div class="table-responsive">
+                    <table class="table table-borderless align-middle">
+                        <thead>
+                            <tr>
+                                <th class="p-0 w-50px"></th>
+                                <th class="p-0 min-w-150px fw-bolder">Module</th>
+                                <th class="p-0 min-w-70px text-end fw-bolder">Session</th>
+                                <th class="p-0 min-w-70px text-end fw-bolder"> Grade </th>
+                                <th class="p-0 min-w-70px text-end"></th>
+                                <!-- <th class="p-0 min-w-70px text-end"></th> -->
+                                <th class="p-0 min-w-50px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% grades_res.forEach(function (grade) { %>																
+                            <tr>
+                                <td class="px-0 py-3">
+                                    <div class="symbol symbol-55px mt-1 me-5">
+                                        <span class="symbol-label bg-light-primary align-items-end">
+                                            <div class="symbol symbol-50px">
+                                                <div class="symbol-label fs-2 fw-bold text-success">L<%= grade.level %></div>
+                                            </div>	
+                                        </span>
+                                </td>
+                                <td class="px-0">
+                                    <a href="/module_leaderboard?module_id=<%= grade.course_id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= grade.course_id %></a>
+                                    <span class="text-muted fw-bold d-block mt-1"><%=grade.title %></span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="text-primary fw-bolder d-block fs-6"><%= grade.session %></span>
+                                </td>
+                                <td class="text-end">
+                                    <span class="text-primary fw-bolder d-block fs-6"><%= grade.grade %></span>
+                                </td>
+                                <!-- <td class="text-end"> -->
+                                    <!-- <span class="text-primary fw-bolder d-block fs-6"><%= grade.submissions %></span>
+                                    <span class="text-muted fw-bold d-block mt-1 fs-7">Submissions</span> -->
+                                <!-- </td> -->
+                                <!-- Edit button -->
+                                <td class="text-end pe-0">
+                                    <a class="btn btn-icon btn-bg-light btn-active-primary btn-sm">
+                                        <span class="svg-icon svg-icon-4 fw-bolder">
+                                            Edit
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+								<td></td>
+								<td></td>
+                                <td class="text-end" style="font-weight: bold;">
+                                    <span class="text-gray-900 fw-bolder d-block fs-6">Cumulative Grade</span>
+                                </td>
+                                <td class="text-end" style="font-weight: bold;">
+                                    <span class="text-gray-900 fw-bolder d-block fs-6"><%= cumulativeGrade %> </span>
+                                </td>
+                                
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+                                <td class="text-end" style="font-weight: bold;">
+                                    <span class="text-gray-900 fw-bolder d-block fs-6"> Completion Rate</span>
+                                </td>
+                                <td class="text-end" style="font-weight: bold;">
+                                    <span class="text-gray-900 fw-bolder d-block fs-6"> <%= completionRate %>%</span>
+                                </td>
+								<td></td>
+								<td></td>
+							</tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!--end::Table-->
+            </div> 
+            <!--end::Tap pane-->
+        </div>
+    </div>
+    <!--end::Body-->
+</div>
+<!--end::Table Widget 2-->
