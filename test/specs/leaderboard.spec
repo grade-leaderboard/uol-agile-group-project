@@ -1,4 +1,4 @@
-# Test Grade Leaderboard
+# Test Gradez
 Remember to reset the database prior to the tests
 
 ## View default page 

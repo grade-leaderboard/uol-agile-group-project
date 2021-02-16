@@ -1,4 +1,4 @@
-# Grades Leaderboard
+# Gradez
 
 ## Developer Setup Instructions
 
@@ -10,7 +10,7 @@
 3.  Run the setup script(s) in the `db` directory to build the database.
 4.  Copy `.envexample`, rename to `.env`, and update with real configuration. 
 
-    The slack client id and secret are available in https://api.slack.com/apps under `grade-leaderboard`. If you cannot see this app please ask an existing collaborator to add you. A redirect URL is defined in slack which includes the port so using the default is suggested. Alternatively you can add another redirect link with the desired port at https://api.slack.com/apps/A01KQU40QAH/oauth?.
+    The slack client id and secret are available in https://api.slack.com/apps under `Gradez`. If you cannot see this app please ask an existing collaborator to add you. A redirect URL is defined in slack which includes the port so using the default is suggested. Alternatively you can add another redirect link with the desired port at https://api.slack.com/apps/A01KQU40QAH/oauth?.
 
     The session string is an arbitrary string - anything will work for your local environment but it should be complex for production.
 

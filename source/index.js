@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const sessionStore = new MySQLStore({}, db);
 app.use(
 	session({
-		key: "grades-leaderboard-session",
+		key: "gradez-session",
 		secret: process.env.SESSION_SECRET,
 		store: sessionStore,
 		resave: false,
