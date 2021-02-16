@@ -124,6 +124,7 @@ module.exports = function (app, passport) {
 				editResult: req.query.editResult,
 				cumulativeGrade: cumulativeGrade,
 				completionRate: completionRate,
+				subtitle: grades_results.user
 			});
 		} catch (error) {
 			console.log(error);
