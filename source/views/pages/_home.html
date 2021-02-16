@@ -1,13 +1,15 @@
 <!--begin::Row-->
 <div class="row g-0 g-xl-5 g-xxl-8">
+	<div class="col-xl-6">
+		<!-- ../partials/widgets/engage/_widget-welcome-info.html -->
+		<%- include('../partials/widgets/stats/_widget-8.html')%>
+	</div>
 	<% if (!user) {%>
-	<div class="col-xl-4">
-		<!--layout-partial:partials/widgets/engage/_widget-5.html-->
+	<div class="col-xl-6">
 		<%- include('../partials/widgets/engage/_widget-5.html')%>
 	</div>
 	<% } %>
 	<div class="col-xl-12">
-		<!--layout-partial:partials/widgets/tables/_widget-2.html-->
 		<%- include('../partials/widgets/tables/_widget-modules.html')%>
 	</div>
 </div>
