@@ -14,6 +14,15 @@ async function checkPermission(req, res, next) {
 				permit = true;
 				break;
 			}
+			case "POST /add-grade": {
+				permit = true;
+				break;
+			}		
+			case "POST /edit-grade": {
+				[user, _] = await db.query("SELECT user_id FROM grades WHERE id=?", [req.body.grade_id]);
+				permit = req.user.id == user[0].user_id;
+				break;
+			}						
 		}
 		if (permit) {
 			next();

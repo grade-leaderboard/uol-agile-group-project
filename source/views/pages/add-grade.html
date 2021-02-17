@@ -12,8 +12,7 @@ License: You must have a valid license purchased only from above link in order t
 	<%- include('../partials/head.html'), {title: title}%>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<!-- <body id="kt_body" data-sidebar="on" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled sidebar-enabled" data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed=""></body> -->
-	<body id="kt_body" data-sidebar="on" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled sidebar-enabled">
+	<body id="kt_body" data-sidebar="on" class="header-fixed toolbar-enabled sidebar-enabled">
 
 	<!--layout-partial:layout/master.html-->
 	<%- include('../layout/master.html')%>
@@ -24,9 +23,7 @@ License: You must have a valid license purchased only from above link in order t
 		<%- include('../partials/jsbundle.html')%>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="assets/js/custom/widgets.js"></script>
-		<script src="assets/js/custom/modals/create-app.js"></script>
-		<script src="assets/js/custom/modals/select-location.js"></script>
+        <script src="assets/js/custom/general/wizard.js"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

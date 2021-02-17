@@ -1,6 +1,6 @@
 						<!--begin::toolbar-->
 						<div class="toolbar" id="kt_toolbar">
-							<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 								<!--begin::Info-->
 								<div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-1">
 									<!--begin::Title-->
@@ -20,9 +20,9 @@
 								<!--begin::Nav-->
 								<div class="d-flex align-items-center flex-nowrap text-nowrap overflow-auto py-1">
 									<!-- <a href="profile/overview.html" class="btn btn-active-accent active fw-bolder">Home</a> -->
-									<a href="home" class="btn btn-active-accent fw-bolder ms-3">Home</a> 	
-									<a href="personal_grade" class="btn btn-active-accent fw-bolder ms-3">My Grades</a>
-									<a href="addgrade" class="btn btn-active-accent fw-bolder ms-3">Add Grade</a>
+									<a href="home" class="btn <%= (title == "Home" ? "btn-light-primary": "") %> btn-active-primary fw-bolder ms-3">Home</a> 	
+									<a  href="personal_grade" class="btn <%= (title == "My Grades" ? "btn-light-primary": "") %> btn-active-primary fw-bolder ms-3">My Grades</a>
+									<a href="add-grade" class="btn <%= (title == "Add Grade" ? "btn-light-primary": "") %> btn-active-primary fw-bolder ms-3">Add Grade</a>
 									
 								</div>
 								<!--end::Nav-->

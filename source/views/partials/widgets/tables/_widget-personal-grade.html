@@ -22,9 +22,7 @@
                                 <th class="p-0 min-w-150px fw-bolder">Module</th>
                                 <th class="p-0 min-w-70px text-end fw-bolder">Session</th>
                                 <th class="p-0 min-w-70px text-end fw-bolder"> Grade </th>
-                                <th class="p-0 min-w-70px text-end"></th>
-                                <!-- <th class="p-0 min-w-70px text-end"></th> -->
-                                <th class="p-0 min-w-50px"></th>
+                                <th class="p-0 min-w-50px text-end"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +52,15 @@
                                 <!-- </td> -->
                                 <!-- Edit button -->
                                 <td class="text-end pe-0">
-                                    <a class="btn btn-icon btn-bg-light btn-active-primary btn-sm">
+                                    <a href="#" class="btn btn-icon btn-bg-light btn-active-primary btn-sm" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#kt_modal_edit_grade" 
+                                        data-bs-module="<%= grade.title %>"
+                                        data-bs-semester="<%= grade.session_id %>"
+                                        data-bs-grade="<%= grade.grade %>"
+                                        data-bs-grade-id="<%= grade.id %>"
+                                        data-bs-anonymous="<%= grade.anonymous?true:false %>"
+                                        >
                                         <span class="svg-icon svg-icon-4 fw-bolder">
                                             Edit
                                         </span>
@@ -73,8 +79,6 @@
                                 <td class="text-end" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"><%= cumulativeGrade %> </span>
                                 </td>
-                                
-								<td></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -86,7 +90,6 @@
                                 <td class="text-end" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"> <%= completionRate %>%</span>
                                 </td>
-								<td></td>
 								<td></td>
 							</tr>
                         </tfoot>
