@@ -26,7 +26,7 @@ var KTWizardPage = function () {
 				document.getElementById("semester-confirmation").textContent = s.options[s.selectedIndex].text;
 				document.getElementById("grade-confirmation").textContent = document.getElementById("grade").value;
 				document.getElementById("anonymous-confirmation").textContent = 
-					document.getElementById("anonymous").checked ? "Grade will be kept private" : "Grade will be visible to other users";			
+				document.getElementById("anonymous").checked ? "Grade will be kept private" : "Grade will be visible to other users";			
 
 			}
 			// Validate form before change stepper step

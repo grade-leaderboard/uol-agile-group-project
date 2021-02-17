@@ -52,7 +52,15 @@
                                 <!-- </td> -->
                                 <!-- Edit button -->
                                 <td class="text-end pe-0">
-                                    <a class="btn btn-icon btn-bg-light btn-active-primary btn-sm">
+                                    <a href="#" class="btn btn-icon btn-bg-light btn-active-primary btn-sm" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#kt_modal_edit_grade" 
+                                        data-bs-module="<%= grade.title %>"
+                                        data-bs-semester="<%= grade.session_id %>"
+                                        data-bs-grade="<%= grade.grade %>"
+                                        data-bs-grade-id="<%= grade.id %>"
+                                        data-bs-anonymous="<%= grade.anonymous?true:false %>"
+                                        >
                                         <span class="svg-icon svg-icon-4 fw-bolder">
                                             Edit
                                         </span>

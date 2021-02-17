@@ -127,7 +127,7 @@ module.exports = function (app, passport) {
 		try {
 			let user = [req.user.id];
 			let grades_sql =
-				"SELECT study_sessions.title AS session, grades.course_id,  \
+				"SELECT study_sessions.title AS session, study_sessions.id as session_id, grades.course_id,  \
 					courses.title, courses.level, grades.id, grades.grade, grades.anonymous, grades.created_at\
 					FROM grades \
 					JOIN users \
@@ -145,7 +145,7 @@ module.exports = function (app, passport) {
 			res.render("pages/personal_grade.html", {
 				title: "My Grades",
 				grades_res: grades_results,
-				sessions_res: sessions_results,
+				semesterList: sessions_results,
 				editResult: req.query.editResult,
 				cumulativeGrade: cumulativeGrade,
 				completionRate: completionRate,
@@ -153,6 +153,23 @@ module.exports = function (app, passport) {
 			});
 		} catch (error) {
 			console.log(error);
+		}
+	});
+
+	app.post("/edit-grade", checkAuth, checkPermission, async (req, res) => {
+		try {
+			let sql = "UPDATE grades \
+					SET study_session_id = ?, \
+					grade = ?, \
+					anonymous = ? \
+					WHERE id = ?";
+			var anonymous = req.body.anonymous == "true" ? 1 : 0;
+			var fields = [req.body.semester, req.body.grade, anonymous, req.body.grade_id];
+			var [results, _] = await db.query(sql, fields);
+			res.redirect("/personal_grade" + "?editResult=success");
+		} catch (error) {
+			console.log(error);
+			res.redirect("/personal_grade" + "?editResult=Grade was not edited. Something went wrong.");
 		}
 	});
 
