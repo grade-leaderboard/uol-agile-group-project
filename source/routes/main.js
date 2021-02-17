@@ -41,7 +41,7 @@ module.exports = function (app, passport) {
 		}
 	});
 
-	app.get("/addgrade", checkAuth, async (req, res) => {
+	app.get("/add-grade", checkAuth, async (req, res) => {
 		try {
 			let sql = `SELECT c.* FROM courses c WHERE c.id NOT IN 
 			(SELECT g.course_id FROM grades g WHERE g.user_id = ?)
@@ -49,15 +49,33 @@ module.exports = function (app, passport) {
 			var [courses, _] = await db.query(sql, [req.user.id]);
 			sql = "SELECT * FROM study_sessions ORDER BY id ASC";
 			var [semesters, _] = await db.query(sql);
-			res.render("pages/addgrade.html", {
+			res.render("pages/add-grade.html", {
 				title: "Leaderboard - Add grade",
 				heading: "Add grade",
 				courseList: courses,
 				semesterList: semesters,
 				addResult: req.query.addResult,
+				title: "Add grade", 
+				subtitle: "Add your grade"
 			});
 		} catch (error) {
 			console.log(error);
+		}
+	});
+
+	app.post("/add-grade", checkAuth, checkPermission, async (req, res) => {
+		try {
+			let params = [req.body.course_id, req.body.semester, req.user.id, req.body.grade, !!req.body.anonymous];
+			let sql = `
+			INSERT INTO grades(course_id, study_session_id, user_id, grade, anonymous)
+			VALUES (?, ?, ?, ?, ?)`;
+			var [results, _] = await db.query(sql, params);
+			res.redirect(req.baseUrl + "?addResult=success");
+		} catch (error) {
+			console.log(error);
+			if (error.code == "ER_DUP_ENTRY") {
+				res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
+			}
 		}
 	});
 

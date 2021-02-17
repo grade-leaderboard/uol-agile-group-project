@@ -19,7 +19,16 @@ var KTWizardPage = function () {
 		// Validation before going to next page
 		_stepperObj.on('kt.stepper.next', function (stepper) {
 			console.log('stepper.next');
+			if (stepper.getCurrentStepIndex() == 2) {
+				var m = document.getElementById("module");	
+				document.getElementById("module-confirmation").textContent = m.options[m.selectedIndex].text;
+				var s = document.getElementById("semester");
+				document.getElementById("semester-confirmation").textContent = s.options[s.selectedIndex].text;
+				document.getElementById("grade-confirmation").textContent = document.getElementById("grade").value;
+				document.getElementById("anonymous-confirmation").textContent = 
+					document.getElementById("anonymous").checked ? "Grade will be kept private" : "Grade will be visible to other users";			
 
+			}
 			// Validate form before change stepper step
 			var validator = _validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
 
@@ -64,7 +73,7 @@ var KTWizardPage = function () {
 			e.preventDefault();
 
 			Swal.fire({
-				text: "All is good! Please confirm the form submission.",
+				text: "All is good! Please confirm the grade submission.",
 				icon: "success",
 				showCancelButton: true,
 				buttonsStyling: false,
@@ -99,17 +108,17 @@ var KTWizardPage = function () {
 			_stepperFormEl,
 			{
 				fields: {
-					comnpanyname: {
+					course_id: {
 						validators: {
 							notEmpty: {
-								message: 'Company name is required'
+								message: 'Module is required'
 							}
 						}
 					},
-					yourname: {
+					semester: {
 						validators: {
 							notEmpty: {
-								message: 'Your name is required'
+								message: 'Study session is required'
 							}
 						}
 					}
@@ -129,48 +138,59 @@ var KTWizardPage = function () {
 			_stepperFormEl,
 			{
 				fields: {
-					address1: {
+					grade: {
 						validators: {
 							notEmpty: {
-								message: 'Address is required'
-							}
-						}
-					},
-					address2: {
-						validators: {
-							notEmpty: {
-								message: 'Address is required'
-							}
-						}
-					},
-					postcode: {
-						validators: {
-							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					},
-					city: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					state: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					country: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
+								message: 'Grade is required'
+							},
+							integer: {
+								decimalSeparator: '',
+        						message: 'Grade must be an integer',
+							},
+							between: {
+								inclusive: true,
+								min: 40,
+								max: 100,
+								message: 'Grade must be between 40 and 100'
 							}
 						}
 					}
+					// ,
+					// address2: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Address is required'
+					// 		}
+					// 	}
+					// },
+					// postcode: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Postcode is required'
+					// 		}
+					// 	}
+					// },
+					// city: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'City is required'
+					// 		}
+					// 	}
+					// },
+					// state: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'State is required'
+					// 		}
+					// 	}
+					// },
+					// country: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Country is required'
+					// 		}
+					// 	}
+					// }
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),

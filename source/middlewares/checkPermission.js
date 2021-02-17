@@ -14,6 +14,10 @@ async function checkPermission(req, res, next) {
 				permit = true;
 				break;
 			}
+			case "POST /add-grade": {
+				permit = true;
+				break;
+			}			
 		}
 		if (permit) {
 			next();
