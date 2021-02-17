@@ -58,7 +58,7 @@ module.exports = function (app, passport) {
 				courseList: courses,
 				semesterList: semesters,
 				addResult: req.query.addResult,
-				title: "Add grade", 
+				title: "Add Grade", 
 				subtitle: "Add your grade"
 			});
 		} catch (error) {
@@ -143,7 +143,7 @@ module.exports = function (app, passport) {
 			let cumulativeGrade = calculateCumulativeGrade(grades_results);
 			let completionRate = calculateCompletionRate(grades_results);
 			res.render("pages/personal_grade.html", {
-				title: "Leaderboard - My grades",
+				title: "My Grades",
 				grades_res: grades_results,
 				sessions_res: sessions_results,
 				editResult: req.query.editResult,
