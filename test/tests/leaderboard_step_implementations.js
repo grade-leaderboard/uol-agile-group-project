@@ -53,7 +53,7 @@ step("Open default app webpage", async () => {
 });
 
 step("Go to homepage", async () => {
-    await click("Grades Leaderboard")
+    await click("Gradez")
 });
 
 step("Open personal grades page", async () => {
