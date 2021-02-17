@@ -1,14 +1,21 @@
 <!--begin::Row-->
 <div class="row g-0 g-xl-5 g-xxl-8">
-	<div class="col-xl-6">
-		<!-- ../partials/widgets/engage/_widget-welcome-info.html -->
-		<%- include('../partials/widgets/stats/_widget-8.html')%>
-	</div>
 	<% if (!user) {%>
+	<!-- Two cards side-by-side if not logged in -->
+	<div class="col-xl-6">
+		<%- include('../partials/widgets/engage/_widget-welcome-info.html')%>
+	</div>
 	<div class="col-xl-6">
 		<%- include('../partials/widgets/engage/_widget-5.html')%>
 	</div>
+	<% } else { %>
+	<!-- One card if logged in -->
+	<div class="col-xl-12">
+		<%- include('../partials/widgets/engage/_widget-welcome-info.html')%>
+	</div>
 	<% } %>
+</div>
+<div class="row g-0 g-xl-5 g-xxl-8">
 	<div class="col-xl-12">
 		<%- include('../partials/widgets/tables/_widget-modules.html')%>
 	</div>
