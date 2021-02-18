@@ -172,6 +172,22 @@ module.exports = function (app, passport) {
 		}
 	});
 
+	app.get("/demo-login", async (req, res) => {
+		try {
+			var [demoUserRow, _] = await db.query("SELECT * FROM users WHERE id = 'U00000007'");
+
+			// mimic authentication - add demo user to req and session
+			req.user = { ...demoUserRow[0] };
+			req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
+			req.session.passport = { user: req.user.id };
+			req.session.save(function (err) {});
+
+			res.redirect("/home");
+		} catch (error) {
+			console.log(error);
+		}
+	});
+
 	// Intiate slack authentication process
 	app.get("/auth/slack", passport.authorize("slack"));
 
