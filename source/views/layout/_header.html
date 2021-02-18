@@ -55,7 +55,6 @@
 								<!--begin::User-->
 								<div class="ms-1 ms-lg-6">
 									<!--begin::Toggle-->
-									<div class="btn btn-icon btn-sm btn-active-bg-accent" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 										<% if (!user) {%>
 										<!--begin::Svg Icon | path: '.svg/icons/General/User.svg.'-->
 										
@@ -70,11 +69,82 @@
 										</span>
 										<!--end::Svg Icon-->
 										<% } else { %>
-											<div class="symbol symbol-30px">
-												<img src="<%=user.avatar_url %>" alt="<%=user.name%>"/>
-											</div>										
-										<% } %>
-									</div>
+											<div class="btn btn-icon btn-sm btn-active-bg-accent show menu-dropdown" data-kt-menu-trigger="hover" data-kt-menu-placement="bottom-end">	
+												<span class="symbol symbol-40px">
+													<img src="<%=user.avatar_url %>" alt="<%=user.name%>"/>
+												</span>
+											</div>
+											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px " data-kt-menu="true" style="margin: 0px; z-index: 105; position: fixed; left: 0px; top: 0px; right: auto; bottom: auto; transform: translate3d(550px, 78px, 0px);" data-popper-placement="bottom-end">
+												<div class="menu-content fw-bold d-flex align-items-center bgi-no-repeat bgi-position-y-top rounded-top bg-info" >
+													<div class="symbol symbol-45px mx-5 py-5">
+														<span class="symbol symbol-40px">
+															<img src="<%=user.avatar_url %>" alt="<%=user.name%>"/>
+														</span>
+													</div>
+													<div class="">
+														<span class="text-white fw-bolder fs-4">Hello, <%=user.name%></span>
+														<span class="text-white fw-bold fs-7 d-block"></span>
+													</div>
+												</div>
+												<!--begin::Row-->
+												<div class="row row-cols-2 g-0">
+													<a href="personal_grade" class="border-bottom border-end text-center py-10 btn btn-active-color-primary rounded-0">
+														<!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-4-blocks.svg-->
+														<span class="svg-icon svg-icon-primary svg-icon-3x"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<path opacity="0.25" d="M3 7H21V19C21 20.6569 19.6569 22 18 22H6C4.34315 22 3 20.6569 3 19V7Z" fill="#12131A"/>
+															<path d="M9 13C9 12.4477 9.44772 12 10 12H14C14.5523 12 15 12.4477 15 13V13C15 13.5523 14.5523 14 14 14H10C9.44772 14 9 13.5523 9 13V13Z" fill="#12131A"/>
+															<path d="M2 4C2 2.89543 2.89543 2 4 2H20C21.1046 2 22 2.89543 22 4V6C22 7.10457 21.1046 8 20 8H4C2.89543 8 2 7.10457 2 6V4Z" fill="#12131A"/>
+															</svg></span>
+														<!--end::Svg Icon-->
+														<span class="fw-bolder fs-6 d-block pt-3">My Grade</span>
+													</a>
+													<!-- <a href="/start/profile/account.html" class="col border-bottom text-center py-10 btn btn-active-color-primary rounded-0"> -->
+														<!--begin::Svg Icon | path: icons/stockholm/General/Settings-1.svg-->
+														<!-- <span class="svg-icon svg-icon-3x me-n1"> -->
+															<!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> -->
+																<!-- <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24"></rect>
+																	<path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000"></path>
+																	<path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3"></path>
+																</g> -->
+															<!-- </svg> -->
+														<!-- </span> -->
+														<!--end::Svg Icon-->
+														<!-- <span class="fw-bolder fs-6 d-block pt-3">Settings</span> -->
+													<!-- </a> -->
+													<!-- <a href="/start/profile/settings.html" class="col text-center border-end py-10 btn btn-active-color-primary rounded-0"> -->
+														<!--begin::Svg Icon | path: icons/stockholm/Shopping/Euro.svg-->
+														<!-- <span class="svg-icon svg-icon-3x me-n1"> -->
+															<!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> -->
+																<!-- <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> -->
+																	<!-- <rect x="0" y="0" width="24" height="24"></rect> -->
+																	<!-- <path d="M4.3618034,10.2763932 L4.8618034,9.2763932 C4.94649941,9.10700119 5.11963097,9 5.30901699,9 L15.190983,9 C15.4671254,9 15.690983,9.22385763 15.690983,9.5 C15.690983,9.57762255 15.6729105,9.65417908 15.6381966,9.7236068 L15.1381966,10.7236068 C15.0535006,10.8929988 14.880369,11 14.690983,11 L4.80901699,11 C4.53287462,11 4.30901699,10.7761424 4.30901699,10.5 C4.30901699,10.4223775 4.32708954,10.3458209 4.3618034,10.2763932 Z M14.6381966,13.7236068 L14.1381966,14.7236068 C14.0535006,14.8929988 13.880369,15 13.690983,15 L4.80901699,15 C4.53287462,15 4.30901699,14.7761424 4.30901699,14.5 C4.30901699,14.4223775 4.32708954,14.3458209 4.3618034,14.2763932 L4.8618034,13.2763932 C4.94649941,13.1070012 5.11963097,13 5.30901699,13 L14.190983,13 C14.4671254,13 14.690983,13.2238576 14.690983,13.5 C14.690983,13.5776225 14.6729105,13.6541791 14.6381966,13.7236068 Z" fill="#000000" opacity="0.3"></path> -->
+																	<!-- <path d="M17.369,7.618 C16.976998,7.08599734 16.4660031,6.69750122 15.836,6.4525 C15.2059968,6.20749878 14.590003,6.085 13.988,6.085 C13.2179962,6.085 12.5180032,6.2249986 11.888,6.505 C11.2579969,6.7850014 10.7155023,7.16999755 10.2605,7.66 C9.80549773,8.15000245 9.45550123,8.72399671 9.2105,9.382 C8.96549878,10.0400033 8.843,10.7539961 8.843,11.524 C8.843,12.3360041 8.96199881,13.0779966 9.2,13.75 C9.43800119,14.4220034 9.7774978,14.9994976 10.2185,15.4825 C10.6595022,15.9655024 11.1879969,16.3399987 11.804,16.606 C12.4200031,16.8720013 13.1129962,17.005 13.883,17.005 C14.681004,17.005 15.3879969,16.8475016 16.004,16.5325 C16.6200031,16.2174984 17.1169981,15.8010026 17.495,15.283 L19.616,16.774 C18.9579967,17.6000041 18.1530048,18.2404977 17.201,18.6955 C16.2489952,19.1505023 15.1360064,19.378 13.862,19.378 C12.6999942,19.378 11.6325049,19.1855019 10.6595,18.8005 C9.68649514,18.4154981 8.8500035,17.8765035 8.15,17.1835 C7.4499965,16.4904965 6.90400196,15.6645048 6.512,14.7055 C6.11999804,13.7464952 5.924,12.6860058 5.924,11.524 C5.924,10.333994 6.13049794,9.25950479 6.5435,8.3005 C6.95650207,7.34149521 7.5234964,6.52600336 8.2445,5.854 C8.96550361,5.18199664 9.8159951,4.66400182 10.796,4.3 C11.7760049,3.93599818 12.8399943,3.754 13.988,3.754 C14.4640024,3.754 14.9609974,3.79949954 15.479,3.8905 C15.9970026,3.98150045 16.4939976,4.12149906 16.97,4.3105 C17.4460024,4.49950095 17.8939979,4.7339986 18.314,5.014 C18.7340021,5.2940014 19.0909985,5.62999804 19.385,6.022 L17.369,7.618 Z" fill="#000000"></path> -->
+																<!-- </g> -->
+															<!-- </svg> -->
+														<!-- </span> -->
+														<!--end::Svg Icon-->
+														<!-- <span class="fw-bolder fs-6 d-block pt-3">Subscriptions</span> -->
+													<!-- </a> -->
+													<a href="logout" class="col text-center py-10 btn btn-active-color-primary rounded-0">
+														<!-- begin::Svg Icon | path: icons/stockholm/Navigation/Sign-out.svg -->
+														<span class="svg-icon svg-icon-3x svg-icon-primary me-n1">
+															<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24"></rect>
+																	<path d="M14.0069431,7.00607258 C13.4546584,7.00607258 13.0069431,6.55855153 13.0069431,6.00650634 C13.0069431,5.45446114 13.4546584,5.00694009 14.0069431,5.00694009 L15.0069431,5.00694009 C17.2160821,5.00694009 19.0069431,6.7970243 19.0069431,9.00520507 L19.0069431,15.001735 C19.0069431,17.2099158 17.2160821,19 15.0069431,19 L3.00694311,19 C0.797804106,19 -0.993056895,17.2099158 -0.993056895,15.001735 L-0.993056895,8.99826498 C-0.993056895,6.7900842 0.797804106,5 3.00694311,5 L4.00694793,5 C4.55923268,5 5.00694793,5.44752105 5.00694793,5.99956624 C5.00694793,6.55161144 4.55923268,6.99913249 4.00694793,6.99913249 L3.00694311,6.99913249 C1.90237361,6.99913249 1.00694311,7.89417459 1.00694311,8.99826498 L1.00694311,15.001735 C1.00694311,16.1058254 1.90237361,17.0008675 3.00694311,17.0008675 L15.0069431,17.0008675 C16.1115126,17.0008675 17.0069431,16.1058254 17.0069431,15.001735 L17.0069431,9.00520507 C17.0069431,7.90111468 16.1115126,7.00607258 15.0069431,7.00607258 L14.0069431,7.00607258 Z" fill="#000000" fill-rule="nonzero" opacity="0.5" transform="translate(9.006943, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-9.006943, -12.000000)"></path>
+																	<rect fill="#000000" opacity="0.5" transform="translate(14.000000, 12.000000) rotate(-270.000000) translate(-14.000000, -12.000000)" x="13" y="6" width="2" height="12" rx="1"></rect>
+																	<path d="M21.7928932,9.79289322 C22.1834175,9.40236893 22.8165825,9.40236893 23.2071068,9.79289322 C23.5976311,10.1834175 23.5976311,10.8165825 23.2071068,11.2071068 L20.2071068,14.2071068 C19.8165825,14.5976311 19.1834175,14.5976311 18.7928932,14.2071068 L15.7928932,11.2071068 C15.4023689,10.8165825 15.4023689,10.1834175 15.7928932,9.79289322 C16.1834175,9.40236893 16.8165825,9.40236893 17.2071068,9.79289322 L19.5,12.0857864 L21.7928932,9.79289322 Z" fill="#000000" fill-rule="nonzero" transform="translate(19.500000, 12.000000) rotate(-90.000000) translate(-19.500000, -12.000000)"></path>
+																</g>
+															</svg>
+														</span>
+														<!--end::Svg Icon-->
+														<span class="fw-bolder fs-6 d-block pt-3">Sign Out</span>
+													</a>
+												</div>
+												<!--end::Row-->
+											</div>
+											<% } %>
 
 <!--layout-partial:partials/layout/_header_user_menu.html-->
 
