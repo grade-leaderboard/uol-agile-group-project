@@ -73,7 +73,11 @@
 																			</div>																																				
 																		</td>
 																		<td class="px-0">
-																			<a href="/module_leaderboard?module_id=<%= module.id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= module.id %></a>
+																			<% if(user) { %>
+																				<a href="/module_leaderboard?module_id=<%= module.id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= module.id %></a>
+																			<% } else { %>
+																				<a class="text-gray-800 fw-bolder fs-6"><%= module.id %></a>
+																				<% } %>
 																			<span class="text-muted fw-bold d-block mt-1"><%= module.title %></span>
 																		</td>
 																		<td class="text-end">
@@ -84,6 +88,7 @@
 																			<span class="text-primary fw-bolder d-block fs-6"><%= module.submissions %></span>
 																			<!-- <span class="text-muted fw-bold d-block mt-1 fs-7">Submissions</span> -->
 																		</td>
+																		<% if (user) {%>
 																		<td class="text-end pe-0">
 																			<a href="/module_leaderboard?module_id=<%= module.id %>"  class="btn btn-icon btn-bg-light btn-active-primary btn-sm">
 																				<!--begin::Svg Icon | path: '.svg/icons/Navigation/Arrow-right.svg.'-->
@@ -99,6 +104,7 @@
 																				<!--end::Svg Icon-->
 																			</a>
 																		</td>
+																		<% } %>
 																	</tr>
 																	<% }); %>
 																</tbody>
