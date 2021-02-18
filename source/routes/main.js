@@ -3,25 +3,7 @@ const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
 module.exports = function (app, passport) {
-	app.get("/", async (req, res) => {
-		try {
-			let sql =
-				"SELECT  m.id, m.title, m.grade, COUNT(g.course_id) AS 'submissions' \
-								FROM modules_with_grades m \
-								LEFT JOIN grades g \
-								ON g.course_id = m.id\
-								GROUP BY m.id\
-								ORDER BY id ASC";
-
-			var [results, _] = await db.query(sql);
-			res.render("_index.html", {
-				res: results,
-				title: "Home",
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	});
+	app.get("/", (req, res) => res.redirect("/home"));
 
 	app.get("/home", async (req, res) => {
 		try {
@@ -58,8 +40,8 @@ module.exports = function (app, passport) {
 				courseList: courses,
 				semesterList: semesters,
 				addResult: req.query.addResult,
-				title: "Add Grade", 
-				subtitle: "Add your grade"
+				title: "Add Grade",
+				subtitle: "Add your grade",
 			});
 		} catch (error) {
 			console.log(error);
@@ -149,7 +131,7 @@ module.exports = function (app, passport) {
 				editResult: req.query.editResult,
 				cumulativeGrade: cumulativeGrade,
 				completionRate: completionRate,
-				subtitle: grades_results.user
+				subtitle: grades_results.user,
 			});
 		} catch (error) {
 			console.log(error);
