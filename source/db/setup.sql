@@ -209,7 +209,11 @@ VALUES
 	('CM1035', '19|10', 'UGZRDUR1C', 86, 0),
 	('CM1040', '20|04', 'UGZRDUR1C', 68, 0),
 	('CM2005', '20|04', 'UGZRDUR1C', 98, 0),
-	('CM2040', '20|04', 'UGZRDUR1C', 93, 0);
+	('CM2040', '20|04', 'UGZRDUR1C', 93, 0),
+	('CM1005', '20|04', 'U00000007', 55, 1),
+	('CM1010', '20|04', 'U00000007', 60, 1),
+	('CM1015', '20|04', 'U00000007', 90, 0),
+	('CM1020', '20|04', 'U00000007', 84, 0);
 
 -- for test to check tie order is correct
 INSERT INTO
@@ -283,4 +287,10 @@ VALUES
 		'Alice',
 		'alice@something.com',
 		'https://st4.depositphotos.com/5575514/23597/v/600/depositphotos_235978748-stock-illustration-neutral-profile-picture.jpg'
+	),
+	(
+		'U00000007',
+		'Demo User',
+		'demoUser@gmail.com',
+		'https://ca.slack-edge.com/TDT1N1BUG-UJAPKQE48-g11e8085f726-512'
 	);

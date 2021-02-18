@@ -22,6 +22,9 @@
 							<!--end::Left-->
 							<!--begin::Right-->
 							<div class="d-flex align-items-center">
+								<% if (!user) {%>
+								<a href="/demo-login" class="btn btn-light-success btn-active-primary fw-bolder ms-3">Demo Sign-In</a>
+								<% } %>
 								<!--begin::Search-->
 								<!-- <button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" data-bs-toggle="modal" data-bs-target="#kt_header_search_modal"> -->
 									<!--begin::Svg Icon | path: '.svg/icons/General/Search.svg.'-->
