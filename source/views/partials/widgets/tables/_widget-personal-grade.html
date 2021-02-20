@@ -18,30 +18,31 @@
                     <table class="table table-borderless align-middle">
                         <thead>
                             <tr>
-                                <th class="p-0 w-50px"></th>
-                                <th class="p-0 min-w-150px fw-bolder">Module</th>
-                                <th class="p-0 min-w-70px text-end fw-bolder">Session</th>
-                                <th class="p-0 min-w-70px text-end fw-bolder"> Grade </th>
-                                <th class="p-0 min-w-50px text-end"></th>
+                                <!-- <th class="p-0 w-50px"></th> -->
+                                <th class="p-0 min-w-70px text-front fw-bolder text-inverse-light bg-light " >Session</th>
+                                <th class="p-0 min-w-100px fw-bolder text-inverse-light bg-light">Module</th>
+                                <th class="p-0 w-70px text-end fw-bolder text-inverse-light bg-light"> Grade </th>
+                                <th class="p-0 min-w-50px text-end text-inverse-light bg-light"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <% grades_res.forEach(function (grade) { %>																
                             <tr>
-                                <td class="px-0 py-3">
+                                <!-- <td class="px-0 py-3">
                                     <div class="symbol symbol-55px mt-1 me-5">
                                         <span class="symbol-label bg-light-primary align-items-end">
                                             <div class="symbol symbol-50px">
                                                 <div class="symbol-label fs-2 fw-bold text-success">L<%= grade.level %></div>
                                             </div>	
                                         </span>
+                                    </div>
+                                </td> -->
+                                <td class="text-front">
+                                    <span class="text-primary fw-bolder d-block fs-6"><%= grade.session %></span>
                                 </td>
                                 <td class="px-0">
                                     <a href="/module_leaderboard?module_id=<%= grade.course_id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= grade.course_id %></a>
                                     <span class="text-muted fw-bold d-block mt-1"><%=grade.title %></span>
-                                </td>
-                                <td class="text-end">
-                                    <span class="text-primary fw-bolder d-block fs-6"><%= grade.session %></span>
                                 </td>
                                 <td class="text-end">
                                     <span class="text-primary fw-bolder d-block fs-6"><%= grade.grade %></span>
@@ -72,25 +73,23 @@
                         <tfoot>
                             <tr>
 								<td></td>
-								<td></td>
-                                <td class="text-end" style="font-weight: bold;">
+                                <td class="text-front" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6">Cumulative Grade</span>
                                 </td>
                                 <td class="text-end" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"><%= cumulativeGrade %> </span>
                                 </td>
-								<td></td>
+                                <td></td>
 							</tr>
 							<tr>
 								<td></td>
-								<td></td>
-                                <td class="text-end" style="font-weight: bold;">
+                                <td class="text-front" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"> Completion Rate</span>
                                 </td>
                                 <td class="text-end" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"> <%= completionRate %>%</span>
                                 </td>
-								<td></td>
+                                <td></td>
 							</tr>
                         </tfoot>
                     </table>
