@@ -38,7 +38,7 @@
                                     </div>
                                 </td> -->
                                 <td class="text-front">
-                                    <span class="text-primary fw-bolder d-block fs-6"><%= grade.session %></span>
+                                    <span class="text-wmuted fw-bolder d-block fs-6"><%= grade.session %></span>
                                 </td>
                                 <td class="px-0">
                                     <a href="/module_leaderboard?module_id=<%= grade.course_id %>" class="text-gray-800 fw-bolder text-hover-primary fs-6"><%= grade.course_id %></a>
@@ -71,23 +71,23 @@
                             <% }); %>
                         </tbody>
                         <tfoot>
-                            <tr>
+                            <tr class="border-top border-gray-500">
 								<td></td>
-                                <td class="text-front" style="font-weight: bold;">
+                                <td class="px-0" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6">Cumulative Grade</span>
                                 </td>
                                 <td class="text-end" style="font-weight: bold;">
-                                    <span class="text-gray-900 fw-bolder d-block fs-6"><%= cumulativeGrade %> </span>
+                                    <span class="text-primary fw-bolder d-block fs-6"><%= cumulativeGrade %> </span>
                                 </td>
                                 <td></td>
 							</tr>
 							<tr>
 								<td></td>
-                                <td class="text-front" style="font-weight: bold;">
+                                <td class="px-0" style="font-weight: bold;">
                                     <span class="text-gray-900 fw-bolder d-block fs-6"> Completion Rate</span>
                                 </td>
                                 <td class="text-end" style="font-weight: bold;">
-                                    <span class="text-gray-900 fw-bolder d-block fs-6"> <%= completionRate %>%</span>
+                                    <span class="text-primary fw-bolder d-block fs-6"> <%= completionRate %>%</span>
                                 </td>
                                 <td></td>
 							</tr>
