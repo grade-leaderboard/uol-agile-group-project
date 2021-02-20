@@ -9,7 +9,17 @@ with their corresponding steps where they are tested:
 		- If module is in My grades: 'General Navigation': step 4 and 'Edit': step 2
 		- If module is not in My grades: 'General Navigation': step 6
  - From the homepage, does the user prefer Add Grade button in nav or Program Overview?
-   - 'Add': Step 1
+	- 'Add': Step 1
+ - Does the user get a good sense for how they compare to others?
+	- 'Status' Comparison: All steps
+
+## Context and Instructions
+Gradez is a website for University of London Students. The goal is to 
+give students a place to keep track of their grades and see how well
+they are doing compared to others.
+
+After completing the test and exploring the website further please fill
+complete the this survey: https://forms.gle/qXWbrAX1D7XsnGpS7
 
 ## Setup
 1. Read the welcome message
@@ -43,6 +53,12 @@ with their corresponding steps where they are tested:
 1. Having entered a grade for Algorithms and Data Structures I, change the session, grade, and privacy setting.
 2. Visit the leaderboard for Algorithms and Data Structures I to verify changes
 	- _How did they get there? Did they backtrack to homepage or did they realize there is a link in My grades?_
+
+## Status Comparison
+- _These should be difficult for the user to complete_
+1. Find the Demo User's rank out of all the students
+2. Find the Demo User's rank in CM2005 and CM1005
+3. Determine if the Demo User is doing better than average
 
 ## Sign out
 1. Sign-out
