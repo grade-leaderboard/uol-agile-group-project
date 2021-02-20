@@ -6,7 +6,7 @@ function checkAuth(req, res, next) {
 	} else {
 		// req.flash("warning", "You have to sign in before you can access this page");
 		// res.redirect("/");
-		res.render('pages/_login.html')
+		res.render('pages/login.html')
 	}
 }
 
