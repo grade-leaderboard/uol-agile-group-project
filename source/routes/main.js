@@ -118,7 +118,8 @@ module.exports = function (app, passport) {
 					ON study_sessions.id = grades.study_session_id \
 					JOIN courses \
 					ON courses.id = grades.course_id \
-					WHERE users.id = ? ";
+					WHERE users.id = ? \
+					ORDER by session_id";
 			let sessions_sql = "SELECT id, title FROM study_sessions";
 			var [grades_results, _] = await db.query(grades_sql, user);
 			var [sessions_results, _] = await db.query(sessions_sql);

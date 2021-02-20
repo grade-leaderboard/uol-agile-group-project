@@ -41,6 +41,24 @@ app.use(flash());
 require("./routes/main")(app, passport);
 require("./config/passport")(passport);
 
+app.use(function(req, res, next){
+	res.status(404);
+  
+	// respond with html page
+	if (req.accepts('html')) {
+	  res.render('pages/error.html', { url: escape(req.url) });
+	  return;
+	}
+  
+	// respond with json
+	if (req.accepts('json')) {
+	  res.send({ error: 'Not found' });
+	  return;
+	}
+  
+	// default to plain-text. send()
+	res.type('txt').send('Not found');
+  });
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
