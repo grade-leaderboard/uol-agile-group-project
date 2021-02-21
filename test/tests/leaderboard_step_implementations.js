@@ -49,7 +49,7 @@ step("Change device to iPhone X landscape", async () => {
 });
 
 step("Open default app webpage", async () => {
-    await goto("127.0.0.1:8080");
+    await goto("localhost:8080");
 });
 
 step("Go to homepage", async () => {
@@ -66,6 +66,10 @@ step("Open addgrade page", async () => {
 
 step("Click <text>", async (text) => {
     await click(text)
+});
+
+step("Click button <text>", async (text) => {
+    await click(button(text))
 });
 
 step("Open rankings page for <module>", async function(module) {
@@ -145,6 +149,10 @@ step("Enter Slack email and password and continue", async () => {
     await press(['Tab']);
     await write(process.env.SLACK_PASSWORD);
     await click('Sign in');
+});
+
+step("Refresh the page", async () => {
+    await reload();
 });
 
 step("Validate user is logged in", async () => {
