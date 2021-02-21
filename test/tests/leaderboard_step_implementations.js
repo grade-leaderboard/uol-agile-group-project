@@ -32,7 +32,7 @@ const assert = require("assert");
 
 beforeSuite(async () => {
     await openBrowser(
-        {headless: true}
+        {headless: false}
     )
 });
 
@@ -180,12 +180,14 @@ step("Select <dropDownName> <selection>", async (dropDownName, selection) => {
 })
 
 step("Check for user avatar on navbar", async () => {
+    // await highlight(image('user avatar'))
     await image('user avatar').exists()
 })
 
-step("Check for user avatar in leaderboard", async () => {
-    await highlight(image('user avatar', below('Name')))
-    await image('user avatar', below('Name')).exists()
+step("Check for user avatar in <module> leaderboard", async (module) => {
+    // await highlight(image('user avatar', toLeftOf('Name')))
+    await image('user avatar', {below: module, exactMatch: true}).exists(50000, 100)
+    // await image('user avatar', toLeftOf('Name')).exists()
 })
 
 step("Check for <checkText>", async (checkText) => {
