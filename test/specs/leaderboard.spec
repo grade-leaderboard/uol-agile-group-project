@@ -57,3 +57,10 @@ Remember to reset the database prior to the tests
 * Check for "All is good! Please confirm the grade changes"
 * Click button "Yes"
 * Validate personal grade in "CM2030" "Agile Software Projects" in "April 2020" with grade "75"
+
+## Confirm tied grades are sorted by timestamp
+This relies on the database having two users with the same grade and different timestamps.
+Please refer to db to know which user should come before the other.
+* Open default app webpage
+* Click link "CM3070"
+* "Alice" is above "Bob"

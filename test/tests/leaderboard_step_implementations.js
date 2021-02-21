@@ -72,6 +72,10 @@ step("Click button <text>", async (text) => {
     await click(button(text))
 });
 
+step("Click link <text>", async (text) => {
+    await click(link(text))
+});
+
 step("Open rankings page for <module>", async function(module) {
     await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
 });
