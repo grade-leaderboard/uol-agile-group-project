@@ -49,36 +49,24 @@ step("Change device to iPhone X landscape", async () => {
 });
 
 step("Open default app webpage", async () => {
-    await goto("127.0.0.1:8080");
-});
-
-step("Go to homepage", async () => {
-    await click("Gradez")
-});
-
-step("Open personal grades page", async () => {
-    await click("My grade")
-});
-
-step("Open addgrade page", async () => {
-    await click("Add grade")
+    await goto("localhost:8080");
 });
 
 step("Click <text>", async (text) => {
+    await highlight(text)
     await click(text)
 });
 
-step("Open rankings page for <module>", async function(module) {
-    await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
+step("Click button <text>", async (text) => {
+    await highlight(button(text))
+    await click(button(text))
 });
 
-step("Press arrowdown", async () => {
-    await press(['ArrowDown']);
+step("Click link <text>", async (text) => {
+    await highlight(link(text))
+    await click(link(text))
 });
 
-step("Press enter", async () => {
-    await press(['Enter']);
-});
 
 step("Write <text>", async function(text) {
     await write(text);
@@ -89,28 +77,8 @@ step("Enter a grade of <grade>", async function(grade) {
     await write(grade,into(textBox({name:'grade'})))
 });
 
-step("Check for success message", async () => {
-    await assert.ok(await text('successful', {exactMatch: false}).exists());
-});
-
-step("Check for you already have a grade message", async () => {
-    await assert.ok(await text('You already have a grade for module', {exactMatch: false}).exists());
-});
-
-step("Click submit anonymously button", async () => {
-    await click('Do not reveal my identity in leaderboard. Keep this grade anonymous.')
-});
-
 step("Take a screenshot", async () => {
     await screenshot({path: `screenshot-${process.hrtime.bigint()}.png`});
-});
-
-step("Click session <session>", async function(session) {
-    await click(session)
-});
-
-step("Click module <module>", async function(module) {
-    await click(module)
 });
 
 step("Validate personal grade in <courseid> <module> in <session> with grade <grade>", async function(courseid, module, session, grade) {
@@ -163,19 +131,73 @@ step("Click edit for <moduleName>", async (moduleName) => {
     await click("edit", toRightOf(moduleName))
 })
 
+
 step("Select <dropDownName> <selection>", async (dropDownName, selection) => {
     await dropDown(below(dropDownName)).select(selection)
 })
 
 step("Check for user avatar on navbar", async () => {
+    // await highlight(image('user avatar'))
     await image('user avatar').exists()
 })
 
-step("Check for user avatar in leaderboard", async () => {
-    await highlight(image('user avatar', below('Name')))
-    await image('user avatar', below('Name')).exists()
+step("Check for user avatar in <module> leaderboard", async (module) => {
+    // await highlight(image('user avatar', toLeftOf('Name')))
+    await image('user avatar', {below: module, exactMatch: true}).exists(50000, 100)
+    // await image('user avatar', toLeftOf('Name')).exists()
 })
 
 step("Check for <checkText>", async (checkText) => {
     await assert.ok(await text(checkText).exists());
 })
+
+
+/* Unused steps - archive */
+
+/*
+
+step("Go to homepage", async () => {
+    await click("Gradez")
+});
+
+step("Open personal grades page", async () => {
+    await click("My grade")
+});
+
+step("Open addgrade page", async () => {
+    await click("Add grade")
+});
+
+step("Open rankings page for <module>", async function(module) {
+    await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
+});
+
+step("Press arrowdown", async () => {
+    await press(['ArrowDown']);
+});
+
+step("Press enter", async () => {
+    await press(['Enter']);
+});
+
+step("Check for success message", async () => {
+    await assert.ok(await text('successful', {exactMatch: false}).exists());
+});
+
+step("Check for you already have a grade message", async () => {
+    await assert.ok(await text('You already have a grade for module', {exactMatch: false}).exists());
+});
+
+step("Click submit anonymously button", async () => {
+    await click('Do not reveal my identity in leaderboard. Keep this grade anonymous.')
+});
+
+step("Click session <session>", async function(session) {
+    await click(session)
+});
+
+step("Click module <module>", async function(module) {
+    await click(module)
+});
+
+*/
