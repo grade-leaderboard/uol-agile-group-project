@@ -290,7 +290,7 @@ VALUES
 	),
 	(
 		'U00000007',
-		'Demo User',
-		'demoUser@gmail.com',
-		'https://ca.slack-edge.com/TDT1N1BUG-UJAPKQE48-g11e8085f726-512'
+		'Jane Doe',
+		'janeDoe@gmail.com',
+		'/assets/media/avatars/150-8.jpg'
 	);
