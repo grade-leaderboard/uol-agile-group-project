@@ -28,15 +28,6 @@
                         <tbody>
                             <% grades_res.forEach(function (grade) { %>																
                             <tr>
-                                <!-- <td class="px-0 py-3">
-                                    <div class="symbol symbol-55px mt-1 me-5">
-                                        <span class="symbol-label bg-light-primary align-items-end">
-                                            <div class="symbol symbol-50px">
-                                                <div class="symbol-label fs-2 fw-bold text-success">L<%= grade.level %></div>
-                                            </div>	
-                                        </span>
-                                    </div>
-                                </td> -->
                                 <td class="text-front">
                                     <span class="text-wmuted fw-bolder d-block fs-6"><%= grade.session %></span>
                                 </td>
@@ -47,10 +38,6 @@
                                 <td class="text-end">
                                     <span class="text-primary fw-bolder d-block fs-6"><%= grade.grade %></span>
                                 </td>
-                                <!-- <td class="text-end"> -->
-                                    <!-- <span class="text-primary fw-bolder d-block fs-6"><%= grade.submissions %></span>
-                                    <span class="text-muted fw-bold d-block mt-1 fs-7">Submissions</span> -->
-                                <!-- </td> -->
                                 <!-- Edit button -->
                                 <td class="text-end pe-0">
                                     <a href="#" class="btn btn-icon btn-bg-light btn-active-primary btn-sm" 
