@@ -64,22 +64,6 @@ module.exports = function (app, passport) {
 		}
 	});
 
-	app.post("/addgrade", checkAuth, checkPermission, async (req, res) => {
-		try {
-			let params = [req.body.course_id, req.body.semester, req.user.id, req.body.grade, !!req.body.anonymous];
-			let sql = `
-			INSERT INTO grades(course_id, study_session_id, user_id, grade, anonymous)
-			VALUES (?, ?, ?, ?, ?)`;
-			var [results, _] = await db.query(sql, params);
-			res.redirect(req.baseUrl + "?addResult=success");
-		} catch (error) {
-			console.log(error);
-			if (error.code == "ER_DUP_ENTRY") {
-				res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
-			}
-		}
-	});
-
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			id = [req.query.module_id];
@@ -148,23 +132,6 @@ module.exports = function (app, passport) {
 					WHERE id = ?";
 			var anonymous = req.body.anonymous == "true" ? 1 : 0;
 			var fields = [req.body.semester, req.body.grade, anonymous, req.body.grade_id];
-			var [results, _] = await db.query(sql, fields);
-			res.redirect("/personal_grade" + "?editResult=success");
-		} catch (error) {
-			console.log(error);
-			res.redirect("/personal_grade" + "?editResult=Grade was not edited. Something went wrong.");
-		}
-	});
-
-	app.post("/edit_grades", checkAuth, checkPermission, async (req, res) => {
-		try {
-			let sql = "UPDATE grades \
-					SET study_session_id = ?, \
-					grade = ?, \
-					anonymous = ? \
-					WHERE id = ?";
-			var anonymous = req.body.anonymous == "true" ? 1 : 0;
-			var fields = [req.body.session, req.body.grade, anonymous, req.body.grade_id];
 			var [results, _] = await db.query(sql, fields);
 			res.redirect("/personal_grade" + "?editResult=success");
 		} catch (error) {
