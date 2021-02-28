@@ -114,12 +114,19 @@ Our timeline plan is shown in \cref{fig:gantt} illustrating the cycle-based appr
     \label{fig:gantt}
 \end{figure}
 
-\subsubsection{Milestones and Plan Updates} \label{sec:milestones_updates}
+\subsubsection{[BRAD] Milestones and Plan Updates} \label{sec:milestones_updates}
 The main update to our working approach after starting the project was that we switched from two-week sprints to one-week sprints to ensure closer control and ensure delivery by the deadline, given the comparatively short project timeline. We decided to plan our sprints accordingly.
 
 [BRAD] Can you create some kind of update to the Gantt chart?
 
 \subsection{Team Roles}\label{sec:roles}
+
+We used SCRUM as a methodology to assign basic team roles to work in an agile manner. The key roles involved a product owner, a scrum master, individual contributors and a QA lead.
+
+In addition, all team members took on the role of representing personas for testing pursposes to ensure that we were not developing for ourselves, but rather for our users.
+
+[ARJUN] map roles to people
+
 Within the team, we split our roles as follows:
 \textbf{Aleksandar}  led definition of the technical architecture and software approach, and also led the implementation of user feedback specifically around the visual design.
 \textbf{Brad}  led development of all tests, including the implementation of automated testing, and also contributed with developing parts of the application.
@@ -743,7 +750,7 @@ Based on the survey results and research to date, we have identified initial epi
 
 As part of development, we will prioritize these epics and likely deliver on a subset of them in the initial release.
 
-\subsection{Justification of Design Decisions}\label{sec:justif}
+\subsection{[ARJUN] Justification of Design Decisions}\label{sec:justif}
 
 
 \section{Testing}\label{sec:testing}
@@ -778,7 +785,7 @@ In order to actually identify users that match these personas, we are including 
 \subsubsection{Results}
 
 \subsection{Summative Testing}\label{sec:summative}
-\subsubsection{Automated acceptance testing}\label{sec:autotest}
+\subsubsection{[BRAD] Automated acceptance testing}\label{sec:autotest}
 
 \subsubsection{User Feedback}
 
@@ -793,10 +800,12 @@ We tested the first iteration of the application with four real-world student us
 
 A number of smaller usability issues were also mentioned, which we considered as scope for the next iteration. We decided to capture all feedback items and prioritize them by impact and effort for further development.
 
-\subsection{Error Handling}
+\subsection{[ARJUN] Error Handling}
 We have implemented two kinds of error handling in this MVP version of the application. The first is on a technical level, where we have used \texttt{try-catch} blocks in the code, as shown in \cref{lis:trycatch}. This block ensures that a user cannot add a duplicate record to the grades database, and provides a useful error message back to the user. This approach is used throughout the application on all routes.
 
-The second, more user-facing approach is that these error messages are displayed using useful error alert boxes. Based on \cite{mckay_2013}, we ensured that the button labels are action-oriented and the errors clearly indicate what happened, and what the user can do next.
+The UI prevents users from entering a duplicate grade by not offering modules that already have submitted grades. However, we have added an additional layer of error-handling and used the \texttt{try-catch} block to provide a useful error message - in case a user does somehow manage to submit a duplicate grade. Based on \cite{mckay_2013}, we ensured that the button labels are action-oriented and the errors clearly indicate what happened, and what the user can do next.
+
+[ARJUN] screenshot for form UI and alert message
 
 \begin{listing}[H]
 	\caption{Using try-catch blocks for error handling}
@@ -813,7 +822,7 @@ app.post("/addgrade", checkAuth, checkPermission, async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		if (error.code == "ER_DUP_ENTRY") {
-			res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
+			res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit an existing grade`);
 		}
 	}
 });
@@ -844,43 +853,7 @@ The application uses a file structure as shown in \cref{lis:files}, following a 
 	\caption{}
 	\label{lis:files}
 	\begin{minted}{text}
-		.
-├── config
-├── db
-├── middlewares
-├── public
-│   ├── assets
-│   │   ├── css
-│   │   ├── js
-│   │   │   └── custom
-│   │   ├── media
-│   │   │   ├── avatars
-│   │   │   ├── logos
-│   │   │   ├── misc
-│   │   │   ├── plugins
-│   │   │   ├── products
-│   │   │   ├── stock
-│   │   │   └── svg
-│   │   └── plugins
-│   │       ├── custom
-│   │       └── global
-│   └── style
-├── routes
-└── views
-    ├── layout
-    │   └── content
-    ├── pages
-    └── partials
-        ├── content
-        │   └── dropdown
-        ├── layout
-        ├── modals
-        └── widgets
-            ├── engage
-            ├── info
-            ├── lists
-            ├── stats
-            └── tables
+TREE
 	\end{minted}
 \end{listing}
 
@@ -1020,6 +993,10 @@ As noted, we set ourselves targets for the initial launch as well as longer-term
 
 
 \subsection{User Safety \& Security}\label{sec:access}
+
+
+\section{Individual Reflection}
+
 
 \newpage
 \bibliographystyle{IEEEtran}
