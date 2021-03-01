@@ -2,25 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<!--begin::Head-->
-	<head><base href="">
-		<meta charset="utf-8" />
-		<title>Gradez | Sign-in</title>
-		<meta name="description" content="Check out all the features of the Start admin panel. A large number of templates, components and widgets." />
-		<meta name="keywords" content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template" />
-		<link rel="canonical" href="Https://preview.keenthemes.com/start" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="assets/media/logos/favicon.svg" />
-		<link rel="alternate icon" type="image/png" href="assets/media/logos/favicon.png">
-		<link rel=”mask-icon” href=”assets/media/logos/mask-icon.svg” color="#20D489">
-		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<!--end::Fonts-->
-		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Global Stylesheets Bundle-->
-		
-	</head>
+	<%- include('../partials/head.html', {title: "Sign-in"})%>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" data-sidebar="on" class="bg-white header-fixed header-tablet-and-mobile-fixed toolbar-enabled sidebar-enabled">
@@ -160,8 +142,7 @@
 		<!--end::Main-->
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
+		<%- include('../partials/jsbundle.html')%>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<!--end::Page Custom Javascript-->
