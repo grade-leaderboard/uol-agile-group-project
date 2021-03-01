@@ -3,9 +3,9 @@ const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
 module.exports = function (app, passport) {
-	app.get("/", (req, res) => res.redirect("/home"));
+	app.get("/", (req, res) => res.redirect("/program-dashboard"));
 
-	app.get("/home", async (req, res) => {
+	app.get("/program-dashboard", async (req, res) => {
 		try {
 			let sql =
 				"SELECT  m.id, m.title, m.grade, m.level, COUNT(g.course_id) AS 'submissions' \
@@ -16,9 +16,9 @@ module.exports = function (app, passport) {
 								ORDER BY id ASC";
 
 			var [results, _] = await db.query(sql);
-			res.render("pages/home.html", {
+			res.render("pages/program-dashboard.html", {
 				res: results,
-				title: "Home",
+				title: "Program Dashboard",
 				subtitle: "Welcome to Gradez",
 			});
 		} catch (error) {
@@ -183,7 +183,7 @@ module.exports = function (app, passport) {
 			req.session.passport = { user: req.user.id };
 			req.session.save(function (err) {});
 
-			res.redirect("/home");
+			res.redirect("/program-dashboard");
 		} catch (error) {
 			console.log(error);
 		}
@@ -203,7 +203,7 @@ module.exports = function (app, passport) {
 			try {
 				// Set cookie age to 7 days
 				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
-				res.redirect("/home");
+				res.redirect("/program-dashboard");
 			} catch (error) {
 				console.log(error);
 			}
