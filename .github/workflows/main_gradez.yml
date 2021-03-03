@@ -1,36 +1,35 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - gradez
+name: Build and deploy container app to Azure Web App - gradez
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
 
     steps:
     - uses: actions/checkout@master
 
-    - name: Set up Node.js version
-      uses: actions/setup-node@v1
+    - uses: azure/docker-login@v1
       with:
-        node-version: '14.x'
+        login-server: https://index.docker.io/v1/
+        username: ${{ secrets.AzureAppService_ContainerUsername_c00f389cb4b34998b30906a33c19bf0a }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_432115e09acf4f219a9254609e240210 }}
 
-    - name: npm install, build, and test
-      run: |
-        cd source
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+    - run: |
+        docker build . -t index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c00f389cb4b34998b30906a33c19bf0a }}/acamilosevic/gradez-alpine:${{ github.sha }}
+        docker push index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c00f389cb4b34998b30906a33c19bf0a }}/acamilosevic/gradez-alpine:${{ github.sha }}
 
-    - name: 'Deploy to Azure Web App'
+    - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'gradez'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_17351f01280a44469c518f671917ac4c }}
-        package: .
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6b0e523bf1be4889a7c01a707d62c4db }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c00f389cb4b34998b30906a33c19bf0a }}/acamilosevic/gradez-alpine:${{ github.sha }}'
