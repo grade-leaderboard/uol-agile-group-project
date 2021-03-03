@@ -23,6 +23,7 @@ jobs:
         password: ${{ secrets.CONTAINERPASSWORD }}
 
     - run: |
+        cd source
         docker build . -t index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ github.sha }}
         docker push index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ github.sha }}
 
