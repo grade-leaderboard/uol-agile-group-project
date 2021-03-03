@@ -4,9 +4,8 @@
 name: Build and deploy container app to Azure Web App - gradez
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
