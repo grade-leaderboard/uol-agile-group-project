@@ -21,10 +21,14 @@ jobs:
         username: ${{ secrets.CONTAINERUSERNAME }}
         password: ${{ secrets.CONTAINERPASSWORD }}
 
+    - name: Get the version label
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+  
     - run: |
         cd source
-        docker build . -t index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ github.sha }}
-        docker push index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ github.sha }}
+        docker build . -t index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}
+        docker push index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -32,4 +36,4 @@ jobs:
         app-name: 'gradez'
         slot-name: 'production'
         publish-profile: ${{ secrets.PUBLISHPROFILE }}
-        images: 'index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}'
