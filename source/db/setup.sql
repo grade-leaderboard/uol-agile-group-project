@@ -18,57 +18,60 @@ DROP VIEW IF EXISTS modules_with_grades;
 
 DROP VIEW IF EXISTS ranked_grades;
 
+DROP VIEW IF EXISTS user_grade_stats;
+
+DROP VIEW IF EXISTS overall_grade_stats;
+
+DROP VIEW IF EXISTS average_grade_stats;
+
+DROP VIEW IF EXISTS top_grade_stats;
+
+DROP VIEW IF EXISTS user_rank;
+
+DROP VIEW IF EXISTS program_kpis;
+
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
 	`title` VARCHAR(100),
 	`level` SMALLINT,
+	`credits` SMALLINT,
+	`weight` SMALLINT,
 	PRIMARY KEY (`id`)
 );
 
 INSERT INTO
-	courses(id, title, level)
+	courses(id, title, level, credits, weight)
 VALUES
-	('CM1005', 'Introduction to Programming I', 4),
-	('CM1010', 'Introduction to Programming II', 4),
-	('CM1015', 'Numerical Mathematics', 4),
-	('CM1020', 'Discrete Mathematics', 4),
-	('CM1025', 'Fundamentals of Computer Science', 4),
-	('CM1030', 'How Computers Work', 4),
-	('CM1035', 'Algorithms and Data Structures I', 4),
-	('CM1040', 'Web Development', 4),
-	('CM2005', 'Object Oriented Programming', 5),
-	('CM2010', 'Software Design and Development', 5),
-	('CM2015', 'Programming with Data', 5),
-	('CM2020', 'Agile Software Projects', 5),
-	('CM2025', 'Computer Security', 5),
-	('CM2030', 'Graphics Programming', 5),
-	('CM2035', 'Algorithms and Data Structures II', 5),
-	('CM2040', 'Databases, Networks and the Web', 5),
-	('CM3005', 'Data Science', 6),
-	(
-		'CM3010',
-		'Databases and Advanced Data Techniques',
-		6
-	),
-	(
-		'CM3015',
-		'Machine Learning and Neural Networks',
-		6
-	),
-	('CM3020', 'Artificial Intelligence', 6),
-	('CM3025', 'Virtual Reality', 6),
-	('CM3030', 'Games Development', 6),
-	('CM3035', 'Advanced Web Development', 6),
-	(
-		'CM3040',
-		'Physical Computing and Internet of Things',
-		6
-	),
-	('CM3045', '3D Graphics and Animation', 6),
-	('CM3050', 'Mobile Development', 6),
-	('CM3055', 'Interaction Design', 6),
-	('CM3060', 'Natural Language Processing', 6),
-	('CM3070', 'Final Project', 6);
+	('CM1005', 'Introduction to Programming I', 4, 15, 1),
+	('CM1010', 'Introduction to Programming II', 4, 15, 1),
+	('CM1015', 'Numerical Mathematics', 4, 15, 1),
+	('CM1020', 'Discrete Mathematics', 4, 15, 1),
+	('CM1025', 'Fundamentals of Computer Science', 4, 15, 1),
+	('CM1030', 'How Computers Work', 4, 15, 1),
+	('CM1035', 'Algorithms and Data Structures I', 4, 15, 1),
+	('CM1040', 'Web Development', 4, 15, 1),
+	('CM2005', 'Object Oriented Programming', 5, 15, 3),
+	('CM2010', 'Software Design and Development', 5, 15, 3),
+	('CM2015', 'Programming with Data', 5, 15, 3),
+	('CM2020', 'Agile Software Projects', 5, 15, 3),
+	('CM2025', 'Computer Security', 5, 15, 3),
+	('CM2030', 'Graphics Programming', 5, 15, 3),
+	('CM2035', 'Algorithms and Data Structures II', 5, 15, 3),
+	('CM2040', 'Databases, Networks and the Web', 5, 15, 3),
+	('CM3005', 'Data Science', 6, 15, 5),
+	('CM3010', 'Databases and Advanced Data Techniques', 6, 15, 5),
+	('CM3015', 'Machine Learning and Neural Networks', 6, 15, 5),
+	('CM3020', 'Artificial Intelligence', 6, 15, 5),
+	('CM3025', 'Virtual Reality', 6, 15, 5),
+	('CM3030', 'Games Development', 6, 15, 5),
+	('CM3035', 'Advanced Web Development', 6, 15, 5),
+	('CM3040', 'Physical Computing and Internet of Things', 6, 15, 5),
+	('CM3045', '3D Graphics and Animation', 6, 15, 5),
+	('CM3050', 'Mobile Development', 6, 30, 5),
+	('CM3055', 'Interaction Design', 6, 15, 5),
+	('CM3060', 'Natural Language Processing', 6, 15, 5),
+	('CM3070', 'Final Project', 6, 30, 5);
+
 
 CREATE TABLE `users` (
 	`id` VARCHAR(9),
@@ -118,39 +121,6 @@ CREATE TABLE `sessions` (
 PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE VIEW modules_with_grades AS
-SELECT
-	course_id id,
-	courses.title title,
-    courses.level level,
-	ROUND(AVG(grade), 0) grade
-FROM
-	grades
-	JOIN courses ON course_id = courses.id
-GROUP BY
-	course_id;
-
-CREATE VIEW ranked_grades AS
-SELECT
-	name,
-	grade,
-	course_id,
-	anonymous,
-	created_at,
-	avatar_url,
-	RANK() OVER (
-		PARTITION BY course_id
-		ORDER BY
-			course_id ASC,
-			grade DESC
-	) AS "ranking"
-FROM
-	grades
-	JOIN users ON grades.user_id = users.id
-ORDER BY
-	course_id ASC,
-	ranking ASC,
-	created_at ASC;
 
 INSERT INTO
 	grades(
@@ -277,20 +247,130 @@ VALUES
 		'https://ca.slack-edge.com/TDT1N1BUG-UH047P2KA-59cb020788e1-512'
 	),
 	(
-		'U00000005',
-		'Bob',
-		'bob@something.com',
-		'https://st4.depositphotos.com/5575514/23597/v/600/depositphotos_235978748-stock-illustration-neutral-profile-picture.jpg'
-	),
-	(
-		'U00000006',
-		'Alice',
-		'alice@something.com',
-		'https://st4.depositphotos.com/5575514/23597/v/600/depositphotos_235978748-stock-illustration-neutral-profile-picture.jpg'
-	),
-	(
 		'U00000007',
 		'Jane Doe',
 		'janeDoe@gmail.com',
 		'/assets/media/avatars/150-8.jpg'
 	);
+
+/* VIEWS */
+
+CREATE VIEW modules_with_grades AS
+SELECT
+    grades_leaderboard.grades.course_id AS id,
+    grades_leaderboard.courses.title AS title,
+    grades_leaderboard.courses.level AS level,
+    ROUND(AVG(grades_leaderboard.grades.grade), 0) AS grade
+FROM
+    grades_leaderboard.grades JOIN 
+    grades_leaderboard.courses 
+     ON grades_leaderboard.grades.course_id = grades_leaderboard.courses.id
+GROUP BY
+    grades_leaderboard.grades.course_id;
+
+CREATE VIEW ranked_grades AS
+SELECT
+    grades_leaderboard.users.name AS name,
+    grades_leaderboard.grades.grade AS grade,
+    grades_leaderboard.grades.course_id AS course_id,
+    grades_leaderboard.grades.anonymous AS anonymous,
+    grades_leaderboard.grades.created_at AS created_at,
+    grades_leaderboard.users.avatar_url AS avatar_url,
+    rank() OVER (
+        PARTITION BY grades_leaderboard.grades.course_id
+        ORDER BY
+            grades_leaderboard.grades.course_id,
+            grades_leaderboard.grades.grade desc
+    ) AS ranking
+FROM
+    grades_leaderboard.grades JOIN 
+    grades_leaderboard.users 
+    ON grades_leaderboard.grades.user_id = grades_leaderboard.users.id
+ORDER BY
+    grades_leaderboard.grades.course_id,
+    ranking,
+    grades_leaderboard.grades.created_at;
+
+CREATE VIEW user_grade_stats AS
+SELECT
+    g.user_id AS user_id,
+    SUM(c.credits) AS total_credits,
+    ROUND((SUM(c.credits) / 3.6), 1) AS progress,
+    COUNT(g.grade) AS total_grades,
+    ROUND(
+        (
+            SUM((g.grade * c.weight)) / SUM(c.weight)
+        ),
+        1
+    ) AS weighted_grade,
+    ROUND(AVG(g.grade), 1) AS average_grade
+FROM
+    grades_leaderboard.grades g JOIN 
+    grades_leaderboard.courses c 
+    ON g.course_id = c.id
+GROUP BY
+    g.user_id
+ORDER BY
+    weighted_grade desc;
+
+CREATE VIEW average_grade_stats AS
+SELECT
+    'average' AS average,
+    ROUND(AVG(user_grade_stats.total_credits), 1) AS avg_total_credits,
+    ROUND(AVG(user_grade_stats.progress), 1) AS avg_progress,
+    ROUND(AVG(user_grade_stats.total_grades), 1) AS avg_total_grades,
+    ROUND(AVG(user_grade_stats.weighted_grade), 1) AS avg_weighted_grade,
+    ROUND(AVG(user_grade_stats.average_grade), 1) AS avg_grade
+FROM
+    grades_leaderboard.user_grade_stats
+WHERE
+    grades_leaderboard.user_grade_stats.user_id NOT LIKE 'U0000000%';
+
+CREATE VIEW top_grade_stats AS
+SELECT
+    'top' AS top,
+    ROUND(MAX(user_grade_stats.total_credits), 1) AS top_total_credits,
+    ROUND(MAX(user_grade_stats.progress), 1) AS top_progress,
+    ROUND(MAX(user_grade_stats.total_grades), 1) AS top_total_grades,
+    ROUND(MAX(user_grade_stats.weighted_grade), 1) AS top_weighted_grade,
+    ROUND(MAX(user_grade_stats.average_grade), 1) AS top_average_grade
+FROM
+    grades_leaderboard.user_grade_stats
+WHERE
+    grades_leaderboard.user_grade_stats.user_id NOT LIKE 'U0000000%';
+
+CREATE VIEW user_rank AS
+SELECT
+    user_grade_stats.user_id AS user_id,
+    ROUND(
+        (
+            percent_rank() OVER (
+                ORDER BY
+                    user_grade_stats.weighted_grade
+            ) * 100
+        ),
+        2
+    ) AS percentile_rank,
+    dense_rank() OVER (
+        ORDER BY
+            user_grade_stats.weighted_grade desc
+    ) AS order_rank
+FROM
+    grades_leaderboard.user_grade_stats;
+
+CREATE VIEW program_kpis AS
+SELECT
+    'grades' AS kpi,
+    COUNT(0) AS val
+FROM
+    grades_leaderboard.grades
+WHERE
+    grades_leaderboard.grades.user_id NOT LIKE 'U0000000%'
+UNION ALL
+SELECT
+    'users' AS kpi,
+    COUNT(0) AS val
+FROM
+    grades_leaderboard.users
+WHERE
+    grades_leaderboard.users.id NOT LIKE 'U0000000%'

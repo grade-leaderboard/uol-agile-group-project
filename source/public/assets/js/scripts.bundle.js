@@ -5639,7 +5639,7 @@ var KTLayoutSidebar = function() {
         }
 
         var options = {
-            series: [46],
+            series: [userProgress],
             chart: {
                 fontFamily: 'inherit',
                 height: height,
@@ -5670,7 +5670,7 @@ var KTLayoutSidebar = function() {
                     },
                     track: {
                         // background: '#00A3FF',
-                        background: '#4F0CA4',
+                        background: '#440c8a',//'#4F0CA4',
                         strokeWidth: '100%'
                     }
                 }
