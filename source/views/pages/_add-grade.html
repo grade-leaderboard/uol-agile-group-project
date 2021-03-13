@@ -6,7 +6,7 @@
 		<div class="stepper stepper-1 d-flex flex-column flex-xl-row flex-row-fluid" id="kt_stepper">
 			<!--begin::Aside-->
 			<div
-				class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
+				class="d-none d-xl-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px">
 				<!--begin::Nav-->
 				<div class="stepper-nav d-flex flex-column py-15">
 					<!--begin::Step 1-->
@@ -195,16 +195,11 @@
 									<!--end::Form Group-->
 									<div class="form-check form-switch form-check-custom form-check-solid ms-3">
 										<input class="form-check-input h-30px w-50px" type="checkbox" value="false" id="anonymous" name="anonymous"/>
-										<label class="form-check-label fs-6 form-label fw-bolder text-dark" for="anonymous">Keep this grade private
+										<label class="form-check-label fs-6 form-label fw-bolder text-dark" for="anonymous">Hide my name from the leaderboard for this grade
 										</label>
+									<%- include('../partials/widgets/info/_widget-anonymity-info.html')%>
 									</div>									
-									<!-- <div class="">
-										<label class="fs-6 form-label fw-bolder text-dark">City</label>
-										<input type="text" class="form-control form-control-lg form-control-solid"
-											name="city" placeholder="" value="Melbourne" />
-									</div> -->
 									<!--begin::Form Group-->
-								<!-- </div> -->
 							</div>
 							<!--begin::Row-->
 						</div>

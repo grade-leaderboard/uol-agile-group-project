@@ -3,9 +3,9 @@ const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
 module.exports = function (app, passport) {
-	app.get("/", (req, res) => res.redirect("/home"));
+	app.get("/", (req, res) => res.redirect("/program-dashboard"));
 
-	app.get("/home", async (req, res) => {
+	app.get("/program-dashboard", async (req, res) => {
 		try {
 			let sql =
 				"SELECT  m.id, m.title, m.grade, m.level, COUNT(g.course_id) AS 'submissions' \
@@ -16,10 +16,12 @@ module.exports = function (app, passport) {
 								ORDER BY id ASC";
 
 			var [results, _] = await db.query(sql);
-			res.render("pages/home.html", {
+			res.render("pages/program-dashboard.html", {
 				res: results,
-				title: "Home",
+				title: "Program Dashboard",
 				subtitle: "Welcome to Gradez",
+				userStats: await userStats(req.user ? req.user.id : null),
+				programStats: await programStats()
 			});
 		} catch (error) {
 			console.log(error);
@@ -42,6 +44,8 @@ module.exports = function (app, passport) {
 				addResult: req.query.addResult,
 				title: "Add Grade",
 				subtitle: "Add your grade",
+				userStats: await userStats(req.user ? req.user.id : null),
+				programStats: await programStats()				
 			});
 		} catch (error) {
 			console.log(error);
@@ -99,6 +103,8 @@ module.exports = function (app, passport) {
 				course: { id: id, title: title },
 				title: `Leaderboard`,
 				subtitle: `${id} - ${title}`,
+				userStats: await userStats(req.user ? req.user.id : null),
+				programStats: await programStats()				
 			});
 		} catch (error) {
 			console.log(error);
@@ -133,6 +139,8 @@ module.exports = function (app, passport) {
 				cumulativeGrade: cumulativeGrade,
 				completionRate: completionRate,
 				subtitle: grades_results.user,
+				userStats: await userStats(req.user ? req.user.id : null),
+				programStats: await programStats()				
 			});
 		} catch (error) {
 			console.log(error);
@@ -183,7 +191,7 @@ module.exports = function (app, passport) {
 			req.session.passport = { user: req.user.id };
 			req.session.save(function (err) {});
 
-			res.redirect("/home");
+			res.redirect("/program-dashboard");
 		} catch (error) {
 			console.log(error);
 		}
@@ -203,7 +211,7 @@ module.exports = function (app, passport) {
 			try {
 				// Set cookie age to 7 days
 				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
-				res.redirect("/home");
+				res.redirect("/program-dashboard");
 			} catch (error) {
 				console.log(error);
 			}
@@ -241,6 +249,57 @@ module.exports = function (app, passport) {
 		}
 
 		return Math.round(sumOfWeightedGrades / sumOfWeights);
+	}
+
+	async function userStats(user) {
+		try {
+			if (user==null) return null;
+			let sql = `select * from user_grade_stats where user_id = ?`;
+			var [userStats, _] = await db.query(sql, [user]);
+		    sql = `select * from user_rank where user_id = ?`;
+			var [userRank, _] = await db.query(sql, [user]);			
+			stats = {
+				rank: userRank[0].order_rank,
+				percentile: userRank[0].percentile_rank,
+				credits: userStats[0].total_credits,
+				progress: userStats[0].progress,
+				grades: userStats[0].total_grades,
+				weightedGrade: userStats[0].weighted_grade,
+				averageGrade: userStats[0].average_grade
+			};
+			return stats;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async function programStats() {
+		try {
+			let sqlAvg = `select * from average_grade_stats`;
+			let sqlTop = `select * from top_grade_stats`;
+			let sqlKpi = `select * from program_kpis`;
+			var [avgStats, _] = await db.query(sqlAvg);
+			var [topStats, _] = await db.query(sqlTop);
+			var [kpiStats, _] = await db.query(sqlKpi);
+
+			stats = {
+				averageTotalCredits: avgStats[0].avg_total_credits,
+				averageProgress: avgStats[0].avg_progress,
+				averageTotalGrades: avgStats[0].avg_total_grades,
+				averageWeightedGrade: avgStats[0].avg_weighted_grade,
+				averageGrade: avgStats[0].avg_grade,
+				topTotalCredits: topStats[0].top_total_credits,
+				topProgress: topStats[0].top_progress,
+				topTotalGrades: topStats[0].top_total_grades,
+				topWeightedGrade: topStats[0].top_weighted_grade,
+				topAverageGrade: topStats[0].top_grade,
+				students: kpiStats[1].val,
+				grades: kpiStats[0].val				
+			};
+			return stats;
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	function calculateCompletionRate(grades) {

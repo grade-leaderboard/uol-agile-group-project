@@ -1,0 +1,39 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - gradez
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: https://index.docker.io/v1/
+        username: ${{ secrets.CONTAINERUSERNAME }}
+        password: ${{ secrets.CONTAINERPASSWORD }}
+
+    - name: Get the version label
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+  
+    - run: |
+        cd source
+        docker build . -t index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}
+        docker push index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'gradez'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.PUBLISHPROFILE }}
+        images: 'index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}'

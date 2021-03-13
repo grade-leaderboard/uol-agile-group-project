@@ -7,4 +7,5 @@ DB_DATABASE=db_name
 
 SLACK_CLIENT_ID = ID from api.slack.com/apps
 SLACK_CLIENT_SECRET = Secret from https://api.slack.com/apps
+SLACK_CALLBACK_URL=localhost:8080/auth/slack/callback
 SESSION_SECRET = some arbitrary string

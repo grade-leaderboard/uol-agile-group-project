@@ -34,10 +34,12 @@ module.exports = (passport) => {
 			{
 				clientID: process.env.SLACK_CLIENT_ID,
 				clientSecret: process.env.SLACK_CLIENT_SECRET,
+				callbackURL: process.env.SLACK_CALLBACK_URL,
+				
 				scope: ["identity.basic", "identity.email", "identity.avatar"],
 			},
-			// removing accessToken and refreshToken causes errors and
-			// authentication failure
+			// removing accessToken and refreshToken causes errors and 
+			// authentication failure  
 			async (accessToken, refreshToken, profile, done) => {
 				try {
 					// query db for user
