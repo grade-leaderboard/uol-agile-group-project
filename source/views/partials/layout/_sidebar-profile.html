@@ -1,3 +1,7 @@
+<script>
+    var userProgress = <%= userStats.progress %>;
+</script>
+<div class="corner-ribbon top-right sticky bg-primary fw-bolder text-white fs-2 z-index-3">Beta</div>
 <!--begin::Sidebar Content-->
 <div id="kt_sidebar_content" class="py-10 px-2 px-lg-8">
     <div class="hover-scroll-y me-lg-n5 pe-lg-4" data-kt-scroll="true" data-kt-scroll-height="auto"
@@ -21,12 +25,14 @@
                     <!--begin::Items-->
                     <div class="pt-4">
                         <!--begin::Title-->
-                        <div class="text-center pb-12">
+                        <div class="text-center pb-6">
                             <!--begin::Username-->
-                            <h3 class="fw-bolder text-white fs-2 pb-4 me-4"><%= user.name %> <span
+                            <h3 class="fw-bolder text-white fs-2 pb-4 me-4"><%= user.name %>
+                                <!-- <span
                                     class="symbol symbol-circle symbol-30px ms-2">
                                     <img src="assets/media/svg/flags/serbia.svg" alt="" class="img-fluid" />
-                                </span> </h3>
+                                </span>  -->
+                            </h3>
 
                             <!--end::Username-->
 
@@ -38,40 +44,103 @@
                     </div>
                     <!--end::Title-->
                     <div class="row row-cols-1 px-xl-12 sidebar-toolbar">
-                        <div class="col p-3"> 
-                            <a href="#" class="btn p-5 w-100 text-start btn-active-primary" >
-                                <span class="text-white fw-bolder fs-1 d-block pb-1">#8</span>
-                                <span class="fw-bold">Gradez ranking</span>
-                            </a>            
-                        </div>   
+                        <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-active-primary">
+                                    <span class="text-white fw-bolder fs-1 d-block pb-1">#<%= userStats.rank %></span>
+                                    <span class="fw-bold">Gradez ranking</span>
+                                </a>
+                            </div>
+                            <div class="overlay-layer p-3 col bg-opacity-100">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span
+                                        class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.students %></span>
+                                    <span class="fw-bold">Students ranked in the program</span>
+                                </a>
+                            </div>                            
+                        </div>
+
                     </div>
-                 
+
                     <!--begin::Row-->
                     <div class="row row-cols-2 px-xl-12 sidebar-toolbar">
-                        <div class="col p-3">
-                            <a href="#" class="btn p-5 w-100 text-start btn-active-primary">
-                                <span class="text-white fw-bolder fs-1 d-block pb-1">92</span>
-                                <span class="fw-bold">Cumulative grade</span>
-                            </a>
+                        <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span
+                                        class="text-white fw-bolder fs-1 d-block pb-1"><%= userStats.weightedGrade %></span>
+                                    <span class="fw-bold">Average grade</span>
+                                </a>
+                                <div class="overlay-layer p-3 col bg-opacity-100">
+                                    <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                        <span
+                                            class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.averageWeightedGrade %></span>
+                                        <span class="fw-bold">Program average</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col p-3">
-                            <a href="#" class="btn p-5 w-100 text-start btn-active-primary">
-                                <span class="text-white fw-bolder fs-1 d-block pb-1">46%</span>
-                                <span class="fw-bold">Degree progress</span>
-                            </a>
+                        <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span
+                                        class="text-white fw-bolder fs-1 d-block pb-1"><%= userStats.progress %></span>
+                                    <span class="fw-bold">Degree progress</span>
+                                </a>
+                                <div class="overlay-layer p-3 col bg-opacity-100">
+                                    <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                        <span
+                                            class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.averageProgress %></span>
+                                        <span class="fw-bold">Program average</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col p-3">
-                            <a href="#" class="btn p-5 w-100 text-start btn-active-primary">
-                                <span class="text-white fw-bolder fs-1 d-block pb-1">11</span>
-                                <span class="fw-bold">Grades submitted</span>
-                            </a>
-                        </div>
-                        <div class="col p-3">
-                            <a href="#" class="btn p-5 w-100 text-start btn-active-primary">
-                                <span class="text-white fw-bolder fs-1 d-block pb-1">165</span>
-                                <span class="fw-bold">Credits earned</span>
-                            </a>
-                        </div>
+                        <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span class="text-white fw-bolder fs-1 d-block pb-1"><%= userStats.percentile %>%</span>
+                                    <span class="fw-bold">Percentile rank</span>
+                                </a>
+                                <div class="overlay-layer p-3 col bg-opacity-100">
+                                    <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                        <span
+                                            class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.students %></span>
+                                        <span class="fw-bold">Students ranked</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>          
+                        <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span class="text-white fw-bolder fs-1 d-block pb-1"><%= userStats.credits %></span>
+                                    <span class="fw-bold">Credits earned</span>
+                                </a>
+                                <div class="overlay-layer p-3 col bg-opacity-100">
+                                    <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                        <span
+                                            class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.averageTotalCredits %></span>
+                                        <span class="fw-bold">Program average</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>         
+                        <!-- <div class="col p-3 overlay">
+                            <div class="overlay-wrapper">
+                                <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                    <span class="text-white fw-bolder fs-1 d-block pb-1"><%= userStats.grades %></span>
+                                    <span class="fw-bold">Grades submitted</span>
+                                </a>
+                                <div class="overlay-layer p-3 col bg-opacity-100">
+                                    <a href="#" class="btn p-5 w-100 text-start btn-bg-info">
+                                        <span
+                                            class="text-white fw-bolder fs-1 d-block pb-1"><%= programStats.averageTotalGrades %></span>
+                                        <span class="fw-bold">Program average</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>                                                            -->
                     </div>
                     <!--end::Row-->
                 </div>

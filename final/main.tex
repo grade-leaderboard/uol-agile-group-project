@@ -114,13 +114,28 @@ Our timeline plan is shown in \cref{fig:gantt} illustrating the cycle-based appr
     \label{fig:gantt}
 \end{figure}
 
-\subsubsection{Milestones and Plan Updates} \label{sec:milestones_updates}
+\subsubsection{[BRAD] Milestones and Plan Updates} \label{sec:milestones_updates}
 The main update to our working approach after starting the project was that we switched from two-week sprints to one-week sprints to ensure closer control and ensure delivery by the deadline, given the comparatively short project timeline. We decided to plan our sprints accordingly.
 
 [BRAD] Can you create some kind of update to the Gantt chart?
 
 \subsection{Team Roles}\label{sec:roles}
-Within the team, we split our roles as follows:
+
+We used SCRUM as a methodology to assign basic team roles to work in an agile manner. The key roles involved a product owner, a scrum master, individual contributors and a QA lead.
+
+In addition, all team members took on the role of representing personas for testing pursposes to ensure that we were not developing for ourselves, but rather for our users.
+
+In terms of strict SCRUM roles, the team was allocated as follows (however, our responsibilities were treated fluidly as per the project's needs and in adherence to agile principles):
+
+\begin{enumerate}
+	\item \textbf{Aleksandar}: SCRUM master
+	\item \textbf{Arjun}: Product owner
+	\item \textbf{Blair}: Individual contributor
+	\item \textbf{Brad}: QA lead
+	\item \textbf{Hayato}: Individual contributor
+\end{enumerate}
+
+Within the team, our contributions were as follows:
 \textbf{Aleksandar}  led definition of the technical architecture and software approach, and also led the implementation of user feedback specifically around the visual design.
 \textbf{Brad}  led development of all tests, including the implementation of automated testing, and also contributed with developing parts of the application.
 \textbf{Blair}  led much of the core applicationd development including the Slack authentication layer.
@@ -743,7 +758,7 @@ Based on the survey results and research to date, we have identified initial epi
 
 As part of development, we will prioritize these epics and likely deliver on a subset of them in the initial release.
 
-\subsection{Justification of Design Decisions}\label{sec:justif}
+\subsection{[ARJUN] Justification of Design Decisions}\label{sec:justif}
 
 
 \section{Testing}\label{sec:testing}
@@ -778,7 +793,82 @@ In order to actually identify users that match these personas, we are including 
 \subsubsection{Results}
 
 \subsection{Summative Testing}\label{sec:summative}
-\subsubsection{Automated acceptance testing}\label{sec:autotest}
+\subsubsection{[BRAD] Automated acceptance testing}\label{sec:autotest}
+
+As all members of the team were contributing to the Github repository, we wanted to implement some repeatable testing that could be quickly run to ensure the application was continuing to perform as expected. To accomplish this we implemented the Taiko browser automation library \cite{taiko} and Gauge automation framework \cite{gauge}.
+Taiko tests were written to simulate human use of our application. We also endeavoured to make the steps as small and modular as possible, for more effective re-use. We wrote tests that covered a wide range of actions that a user would be expected to be able to try to do, including:
+
+\begin{itemize}
+	\item clicking the log in button
+	\item entering login information as retrieved from system variables
+	\item selecting a course or semester by name
+	\item entering a value in a text field
+	\item waiting for certain text to be visible
+	\item checking that the user avatar was visible in the navigation bar
+	\item checking that the user avatar was visible in the leaderboard
+\end{itemize}
+
+We also wrote Taiko steps to validate that the application was responding as intended to both valid and invalid entries from the automated "user". This included validations that error messages were being displayed when appropriate, and a step to make sure that sorting of the users was being performed in the manner we intended it to be done. The tests were written to allow arguments to be passed if necessary, enabling us to quickly and easily change some of the test conditions for more in-depth testing.
+
+We wrote Gauge automation test specifications to run multiple Taiko test steps. This allowed us to repeatedly test the application in a more end to end manner by re-running all the acceptance tests after changing the application. This provided a greater confidence that the change made to the code had not affected another part of the code unintentionally.
+
+Gauge automation was configured to test a number of scenarios including:
+
+\begin{itemize}
+	\item end to end logging into the application through Slack
+	\item selecting a course and session, entering valid grades, and confirming that the grade was accepted
+	\item selecting a course and session, entering invalid grades, and confirming that error messages were visible to the user
+	\item editing a previously entered grade and confirming that change to the database was successful
+\end{itemize}
+
+
+Much of the testing was done with the software in "headless" mode which made the operation very fast. The generated logs allowed the developer to quickly confirm that the application was still performing as expected, as shown in \cref{fig:success_gauge} or if something was wrong, as shown in \cref{fig:fail_gauge}.
+
+\begin{figure}[H]
+	\label{fig:success_gauge}
+	\caption{Successful Gauge Test Log}
+	\includegraphics{successful_gauge_testing_log}
+\end{figure}
+
+\begin{figure}[H]
+	\label{fig:fail_gauge}
+	\caption{Failed Gauge Test Log}
+	\includegraphics{failed_gauge_testing_log}
+\end{figure}
+
+If necessary the software could be configured to show the automated browser window, as shown in \cref{fig:autobrowser}.
+
+\begin{figure}[H]
+	\label{fig:autobrowser}
+	\caption{Automated Browser Testing}
+	\includegraphics{automated_browser_window_running_tests}
+\end{figure}
+
+This allowed the developer to watch as Gauge implemented the Taiko automation steps. Gauge also provides a testing report in HTML format, a sample of which is provided in \cref{fig:success_gauge_testing_report}. 
+
+
+\begin{figure}[H]
+	\label{fig:success_gauge_report}
+	\caption{Successful Gauge Testing Report}
+	\includegraphics{successful_gauge_testing_report}
+\end{figure}
+
+When the testing fails the report indicates this, as shown in \cref{fig:failed_gauge_report}. Additionally Gauge will take screenshots of the automated browser window to aid the developer in determining the cause of the failure, as shown in \cref{fig:failed_gauge_report_detail}.
+
+\begin{figure}[H]
+	\label{fig:failed_gauge_report}
+	\caption{Failed Gauge Testing Report}
+	\includegraphics{failed_gauge_testing_report}
+\end{figure}
+
+\begin{figure}[H]
+	\label{fig:failed_gauge_testing_report_detail}
+	\caption{Failed Gauge Testing Report - Detailed View}
+	\includegraphics{failed_gauge_testing_report_detail}
+\end{figure}
+
+By using the automation testing software we were able to run acceptance tests on the application repeatedly throughout the development process. Additionally by standardizing the tests we removed some of the aspects of human error from the testing by better ensuring that the same tests were run each time. Knowing that the software would provide a quick log and a detailed report in the event of a failure gave us a better sense of confidence that whatever change we were implementing to the code was not causing the application to fail in a way that we were not focusing on at that time.
+
 
 \subsubsection{User Feedback}
 
@@ -796,7 +886,7 @@ A number of smaller usability issues were also mentioned, which we considered as
 \subsection{Error Handling}
 We have implemented two kinds of error handling in this MVP version of the application. The first is on a technical level, where we have used \texttt{try-catch} blocks in the code, as shown in \cref{lis:trycatch}. This block ensures that a user cannot add a duplicate record to the grades database, and provides a useful error message back to the user. This approach is used throughout the application on all routes.
 
-The second, more user-facing approach is that these error messages are displayed using useful error alert boxes. Based on \cite{mckay_2013}, we ensured that the button labels are action-oriented and the errors clearly indicate what happened, and what the user can do next.
+The UI prevents users from entering a duplicate grade by not offering modules that already have submitted grades. However, we have added an additional layer of error-handling and used the \texttt{try-catch} block to provide a useful error message - in case a user does somehow manage to submit a duplicate grade. Based on \cite{mckay_2013}, we ensured that the button labels are action-oriented and the errors clearly indicate what happened, and what the user can do next.
 
 \begin{listing}[H]
 	\caption{Using try-catch blocks for error handling}
@@ -813,7 +903,7 @@ app.post("/addgrade", checkAuth, checkPermission, async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		if (error.code == "ER_DUP_ENTRY") {
-			res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
+			res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit an existing grade`);
 		}
 	}
 });
@@ -844,43 +934,7 @@ The application uses a file structure as shown in \cref{lis:files}, following a 
 	\caption{}
 	\label{lis:files}
 	\begin{minted}{text}
-		.
-├── config
-├── db
-├── middlewares
-├── public
-│   ├── assets
-│   │   ├── css
-│   │   ├── js
-│   │   │   └── custom
-│   │   ├── media
-│   │   │   ├── avatars
-│   │   │   ├── logos
-│   │   │   ├── misc
-│   │   │   ├── plugins
-│   │   │   ├── products
-│   │   │   ├── stock
-│   │   │   └── svg
-│   │   └── plugins
-│   │       ├── custom
-│   │       └── global
-│   └── style
-├── routes
-└── views
-    ├── layout
-    │   └── content
-    ├── pages
-    └── partials
-        ├── content
-        │   └── dropdown
-        ├── layout
-        ├── modals
-        └── widgets
-            ├── engage
-            ├── info
-            ├── lists
-            ├── stats
-            └── tables
+TREE
 	\end{minted}
 \end{listing}
 
@@ -1019,7 +1073,11 @@ As noted, we set ourselves targets for the initial launch as well as longer-term
 \subsection{Accessibility Audit}\label{sec:access}
 
 
-\subsection{User Safety \& Security}\label{sec:access}
+\subsection{User Safety \& Security}\label{sec:usersafety}
+
+
+\section{Individual Reflection}
+
 
 \newpage
 \bibliographystyle{IEEEtran}
@@ -1031,6 +1089,105 @@ As noted, we set ourselves targets for the initial launch as well as longer-term
 \addappheadtotoc
 
 \section{User Guide}\label{sec:guide}
+
+\subsection{Slack sign-in}\label{sec:slacksignin}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/slack-sign-in/1.jpg}
+    \caption{To sign in as a validated student, click the "Sign in with Slack" button under the "Kickstart your study motivation" card in the homepage. There is more information available by clicking on the info icon in the upper-right of the card, which is depicted in \cref{fig:slacksignin1a}}
+    \label{fig:slacksignin1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/slack-sign-in/1a.jpg}
+    \caption{This information box explains what credentials you need to provide in the event that they are not saved in your browser. Slack saves these credentials in your browser by default. Typically you do not need to provide this information. If your information is saved you will be directed to the screen in \cref{fig:slacksignin4}, otherwise you will need to start the input more information as shown in \cref{fig:slacksignin2} and \cref{fig:slacksignin3}}
+    \label{fig:slacksignin1a}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/slack-sign-in/2.jpg}
+    \caption{If slack credentials are not saved in your browser, enter 'londoncs' as the slack workspace and click "Continue"}
+    \label{fig:slacksignin2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/slack-sign-in/3.jpg}
+    \caption{Enter the email address associated with your londoncs slack account and slack password and click "Sign in"}
+    \label{fig:slacksignin3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/slack-sign-in/4.jpg}
+    \caption{Click "Allow" to authenticate and sign in with Slack. This is all the input required if Slack credentials are saved in your browser. You will be redirected to Gradez.}
+    \label{fig:slacksignin4}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/slack-sign-in/5.jpg}
+    \caption{You are now signed in and can see your slack avatar in the upper-right of the navigation bar.}
+    \label{fig:slacksignin5}
+\end{figure}
+
+\subsection{Demo sign-in}\label{sec:demosignin}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/demo-sign-in/1.jpg}
+    \caption{To use the application without a slack account, you can use the Demo sign in feature. To sign in as the demo user, click "Demo Sign-in" in the navigation bar at the top of the page}
+    \label{fig:demosignin1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/demo-sign-in/2.jpg}
+    \caption{This will return you to the homepage signed in as the demo user, indicated by the avatar in the upper-right of the navigation bar. You can now use the application as if you were a student validated via the slack workspace.}
+    \label{fig:demosignin2}
+\end{figure}
+
+\subsection{Add grade}\label{sec:addgrade}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/add-grade/1.jpg}
+    \caption{Click "Add Grade" in the navigation bar to access the Add Grade form. Select a course and a study session. Courses that you have already submitted grades for are excluded. Click "Next Step" to continue.}
+    \label{fig:addgrade1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/add-grade/2.jpg}
+    \caption{Enter the grade and whether or not you want to keep this grade anonymous. Click the info icon for more information on the anonymity feature. Click "Next Step" to continue.}
+    \label{fig:addgrade1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/add-grade/3.jpg}
+    \caption{Review the information you provided and click "Submit" to add the grade. You can validate this submission in "My Grades" or entering the leaderboard for the course you submitted a grade for.}
+    \label{fig:addgrade1}
+\end{figure}
+
+\subsection{Edit grade}\label{sec:editgrade}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/edit-grade/1.jpg}
+    \caption{Click "My Grades" in the navigation bar to access your grades. Here you can click "Edit" next to grades as depicted above for "Intro to Programming I" to bring up the edit form.}
+    \label{fig:editgrade1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/user-guide/edit-grade/2.jpg}
+    \caption{Here you can change the study session, grade, and anonymity for the course. Grades are only editable for 6 months after their original submission. In this example we are changing the Intro to Programming I grade from 55, as shown in \cref{fig:editgrade1}, to 86. Click "Submit" to finish editing.}
+    \label{fig:editgrade2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/user-guide/edit-grade/3.jpg}
+    \caption{Your updated information will be shown in "My Grades", as shown above, as well as the leaderboard for the class.}
+    \label{fig:editgrade3}
+\end{figure}
 
 \section{User Stories}
 

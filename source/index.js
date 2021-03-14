@@ -10,12 +10,16 @@ const putObjectsInAllViews = require("./middlewares/putObjectsInAllViews");
 const flash = require("flash");
 
 db.configure({
+	connectionLimit : 1000,
+    connectTimeout  : 60 * 60 * 1000,
+    acquireTimeout  : 60 * 60 * 1000,
+    timeout         : 60 * 60 * 1000, 
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_DATABASE,
 	ssl: {
-		rejectUnauthorized: false
+		rejectUnauthorized: false 
 	}
 });
 
@@ -34,7 +38,7 @@ app.use(
 		secret: process.env.SESSION_SECRET,
 		store: sessionStore,
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: false, 
 	})
 );
 app.use(passport.initialize());
