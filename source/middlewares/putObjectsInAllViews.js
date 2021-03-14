@@ -3,7 +3,7 @@
 // for use in nav and other views.
 function putObjectsInAllViews(req, res, next) {
 	res.locals.user = req.user;
-	res.locals.req = req;	
+	res.locals.req = req;
 	next();
 }
 

@@ -3,10 +3,13 @@ const checkPermission = require("../middlewares/checkPermission");
 const { check, validationResult } = require("express-validator");
 
 module.exports = function (app, passport) {
+	// redirect root to program dashboard
 	app.get("/", (req, res) => res.redirect("/program-dashboard"));
 
+	// Program dashboard page
 	app.get("/program-dashboard", async (req, res) => {
 		try {
+			//query database for program-wide data data
 			let sql =
 				"SELECT  m.id, m.title, m.grade, m.level, COUNT(g.course_id) AS 'submissions' \
 								FROM modules_with_grades m \
@@ -20,16 +23,19 @@ module.exports = function (app, passport) {
 				res: results,
 				title: "Program Dashboard",
 				subtitle: "Welcome to Gradez",
+				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
-				programStats: await programStats()
+				programStats: await programStats(),
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	});
 
+	// Add grade form - must be logged in
 	app.get("/add-grade", checkAuth, async (req, res) => {
 		try {
+			//Get courses user can add
 			let sql = `SELECT c.* FROM courses c WHERE c.id NOT IN 
 			(SELECT g.course_id FROM grades g WHERE g.user_id = ?)
 			ORDER BY c.id ASC`;
@@ -44,38 +50,46 @@ module.exports = function (app, passport) {
 				addResult: req.query.addResult,
 				title: "Add Grade",
 				subtitle: "Add your grade",
+				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
-				programStats: await programStats()				
+				programStats: await programStats(),
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	});
 
+	// Submit add grades - must be logged in and authorized to add grade
 	app.post("/add-grade", checkAuth, checkPermission, async (req, res) => {
 		try {
+			// Insert escaped records into database
 			let params = [req.body.course_id, req.body.semester, req.user.id, req.body.grade, !!req.body.anonymous];
 			let sql = `
 			INSERT INTO grades(course_id, study_session_id, user_id, grade, anonymous)
 			VALUES (?, ?, ?, ?, ?)`;
 			var [results, _] = await db.query(sql, params);
+			// redirect with success flag
 			res.redirect(req.baseUrl + "?addResult=success");
 		} catch (error) {
 			console.log(error);
 			if (error.code == "ER_DUP_ENTRY") {
+				//re-direct with unsuccesful message
 				res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
 			}
 		}
 	});
 
+	// Page for individual module leaderboard - must be logged in
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
+			// get leaderboard data for specified module
 			id = [req.query.module_id];
 			let grades_sql = "SELECT * FROM ranked_grades WHERE course_id = ?";
 			var [grades_results, _] = await db.query(grades_sql, id);
 			let course_sql = "SELECT title FROM courses WHERE id = ?";
 			var [course_results, _] = await db.query(course_sql, id);
 			let title = course_results[0].title;
+			// replace name/avatar with placeholder if user wants anonymity
 			grades_results.forEach((row) => {
 				if (row.anonymous) {
 					row.name = "Anonymous";
@@ -87,16 +101,19 @@ module.exports = function (app, passport) {
 				course: { id: id, title: title },
 				title: `Leaderboard`,
 				subtitle: `${id} - ${title}`,
+				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
-				programStats: await programStats()				
+				programStats: await programStats(),
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	});
 
+	// Page for veiwing/editing ones own grades - must be authorized
 	app.get("/personal_grade", checkAuth, async (req, res) => {
 		try {
+			// get validated user's grade information
 			let user = [req.user.id];
 			let grades_sql =
 				"SELECT study_sessions.title AS session, study_sessions.id as session_id, grades.course_id,  \
@@ -113,6 +130,8 @@ module.exports = function (app, passport) {
 			let sessions_sql = "SELECT id, title FROM study_sessions";
 			var [grades_results, _] = await db.query(grades_sql, user);
 			var [sessions_results, _] = await db.query(sessions_sql);
+
+			// calculate grades and progress
 			let cumulativeGrade = calculateCumulativeGrade(grades_results);
 			let completionRate = calculateCompletionRate(grades_results);
 			res.render("pages/personal_grade.html", {
@@ -123,16 +142,19 @@ module.exports = function (app, passport) {
 				cumulativeGrade: cumulativeGrade,
 				completionRate: completionRate,
 				subtitle: grades_results.user,
+				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
-				programStats: await programStats()				
+				programStats: await programStats(),
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	});
 
+	// Submit edited grades - must be logged in and authorized
 	app.post("/edit-grade", checkAuth, checkPermission, async (req, res) => {
 		try {
+			// Update grade in database
 			let sql = "UPDATE grades \
 					SET study_session_id = ?, \
 					grade = ?, \
@@ -141,15 +163,19 @@ module.exports = function (app, passport) {
 			var anonymous = req.body.anonymous == "true" ? 1 : 0;
 			var fields = [req.body.semester, req.body.grade, anonymous, req.body.grade_id];
 			var [results, _] = await db.query(sql, fields);
+			//redirect success
 			res.redirect("/personal_grade" + "?editResult=success");
 		} catch (error) {
 			console.log(error);
+			//redirect unsuccesful
 			res.redirect("/personal_grade" + "?editResult=Grade was not edited. Something went wrong.");
 		}
 	});
 
+	// Login route for demo user
 	app.get("/demo-login", async (req, res) => {
 		try {
+			// retrieve mock user data from database
 			var [demoUserRow, _] = await db.query("SELECT * FROM users WHERE id = 'U00000007'");
 
 			// mimic authentication - add demo user to req and session
@@ -158,6 +184,7 @@ module.exports = function (app, passport) {
 			req.session.passport = { user: req.user.id };
 			req.session.save(function (err) {});
 
+			// redirect home
 			res.redirect("/program-dashboard");
 		} catch (error) {
 			console.log(error);
@@ -171,6 +198,7 @@ module.exports = function (app, passport) {
 	app.get(
 		"/auth/slack/callback",
 		passport.authenticate("slack", {
+			//redirect when authentication fails
 			failureRedirect: "/",
 			failureFlash: "Slack login failed",
 		}),
@@ -178,6 +206,7 @@ module.exports = function (app, passport) {
 			try {
 				// Set cookie age to 7 days
 				req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000;
+				// redirect when authentication succeeds
 				res.redirect("/program-dashboard");
 			} catch (error) {
 				console.log(error);
@@ -186,20 +215,25 @@ module.exports = function (app, passport) {
 	);
 
 	app.get("/logout", (req, res) => {
-		req.logout();
+		req.logout(); // remove user session
 		res.redirect("/");
 	});
 
+	// Takes all of users grades from database and
+	// returns cumulative, weighted average
 	function calculateCumulativeGrade(grades) {
 		let sumOfWeights = 0;
 		let sumOfWeightedGrades = 0;
 		for (let i = 0; i < grades.length; i++) {
+			// Level 4
 			if (grades[i].level == 4) {
 				grades[i].weight = 1;
 			}
+			// Level 5
 			if (grades[i].level == 5) {
 				grades[i].weight = 3;
 			}
+			// Level 6
 			if (grades[i].level == 6) {
 				grades[i].weight = 5;
 			}
@@ -211,6 +245,7 @@ module.exports = function (app, passport) {
 		}
 
 		for (let i = 0; i < grades.length; i++) {
+			// combine the weighted grades
 			sumOfWeights += grades[i].weight;
 			sumOfWeightedGrades += grades[i].grade * grades[i].weight;
 		}
@@ -218,13 +253,27 @@ module.exports = function (app, passport) {
 		return Math.round(sumOfWeightedGrades / sumOfWeights);
 	}
 
+	function calculateCompletionRate(grades) {
+		let totalCredits = grades.length * 15;
+		for (let i = 0; i < grades.length; i++) {
+			if (grades[i].course_id == "CM3070") {
+				totalCredits += 15;
+			}
+		}
+		return Math.round((totalCredits / 360) * 100);
+	}
+
+	// takes a user id, retrieves statistics from the db,
+	// and returns them as a stats object
 	async function userStats(user) {
 		try {
-			if (user==null) return null;
+			if (user == null) return null;
+			// retrieve user's grade data
 			let sql = `select * from user_grade_stats where user_id = ?`;
 			var [userStats, _] = await db.query(sql, [user]);
-		    sql = `select * from user_rank where user_id = ?`;
-			var [userRank, _] = await db.query(sql, [user]);			
+			sql = `select * from user_rank where user_id = ?`;
+			var [userRank, _] = await db.query(sql, [user]);
+			// store result in stats object
 			stats = {
 				rank: userRank[0].order_rank,
 				percentile: userRank[0].percentile_rank,
@@ -232,7 +281,7 @@ module.exports = function (app, passport) {
 				progress: userStats[0].progress,
 				grades: userStats[0].total_grades,
 				weightedGrade: userStats[0].weighted_grade,
-				averageGrade: userStats[0].average_grade
+				averageGrade: userStats[0].average_grade,
 			};
 			return stats;
 		} catch (error) {
@@ -240,8 +289,10 @@ module.exports = function (app, passport) {
 		}
 	}
 
+	// retrieves program statistics from the db and returns as stats object
 	async function programStats() {
 		try {
+			// retrieve all program statistics
 			let sqlAvg = `select * from average_grade_stats`;
 			let sqlTop = `select * from top_grade_stats`;
 			let sqlKpi = `select * from program_kpis`;
@@ -249,6 +300,7 @@ module.exports = function (app, passport) {
 			var [topStats, _] = await db.query(sqlTop);
 			var [kpiStats, _] = await db.query(sqlKpi);
 
+			// store resutls in stats object
 			stats = {
 				averageTotalCredits: avgStats[0].avg_total_credits,
 				averageProgress: avgStats[0].avg_progress,
@@ -261,21 +313,11 @@ module.exports = function (app, passport) {
 				topWeightedGrade: topStats[0].top_weighted_grade,
 				topAverageGrade: topStats[0].top_grade,
 				students: kpiStats[1].val,
-				grades: kpiStats[0].val				
+				grades: kpiStats[0].val,
 			};
 			return stats;
 		} catch (error) {
 			console.log(error);
 		}
-	}
-
-	function calculateCompletionRate(grades) {
-		let totalCredits = grades.length * 15;
-		for (let i = 0; i < grades.length; i++) {
-			if (grades[i].course_id == "CM3070") {
-				totalCredits += 15;
-			}
-		}
-		return Math.round((totalCredits / 360) * 100);
 	}
 };

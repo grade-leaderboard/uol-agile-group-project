@@ -5,11 +5,13 @@ async function checkPermission(req, res, next) {
 
 	try {
 		switch (action) {
+			// Cases for each route where checkPermission is used
 			case "POST /add-grade": {
 				permit = true;
 				break;
 			}
 			case "POST /edit-grade": {
+				// Check if user owns record
 				[user, _] = await db.query("SELECT user_id FROM grades WHERE id=?", [req.body.grade_id]);
 				permit = req.user.id == user[0].user_id;
 				break;
