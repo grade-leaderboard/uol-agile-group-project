@@ -34,6 +34,8 @@ module.exports = (passport) => {
 			{
 				clientID: process.env.SLACK_CLIENT_ID,
 				clientSecret: process.env.SLACK_CLIENT_SECRET,
+				callbackURL: process.env.SLACK_REDIRECT_URI,
+				
 				scope: ["identity.basic", "identity.email", "identity.avatar"],
 			},
 			// removing accessToken and refreshToken causes errors and
