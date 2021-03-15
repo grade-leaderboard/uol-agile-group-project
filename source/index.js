@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const db = require("mysql-promise")();
 const path = require("path");
 const passport = require("passport");
@@ -30,7 +29,8 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, "/public")));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // initialize db session
 const sessionStore = new MySQLStore({}, db);
@@ -51,6 +51,7 @@ app.use(putObjectsInAllViews); //must go after passport.initialize()/.session()
 app.use(flash());
 require("./routes/main")(app, passport);
 require("./config/passport")(passport);
+
 
 // set redirects
 app.use(function (req, res, next) {
