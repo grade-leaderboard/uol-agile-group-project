@@ -1,59 +1,40 @@
-		
-		<!--begin::Main-->
-		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
-			<div class="page d-flex flex-row flex-column-fluid">
-			<!--begin::Aside-->
-				<!--layout-partial:layout/_aside.html-->			
+<!--begin::Main-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root">
+	<!--begin::Page-->
+	<div class="page d-flex flex-row flex-column-fluid">
+		<!--begin::Wrapper-->
+		<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-			<!--end::Aside-->
-				<!--begin::Wrapper-->
-				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+			<!--layout-partial:layout/_header.html-->
+			<%- include('_header.html')%>
 
-					<!--layout-partial:layout/_header.html-->
-					<%- include('_header.html')%>
-	
-					<!--begin::Main-->
-					<div class="d-flex flex-column flex-column-fluid">
-						<!--begin::Toolbar-->
-						<%- include('_toolbar.html')%>		
-						<!--end::Toolbar-->
+			<!--begin::Main-->
+			<div class="d-flex flex-column flex-column-fluid">
+				<!--begin::Toolbar-->
+				<%- include('_toolbar.html')%>		
+				<!--end::Toolbar-->
 
-						<!--begin::Content-->
-						<div class="content fs-6 d-flex flex-column-fluid" id="kt_content">
+				<!--begin::Content-->
+				<div class="content fs-6 d-flex flex-column-fluid" id="kt_content">
 
-							<!--layout-partial:layout/content/_default.html-->
-							<%- include('content/_default.html')%>
-						</div>
-						<!--end::Content-->
-					</div>
-					<!--end::Main-->
-
-					<!--layout-partial:layout/_footer.html-->
-					<%- include('_footer.html')%>
+					<!--layout-partial:layout/content/_default.html-->
+					<%- include('content/_default.html')%>
 				</div>
-				<!--end::Wrapper-->
-
-				<!--layout-partial:layout/_sidebar.html-->
-				<%- include('_sidebar.html')%>
+				<!--end::Content-->
 			</div>
-			<!--end::Page-->
+			<!--end::Main-->
+
+			<!--layout-partial:layout/_footer.html-->
+			<%- include('_footer.html')%>
 		</div>
-		<!--end::Root-->
+		<!--end::Wrapper-->
 
-<!--layout-partial:partials/layout/_header_search.html-->
-<!-- Remove the double slashes as well to re-enable these - the slashes were required to stop the rendering of the html comment closing tag on the output -->
-<!-- <%// - include('../partials/layout/_header_search.html')%> -->
-
-<!--layout-partial:layout/_mega-menu.html-->
-<!-- Remove the double slashes as well to re-enable these - the slashes were required to stop the rendering of the html comment closing tag on the output -->
-<!-- <%// - include('_mega-menu.html')%> -->
-
-<!--layout-partial:partials/layout/_inbox-compose.html-->
-
-
-<!--layout-partial:layout/_scrolltop.html-->
-
-		<!--end::Main-->
+		<!--layout-partial:layout/_sidebar.html-->
+		<%- include('_sidebar.html')%>
+	</div>
+	<!--end::Page-->
+</div>
+<!--end::Root-->
+<!--end::Main-->
 		
