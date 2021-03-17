@@ -98,6 +98,7 @@ module.exports = function (app, passport) {
 			});
 			res.render("pages/module_leaderboard.html", {
 				res: grades_results,
+				histogramBins: JSON.stringify(await getHistogramBins(id)),
 				course: { id: id, title: title },
 				title: `Leaderboard`,
 				subtitle: `${id} - ${title}`,
@@ -318,6 +319,24 @@ module.exports = function (app, passport) {
 			return stats;
 		} catch (error) {
 			console.log(error);
+		}
+	}
+
+	// Given a module id, gets the number of grades
+	// within bins for the module and transforms them
+	// gets passed to the histogram chart to show
+	// grade distribution in module leaderboard
+	async function getHistogramBins(course_id) {
+		try{
+		queryStr = 'CALL module_distributions(?)';
+		var [queryResults, _] = await db.query(queryStr, [course_id]);
+		bins = {
+			labels: queryResults[0].map(a => a.grade_bin),
+			counts: queryResults[0].map(a => a.count)
+		}
+		return bins;
+		} catch (error) {
+			console.log(error)
 		}
 	}
 };

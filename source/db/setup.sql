@@ -30,6 +30,8 @@ DROP VIEW IF EXISTS user_rank;
 
 DROP VIEW IF EXISTS program_kpis;
 
+DROP PROCEDURE IF EXISTS module_distributions;
+
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
 	`title` VARCHAR(100),
@@ -373,4 +375,47 @@ SELECT
 FROM
     grades_leaderboard.users
 WHERE
-    grades_leaderboard.users.id NOT LIKE 'U0000000%'
+    grades_leaderboard.users.id NOT LIKE 'U0000000%';
+
+-- PROCEDURES
+
+DELIMITER //
+CREATE PROCEDURE module_distributions
+(IN module_id VARCHAR(6))
+BEGIN
+	DECLARE i int;
+	DROP TABLE IF EXISTS zeroes; 
+	CREATE TEMPORARY TABLE zeroes (
+		`grade_bin` INT UNIQUE,
+		`count` INT DEFAULT 0
+	);
+    
+	INSERT INTO zeroes(grade_bin) 
+		VALUES
+			(40),
+			(45),
+			(50),
+			(55),
+			(60),
+			(65),
+			(70),
+			(75),
+			(80),
+			(85),
+			(90),
+			(95),
+			(100);
+
+	SELECT * FROM
+	((SELECT
+	  FLOOR(grade/5.00)*5 AS grade_bin,
+	  COUNT(grade) AS count
+	FROM ranked_grades
+	WHERE course_id = module_id
+	GROUP BY 1
+	ORDER BY 1)
+	UNION
+	(SELECT * FROM zeroes)) as t
+	GROUP BY grade_bin
+	ORDER BY grade_bin ASC;
+END//
