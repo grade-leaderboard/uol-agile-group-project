@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS courses;
 
 DROP TABLE IF EXISTS sessions;
 
+DROP TABLE IF EXISTS grade_bins;
+
 DROP VIEW IF EXISTS modules_with_grades;
 
 DROP VIEW IF EXISTS ranked_grades;
@@ -30,7 +32,11 @@ DROP VIEW IF EXISTS user_rank;
 
 DROP VIEW IF EXISTS program_kpis;
 
-DROP PROCEDURE IF EXISTS module_distributions;
+DROP VIEW IF EXISTS module_stats;
+
+DROP VIEW IF EXISTS user_module_stats;
+
+DROP VIEW IF EXISTS module_grade_bins;
 
 CREATE TABLE `courses` (
 	`id` VARCHAR(6),
@@ -272,18 +278,17 @@ GROUP BY
 
 CREATE VIEW ranked_grades AS
 SELECT
+	grades_leaderboard.grades.course_id AS course_id,
     grades_leaderboard.users.name AS name,
     grades_leaderboard.grades.grade AS grade,
-    grades_leaderboard.grades.course_id AS course_id,
-    grades_leaderboard.grades.anonymous AS anonymous,
-    grades_leaderboard.grades.created_at AS created_at,
-    grades_leaderboard.users.avatar_url AS avatar_url,
-    rank() OVER (
+        rank() OVER (
         PARTITION BY grades_leaderboard.grades.course_id
         ORDER BY
             grades_leaderboard.grades.course_id,
             grades_leaderboard.grades.grade desc
-    ) AS ranking
+    ) AS ranking,
+    grades_leaderboard.grades.anonymous AS anonymous,
+    grades_leaderboard.users.avatar_url AS avatar_url
 FROM
     grades_leaderboard.grades JOIN 
     grades_leaderboard.users 
@@ -376,46 +381,62 @@ FROM
     grades_leaderboard.users
 WHERE
     grades_leaderboard.users.id NOT LIKE 'U0000000%';
-
--- PROCEDURES
-
-DELIMITER //
-CREATE PROCEDURE module_distributions
-(IN module_id VARCHAR(6))
-BEGIN
-	DECLARE i int;
-	DROP TABLE IF EXISTS zeroes; 
-	CREATE TEMPORARY TABLE zeroes (
-		`grade_bin` INT UNIQUE,
-		`count` INT DEFAULT 0
-	);
     
-	INSERT INTO zeroes(grade_bin) 
-		VALUES
-			(40),
-			(45),
-			(50),
-			(55),
-			(60),
-			(65),
-			(70),
-			(75),
-			(80),
-			(85),
-			(90),
-			(95),
-			(100);
+CREATE VIEW module_stats AS 
+SELECT
+	course_id,
+    COUNT(grade) AS grades_submitted,
+    ROUND(AVG(grade), 0) AS avg_grade
+FROM grades
+GROUP BY course_id;
 
-	SELECT * FROM
-	((SELECT
-	  FLOOR(grade/5.00)*5 AS grade_bin,
-	  COUNT(grade) AS count
-	FROM ranked_grades
-	WHERE course_id = module_id
-	GROUP BY 1
-	ORDER BY 1)
-	UNION
-	(SELECT * FROM zeroes)) as t
-	GROUP BY grade_bin
-	ORDER BY grade_bin ASC;
-END//
+CREATE VIEW user_module_stats AS
+SELECT
+	grades_leaderboard.grades.course_id AS course_id,
+	grades_leaderboard.users.id AS user_id,
+    grades_leaderboard.grades.grade AS grade,
+        RANK() OVER (
+        PARTITION BY grades_leaderboard.grades.course_id
+        ORDER BY
+            grades_leaderboard.grades.course_id,
+            grades_leaderboard.grades.grade desc
+    ) AS ranking,
+    ROUND(
+        (
+            PERCENT_RANK() OVER (
+				PARTITION BY grades_leaderboard.grades.course_id
+                ORDER BY
+                    grades_leaderboard.grades.grade
+            ) * 100
+        ),
+        2
+    ) AS percentile
+FROM
+    grades_leaderboard.grades JOIN 
+    grades_leaderboard.users 
+    ON grades_leaderboard.grades.user_id = grades_leaderboard.users.id
+ORDER BY
+    grades_leaderboard.grades.course_id;
+
+CREATE VIEW module_grade_bins AS
+SELECT c.id AS course_id, gb.grade_bin, COUNT(rg.course_id) AS count
+FROM (SELECT 40 AS grade_bin UNION ALL
+      SELECT 45 AS grade_bin UNION ALL
+      SELECT 50 AS grade_bin UNION ALL
+      SELECT 55 AS grade_bin UNION ALL
+      SELECT 60 AS grade_bin UNION ALL
+      SELECT 65 AS grade_bin UNION ALL
+      SELECT 70 AS grade_bin UNION ALL
+      SELECT 75 AS grade_bin UNION ALL
+      SELECT 80 AS grade_bin UNION ALL
+      SELECT 85 AS grade_bin UNION ALL
+      SELECT 90 AS grade_bin UNION ALL
+      SELECT 95 AS grade_bin UNION ALL
+      SELECT 100 AS grade_bin
+     ) gb CROSS JOIN
+     courses c LEFT JOIN
+     ranked_grades rg
+     ON rg.course_id = c.id AND
+        rg.grade >= gb.grade_bin AND
+        rg.grade < gb.grade_bin + 5
+GROUP BY c.id, gb.grade_bin;
