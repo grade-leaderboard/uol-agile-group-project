@@ -58,7 +58,7 @@ var ModuleGradeHistogram = (function () {
 				},
 				grid: { show: false },
 				tooltip: {x: {formatter: (value) => {
-					if (value == 100) return value
+					if (value == 100) return `Grade bin: ${value}`
 					return `Grade bin: ${value}-${value + 4}`
 				}}}
 			};
