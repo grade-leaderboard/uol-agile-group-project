@@ -25,7 +25,7 @@ module.exports = function (app, passport) {
 				subtitle: "Welcome to Gradez",
 				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
-				programStats: await programStats(),
+				programStats: await programStats()
 			});
 		} catch (error) {
 			console.log(error);
@@ -68,8 +68,10 @@ module.exports = function (app, passport) {
 			INSERT INTO grades(course_id, study_session_id, user_id, grade, anonymous)
 			VALUES (?, ?, ?, ?, ?)`;
 			var [results, _] = await db.query(sql, params);
-			// redirect with success flag
-			res.redirect(req.baseUrl + "?addResult=success");
+			// redirect with success message
+			req.flash("info", `Your grade for ${req.body.course_id} was added`)
+			res.redirect('/personal_grade')
+			// res.redirect(req.baseUrl + "?addResult=success");
 		} catch (error) {
 			console.log(error);
 			if (error.code == "ER_DUP_ENTRY") {
