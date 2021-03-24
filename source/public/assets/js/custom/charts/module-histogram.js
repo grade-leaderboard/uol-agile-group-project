@@ -24,7 +24,6 @@ var ModuleGradeHistogram = (function () {
 							});
 							arraySelected = arraySelected.reduce(function(acc, curr) {
 								let sum = bins.counts.reduce((a, b) => a + b, 0);
-								console.log(acc, curr, sum);
 								return (acc + curr / sum);
 							} , 0).toFixed(2) * 100
 							document.querySelector("#selected-count").innerHTML = arraySelected
@@ -66,7 +65,6 @@ var ModuleGradeHistogram = (function () {
 			var chart = new ApexCharts(document.querySelector("#module-grades-histogram"), options);
 			chart.render();
 			chart.addEventListener("dataPointSelection", function (e, opts) {
-				console.log(e, opts);
 			});
 		},
 	};
