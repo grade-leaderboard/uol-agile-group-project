@@ -6,7 +6,7 @@ const passport = require("passport");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const putObjectsInAllViews = require("./middlewares/putObjectsInAllViews");
-const flash = require("flash");
+const flash = require("express-flash");
 
 //db configuration
 db.configure({

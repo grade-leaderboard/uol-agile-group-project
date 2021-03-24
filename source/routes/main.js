@@ -83,11 +83,12 @@ module.exports = function (app, passport) {
 	app.get("/module_leaderboard", checkAuth, async (req, res) => {
 		try {
 			// get leaderboard data for specified module
-			id = [req.query.module_id];
+			course_id = [req.query.module_id];
 			let grades_sql = "SELECT * FROM ranked_grades WHERE course_id = ?";
-			var [grades_results, _] = await db.query(grades_sql, id);
+			var [grades_results, _] = await db.query(grades_sql, course_id);
+			// get module title
 			let course_sql = "SELECT title FROM courses WHERE id = ?";
-			var [course_results, _] = await db.query(course_sql, id);
+			var [course_results, _] = await db.query(course_sql, course_id);
 			let title = course_results[0].title;
 			// replace name/avatar with placeholder if user wants anonymity
 			grades_results.forEach((row) => {
@@ -98,9 +99,12 @@ module.exports = function (app, passport) {
 			});
 			res.render("pages/module_leaderboard.html", {
 				res: grades_results,
-				course: { id: id, title: title },
+				course: { id: course_id, title: title },
 				title: `Leaderboard`,
-				subtitle: `${id} - ${title}`,
+				subtitle: `${course_id} - ${title}`,
+				// course specific stats
+				moduleStats: await moduleStats(course_id, req.user.id),
+				histogramBins: JSON.stringify(await getHistogramBins(course_id)),
 				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
 				programStats: await programStats(),
@@ -318,6 +322,46 @@ module.exports = function (app, passport) {
 			return stats;
 		} catch (error) {
 			console.log(error);
+		}
+	}
+
+	// Returns module level statistics from the database given a module id
+	async function moduleStats(course_id, user_id) {
+		try{
+		// get module statssa
+		mQueryStr = 'SELECT * FROM module_stats WHERE course_id = ?';
+		var [mQueryRes, _] = await db.query(mQueryStr, [course_id]);
+		// get user stats for module
+		uQueryStr = 'SELECT * FROM user_module_stats WHERE course_id = ? AND user_id = ?';
+		var [uQueryRes, _] = await db.query(uQueryStr, [course_id, user_id]);
+
+		stats = {
+			count: mQueryRes[0].grades_submitted,
+			avgGrade: mQueryRes[0].avg_grade,
+			userGrade: uQueryRes[0] ? uQueryRes[0].grade : null,
+			userRank: uQueryRes[0] ? uQueryRes[0].ranking : null,
+			userPercentile: uQueryRes[0] ? uQueryRes[0].percentile : null
+		}
+		return stats;
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	// Given a module id, gets the number of grades within bins for use in the
+	// histogram chart showing grade distribution in module leaderboard
+	async function getHistogramBins(course_id) {
+		try{
+		// string to get grade bins and their counts, by module id
+		queryStr = 'SELECT grade_bin, count FROM module_grade_bins WHERE course_id = ?';
+		var [queryResults, _] = await db.query(queryStr, [course_id]);
+		bins = {
+			labels: queryResults.map(x => x.grade_bin),
+			counts: queryResults.map(x => x.count)
+		}
+		return bins;
+		} catch (error) {
+			console.log(error)
 		}
 	}
 };
