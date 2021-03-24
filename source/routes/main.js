@@ -26,6 +26,7 @@ module.exports = function (app, passport) {
 				// sidebar profile stats
 				userStats: await userStats(req.user ? req.user.id : null),
 				programStats: await programStats()
+
 			});
 		} catch (error) {
 			console.log(error);
@@ -69,14 +70,15 @@ module.exports = function (app, passport) {
 			VALUES (?, ?, ?, ?, ?)`;
 			var [results, _] = await db.query(sql, params);
 			// redirect with success message
-			req.flash("info", `Your grade for ${req.body.course_id} was added`)
-			res.redirect('/personal_grade')
-			// res.redirect(req.baseUrl + "?addResult=success");
+			req.flash("success", `Your grade for ${req.body.course_id} was added`)
+			res.redirect('/personal_grade');
 		} catch (error) {
 			console.log(error);
 			if (error.code == "ER_DUP_ENTRY") {
 				//re-direct with unsuccesful message
-				res.redirect(req.baseUrl + `?addResult=You already have a grade for module ${req.body.course_id}. You may edit existing grade`);
+				req.flash("error", `You already submitted a grade for \ 
+						${req.body.course_id}. You may edit it instead.`)
+				res.redirect('/personal_grade');
 			}
 		}
 	});
@@ -170,11 +172,13 @@ module.exports = function (app, passport) {
 			var fields = [req.body.semester, req.body.grade, anonymous, req.body.grade_id];
 			var [results, _] = await db.query(sql, fields);
 			//redirect success
-			res.redirect("/personal_grade" + "?editResult=success");
+			req.flash("success", "Your grade was updated");
+			res.redirect("/personal_grade");
 		} catch (error) {
 			console.log(error);
 			//redirect unsuccesful
-			res.redirect("/personal_grade" + "?editResult=Grade was not edited. Something went wrong.");
+			req.flash("Something went wrong. Your grade was not updated.");
+			res.redirect("/personal_grade");
 		}
 	});
 
