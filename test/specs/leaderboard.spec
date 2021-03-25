@@ -4,7 +4,7 @@ Remember to reset the database prior to the tests
 ## View default page 
 * Open default app webpage
 
-## Sign in with Slack
+## Sign in to the app with Slack
 * Open default app webpage
 * Click button "Sign in with Slack"
 * Enter workspace and continue

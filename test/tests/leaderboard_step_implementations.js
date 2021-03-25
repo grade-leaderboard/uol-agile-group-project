@@ -98,7 +98,6 @@ step("Ensure personal grade in <courseid> <module> in <session> with grade <grad
 });
 
 step("Click Slack sign in", async () => {
-    // await click(button({id: "navbar-toggler"})) // modal
     await click(image({id:'slack-sign-in'}));
 });
 
@@ -137,67 +136,13 @@ step("Select <dropDownName> <selection>", async (dropDownName, selection) => {
 })
 
 step("Check for user avatar on navbar", async () => {
-    // await highlight(image('user avatar'))
     await image('user avatar').exists()
 })
 
 step("Check for user avatar in <module> leaderboard", async (module) => {
-    // await highlight(image('user avatar', toLeftOf('Name')))
     await image('user avatar', {below: module, exactMatch: true}).exists(50000, 100)
-    // await image('user avatar', toLeftOf('Name')).exists()
 })
 
 step("Check for <checkText>", async (checkText) => {
     await assert.ok(await text(checkText).exists());
 })
-
-
-/* Unused steps - archive */
-
-/*
-
-step("Go to homepage", async () => {
-    await click("Gradez")
-});
-
-step("Open personal grades page", async () => {
-    await click("My grade")
-});
-
-step("Open addgrade page", async () => {
-    await click("Add grade")
-});
-
-step("Open rankings page for <module>", async function(module) {
-    await goto("http://localhost:8080/module_leaderboard?module_id=" + module);
-});
-
-step("Press arrowdown", async () => {
-    await press(['ArrowDown']);
-});
-
-step("Press enter", async () => {
-    await press(['Enter']);
-});
-
-step("Check for success message", async () => {
-    await assert.ok(await text('successful', {exactMatch: false}).exists());
-});
-
-step("Check for you already have a grade message", async () => {
-    await assert.ok(await text('You already have a grade for module', {exactMatch: false}).exists());
-});
-
-step("Click submit anonymously button", async () => {
-    await click('Do not reveal my identity in leaderboard. Keep this grade anonymous.')
-});
-
-step("Click session <session>", async function(session) {
-    await click(session)
-});
-
-step("Click module <module>", async function(module) {
-    await click(module)
-});
-
-*/
