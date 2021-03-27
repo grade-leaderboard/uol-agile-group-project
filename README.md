@@ -1,3 +1,3 @@
 # Agile Software Projects - Tutor Group 1, Group 6
 
-[Meeting Notes](meetings/TG1_G6_GroupMeetings.md)
+see [installation instructions]('https://github.com/grade-leaderboard/uol-agile-group-project/blob/main/source/README.md')
