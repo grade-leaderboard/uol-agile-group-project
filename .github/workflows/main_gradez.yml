@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'gradez'
+        app-name: 'grdz'
         slot-name: 'production'
         publish-profile: ${{ secrets.PUBLISHPROFILE }}
         images: 'index.docker.io/${{ secrets.CONTAINERUSERNAME }}/gradez-alpine:${{ steps.get_version.outputs.VERSION }}'
